@@ -1,0 +1,108 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'/Users/allanmedeiros/.m2/repository/com/googlecode/lanterna/lanterna/3.1.1/lanterna-3.1.1.jar:/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik/1.9.1/jqwik-1.9.1.jar:/Users/allanmedeiros/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-api/1.9.1/jqwik-api-1.9.1.jar:/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-web/1.9.1/jqwik-web-1.9.1.jar:/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-time/1.9.1/jqwik-time-1.9.1.jar:/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-engine/1.9.1/jqwik-engine-1.9.1.jar:/Users/allanmedeiros/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/allanmedeiros/.m2/repository/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar:/Users/allanmedeiros/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.2/junit-jupiter-api-5.11.2.jar:/Users/allanmedeiros/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-commons/1.11.2/junit-platform-commons-1.11.2.jar:/Users/allanmedeiros/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.2/junit-jupiter-params-5.11.2.jar:/Users/allanmedeiros/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.2/junit-jupiter-engine-5.11.2.jar:/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-engine/1.11.2/junit-platform-engine-1.11.2.jar:/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-runner/1.11.2/junit-platform-runner-1.11.2.jar:/Users/allanmedeiros/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/allanmedeiros/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-suite-api/1.11.2/junit-platform-suite-api-1.11.2.jar:/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-suite-commons/1.11.2/junit-platform-suite-commons-1.11.2.jar:/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-launcher/1.11.2/junit-platform-launcher-1.11.2.jar:/Users/allanmedeiros/.m2/repository/org/mockito/mockito-core/5.14.1/mockito-core-5.14.1.jar:/Users/allanmedeiros/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.3/byte-buddy-agent-1.15.3.jar:/Users/allanmedeiros/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/allanmedeiros/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.1/mockito-junit-jupiter-5.14.1.jar:/Users/allanmedeiros/.m2/repository/com/google/guava/guava/33.3.1-jre/guava-33.3.1-jre.jar:/Users/allanmedeiros/.m2/repository/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar:/Users/allanmedeiros/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/Users/allanmedeiros/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/Users/allanmedeiros/.m2/repository/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.jar:/Users/allanmedeiros/.m2/repository/com/google/errorprone/error_prone_annotations/2.28.0/error_prone_annotations-2.28.0.jar:/Users/allanmedeiros/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar:/Users/allanmedeiros/.m2/repository/ch/qos/logback/logback-classic/1.2.11/logback-classic-1.2.11.jar:/Users/allanmedeiros/.m2/repository/ch/qos/logback/logback-core/1.2.11/logback-core-1.2.11.jar:/Users/allanmedeiros/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/Users/allanmedeiros/.m2/repository/org/slf4j/slf4j-reload4j/1.7.36/slf4j-reload4j-1.7.36.jar:/Users/allanmedeiros/.m2/repository/ch/qos/reload4j/reload4j/1.2.19/reload4j-1.2.19.jar'
+-encoding
+'UTF-8'
+-protected
+--release
+21
+-sourcepath
+'/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/src/main/java:/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2023&#x2013;2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'TimelessOdyssey 0.0.1-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'TimelessOdyssey 0.0.1-SNAPSHOT API'
+timelessodyssey
+timelessodyssey.states
+timelessodyssey.gui
+timelessodyssey.model
+timelessodyssey.model.game.elements
+timelessodyssey.model.game.elements.particles
+timelessodyssey.model.game.elements.player
+timelessodyssey.model.game.scene
+timelessodyssey.model.menu
+timelessodyssey.model.credits
+timelessodyssey.view
+timelessodyssey.view.screens
+timelessodyssey.view.elements
+timelessodyssey.view.menu
+timelessodyssey.view.text
+timelessodyssey.sound
+timelessodyssey.control.game
+timelessodyssey.control
+timelessodyssey.control.menu
+timelessodyssey.control.credits
+/Users/allanmedeiros/.m2/repository/com/googlecode/lanterna/lanterna/3.1.1/lanterna-3.1.1.jar = 1609645327000
+/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik/1.9.1/jqwik-1.9.1.jar = 1727685443000
+/Users/allanmedeiros/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar = 1697922146504
+/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-api/1.9.1/jqwik-api-1.9.1.jar = 1727685433000
+/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-web/1.9.1/jqwik-web-1.9.1.jar = 1727685679000
+/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-time/1.9.1/jqwik-time-1.9.1.jar = 1727685649000
+/Users/allanmedeiros/.m2/repository/net/jqwik/jqwik-engine/1.9.1/jqwik-engine-1.9.1.jar = 1727685549000
+/Users/allanmedeiros/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar = 1720544908000
+/Users/allanmedeiros/.m2/repository/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar = 1720465576000
+/Users/allanmedeiros/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.2/junit-jupiter-api-5.11.2.jar = 1728046602000
+/Users/allanmedeiros/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar = 1688646332000
+/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-commons/1.11.2/junit-platform-commons-1.11.2.jar = 1728046573000
+/Users/allanmedeiros/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.2/junit-jupiter-params-5.11.2.jar = 1728046621000
+/Users/allanmedeiros/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.2/junit-jupiter-engine-5.11.2.jar = 1728046621000
+/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-engine/1.11.2/junit-platform-engine-1.11.2.jar = 1728046601000
+/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-runner/1.11.2/junit-platform-runner-1.11.2.jar = 1728046601000
+/Users/allanmedeiros/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar = 1698219871428
+/Users/allanmedeiros/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar = 1698219868942
+/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-suite-api/1.11.2/junit-platform-suite-api-1.11.2.jar = 1728046580000
+/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-suite-commons/1.11.2/junit-platform-suite-commons-1.11.2.jar = 1728046630000
+/Users/allanmedeiros/.m2/repository/org/junit/platform/junit-platform-launcher/1.11.2/junit-platform-launcher-1.11.2.jar = 1728046620000
+/Users/allanmedeiros/.m2/repository/org/mockito/mockito-core/5.14.1/mockito-core-5.14.1.jar = 1727694145000
+/Users/allanmedeiros/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.3/byte-buddy-agent-1.15.3.jar = 1727388918000
+/Users/allanmedeiros/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar = 1697922155851
+/Users/allanmedeiros/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.1/mockito-junit-jupiter-5.14.1.jar = 1727694139000
+/Users/allanmedeiros/.m2/repository/com/google/guava/guava/33.3.1-jre/guava-33.3.1-jre.jar = 1727122377000
+/Users/allanmedeiros/.m2/repository/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar = 1697548569000
+/Users/allanmedeiros/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar = 1697922202709
+/Users/allanmedeiros/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar = 1697922201893
+/Users/allanmedeiros/.m2/repository/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.jar = 1714590203000
+/Users/allanmedeiros/.m2/repository/com/google/errorprone/error_prone_annotations/2.28.0/error_prone_annotations-2.28.0.jar = 1717171834000
+/Users/allanmedeiros/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar = 1710004379000
+/Users/allanmedeiros/.m2/repository/ch/qos/logback/logback-classic/1.2.11/logback-classic-1.2.11.jar = 1646514865000
+/Users/allanmedeiros/.m2/repository/ch/qos/logback/logback-core/1.2.11/logback-core-1.2.11.jar = 1646514816000
+/Users/allanmedeiros/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar = 1698219887794
+/Users/allanmedeiros/.m2/repository/org/slf4j/slf4j-reload4j/1.7.36/slf4j-reload4j-1.7.36.jar = 1644327272000
+/Users/allanmedeiros/.m2/repository/ch/qos/reload4j/reload4j/1.2.19/reload4j-1.2.19.jar = 1644310495000
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/src/main/java = 1730813186000
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/generated-sources/annotations = 1733658661855
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/constant-values.html = 1733826876635
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/tag-search-index.js = 1733826876724
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/overview-tree.html = 1733826876707
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/module-search-index.js = 1733826876723
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/index.html = 1733826876709
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/package-search-index.js = 1733826876723
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/link.svg = 1733826876747
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/index-all.html = 1733826876741
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/allpackages-index.html = 1733826876723
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/member-search-index.js = 1733826876724
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/copy.svg = 1733826876747
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/script.js = 1733826876746
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/stylesheet.css = 1733826876746
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/search-page.js = 1733826876748
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/overview-summary.html = 1733826876742
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/help-doc.html = 1733826876743
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/element-list = 1733826876601
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/search.html = 1733826876741
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/allclasses-index.html = 1733826876722
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/type-search-index.js = 1733826876724
+/Users/allanmedeiros/Documents/FEUP/TTVS 2/project-timeless-odyssey/target/site/apidocs/search.js = 1733826876748

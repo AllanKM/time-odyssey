@@ -14,17 +14,17 @@ public abstract class ScreenViewer&lt;T&gt; {
 <span class="fc" id="L14">    }</span>
 
     public T getModel() {
-<span class="nc" id="L17">        return model;</span>
+<span class="fc" id="L17">        return model;</span>
     }
 
     public abstract void draw(ResizableGUI gui, long frameCount) throws IOException;
 
     protected void drawBackgroundAndFrame(GUI gui, TextColor frameColor, TextColor backgroundColor) {
-<span class="nc" id="L23">        gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);</span>
-<span class="nc" id="L24">        gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);</span>
-<span class="nc" id="L25">        gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);</span>
-<span class="nc" id="L26">        gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);</span>
-<span class="nc" id="L27">        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);</span>
-<span class="nc" id="L28">    }</span>
+<span class="fc" id="L23">        gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);</span>
+<span class="fc" id="L24">        gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);</span>
+<span class="fc" id="L25">        gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);</span>
+<span class="fc" id="L26">        gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);</span>
+<span class="fc" id="L27">        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);</span>
+<span class="fc" id="L28">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

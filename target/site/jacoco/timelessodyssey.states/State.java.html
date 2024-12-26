@@ -32,10 +32,10 @@ public abstract class State&lt;T&gt; {
     }
 
     public void step(Game game, ResizableGUI gui, long frameCount) throws IOException, URISyntaxException, FontFormatException {
-<span class="nc" id="L35">        game.setKeySpam(allowArrowSpam());</span>
-<span class="nc" id="L36">        GUI.Action action = gui.getNextAction();</span>
-<span class="nc" id="L37">        controller.step(game, action, frameCount);</span>
-<span class="nc" id="L38">        screenViewer.draw(gui, frameCount);</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L35">        game.setKeySpam(allowArrowSpam());</span>
+<span class="fc" id="L36">        GUI.Action action = gui.getNextAction();</span>
+<span class="fc" id="L37">        controller.step(game, action, frameCount);</span>
+<span class="fc" id="L38">        screenViewer.draw(gui, frameCount);</span>
+<span class="fc" id="L39">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

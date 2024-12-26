@@ -16,3 +16,7 @@ C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\cre
 C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\game\elements\particles\DeathParticleTest.java
 C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\game\elements\particles\ParticleTest.java
 C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\game\elements\particles\SnowTest.java
+C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\game\elements\player\AfterDashStateTest.java
+C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\game\elements\player\DashingStateTest.java
+C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\game\elements\player\DeadStateTest.java
+C:\Users\allan\IdeaProjects\time-odyssey\src\test\java\timelessodyssey\model\game\elements\player\FallingStateTest.java

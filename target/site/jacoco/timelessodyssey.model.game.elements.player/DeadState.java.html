@@ -12,26 +12,26 @@ public class DeadState extends PlayerState {
     private long duration;
 
     public DeadState(Player player, long duration) {
-<span class="nc" id="L15">        super(player);</span>
-<span class="nc" id="L16">        this.duration = duration;</span>
-<span class="nc" id="L17">        player.getScene().setDeathParticles(createDeathParticles());</span>
-<span class="nc" id="L18">    }</span>
+<span class="fc" id="L15">        super(player);</span>
+<span class="fc" id="L16">        this.duration = duration;</span>
+<span class="fc" id="L17">        player.getScene().setDeathParticles(createDeathParticles());</span>
+<span class="fc" id="L18">    }</span>
 
     public long getDuration() {
-<span class="nc" id="L21">        return duration;</span>
+<span class="fc" id="L21">        return duration;</span>
     }
 
     private List&lt;Particle&gt; createDeathParticles() {
-<span class="nc" id="L25">        List&lt;Particle&gt; particles = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L26">        int numParticles = 20;</span>
-<span class="nc" id="L27">        Random random = new Random();</span>
-<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (int i = 0; i &lt;= numParticles; i++) {</span>
-<span class="nc" id="L29">            double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">            double velocity = random.nextDouble() &lt; 0.3 ? 2.0 : 1.2;</span>
-<span class="nc" id="L31">            double angle = 2 * Math.PI * i / numParticles;</span>
-<span class="nc" id="L32">            particles.add(new DeathParticle(x, y, velocity, angle));</span>
+<span class="fc" id="L25">        List&lt;Particle&gt; particles = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L26">        int numParticles = 20;</span>
+<span class="fc" id="L27">        Random random = new Random();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt;= numParticles; i++) {</span>
+<span class="fc" id="L29">            double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            double velocity = random.nextDouble() &lt; 0.3 ? 2.0 : 1.2;</span>
+<span class="fc" id="L31">            double angle = 2 * Math.PI * i / numParticles;</span>
+<span class="fc" id="L32">            particles.add(new DeathParticle(x, y, velocity, angle));</span>
         }
-<span class="nc" id="L34">        return particles;</span>
+<span class="fc" id="L34">        return particles;</span>
     }
 
     @Override
@@ -46,15 +46,15 @@ public class DeadState extends PlayerState {
 
     @Override
     public Vector updateVelocity(Vector velocity) {
-<span class="nc" id="L49">        duration--;</span>
-<span class="nc" id="L50">        return new Vector(0, 0);</span>
+<span class="fc" id="L49">        duration--;</span>
+<span class="fc" id="L50">        return new Vector(0, 0);</span>
     }
 
     @Override
     public PlayerState getNextState() {
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (duration &lt;= 0)</span>
-<span class="nc" id="L56">            return null;  // Null state means the player should be reset</span>
-<span class="nc" id="L57">        return this;</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (duration &lt;= 0)</span>
+<span class="fc" id="L56">            return null;  // Null state means the player should be reset</span>
+<span class="fc" id="L57">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

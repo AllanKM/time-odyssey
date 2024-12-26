@@ -4,39 +4,39 @@ import timelessodyssey.model.Vector;
 
 public class FallingState extends PlayerState {
     public FallingState(Player player) {
-<span class="nc" id="L7">        super(player);</span>
-<span class="nc" id="L8">    }</span>
+<span class="fc" id="L7">        super(player);</span>
+<span class="fc" id="L8">    }</span>
 
     @Override
     public Vector jump() {
-<span class="nc" id="L12">        return updateVelocity(getPlayer().getVelocity());</span>
+<span class="fc" id="L12">        return updateVelocity(getPlayer().getVelocity());</span>
     }
 
     @Override
     public Vector dash() {
-<span class="nc" id="L17">        return applyCollisions(</span>
-<span class="nc bnc" id="L18" title="All 2 branches missed.">            new Vector(getPlayer().isFacingRight() ? getPlayer().getDashBoost() : -getPlayer().getDashBoost(), 0));</span>
+<span class="fc" id="L17">        return applyCollisions(</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">            new Vector(getPlayer().isFacingRight() ? getPlayer().getDashBoost() : -getPlayer().getDashBoost(), 0));</span>
     }
 
     @Override
     public Vector updateVelocity(Vector velocity) {
-<span class="nc" id="L23">        Vector newVelocity = new Vector(</span>
-<span class="nc" id="L24">                velocity.x() * getPlayer().getScene().getFriction(),</span>
-<span class="nc" id="L25">                velocity.y() + getPlayer().getScene().getGravity()</span>
+<span class="fc" id="L23">        Vector newVelocity = new Vector(</span>
+<span class="fc" id="L24">                velocity.x() * getPlayer().getScene().getFriction(),</span>
+<span class="fc" id="L25">                velocity.y() + getPlayer().getScene().getGravity()</span>
         );
-<span class="nc" id="L27">        return limitVelocity(applyCollisions(newVelocity));</span>
+<span class="fc" id="L27">        return limitVelocity(applyCollisions(newVelocity));</span>
     }
 
     @Override
     public PlayerState getNextState() {
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (getPlayer().getScene().isPlayerDying())</span>
-<span class="nc" id="L33">            return new DeadState(getPlayer(), 50);</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (getPlayer().isOverMaxXVelocity())</span>
-<span class="nc" id="L35">            return new DashingState(getPlayer());</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (getPlayer().getScene().isPlayerDying())</span>
+<span class="fc" id="L33">            return new DeadState(getPlayer(), 50);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (getPlayer().isOverMaxXVelocity())</span>
+<span class="fc" id="L35">            return new DashingState(getPlayer());</span>
 
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (getPlayer().isOnGround())</span>
-<span class="nc" id="L38">            return getNextGroundState();</span>
-<span class="nc" id="L39">        return this;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (getPlayer().isOnGround())</span>
+<span class="fc" id="L38">            return getNextGroundState();</span>
+<span class="fc" id="L39">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

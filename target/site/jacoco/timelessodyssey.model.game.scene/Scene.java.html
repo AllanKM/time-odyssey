@@ -53,15 +53,15 @@ public class Scene {
     }
 
     public double getGravity() {
-<span class="nc" id="L56">        return gravity;</span>
+<span class="fc" id="L56">        return gravity;</span>
     }
 
     public double getFriction() {
-<span class="nc" id="L60">        return friction;</span>
+<span class="fc" id="L60">        return friction;</span>
     }
 
     public int getSceneCode() {
-<span class="nc" id="L64">        return sceneCode;</span>
+<span class="fc" id="L64">        return sceneCode;</span>
     }
 
     public Player getPlayer() {
@@ -144,19 +144,19 @@ public class Scene {
 <span class="fc" id="L144">    }</span>
 
     private boolean checkOutsideScene(double x1, double x2, double y1, double y2) {
-<span class="nc bnc" id="L147" title="All 8 branches missed.">        return x1 &lt; 0 || x2 &gt;= width * Tile.SIZE || y1 &lt; 0 || y2 &gt;= height * Tile.SIZE;</span>
+<span class="pc bpc" id="L147" title="4 of 8 branches missed.">        return x1 &lt; 0 || x2 &gt;= width * Tile.SIZE || y1 &lt; 0 || y2 &gt;= height * Tile.SIZE;</span>
     }
 
     private boolean checkCollision(double x1, double x2, double y1, double y2, Element[][] layer) {
-<span class="nc bnc" id="L151" title="All 2 branches missed.">        if (checkOutsideScene(x1, x2, y1, y2))</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (checkOutsideScene(x1, x2, y1, y2))</span>
 <span class="nc" id="L152">            return true;</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">        for (int tileY: List.of((int)y1 / Tile.SIZE, (int)y2 / Tile.SIZE)) {</span>
-<span class="nc bnc" id="L154" title="All 2 branches missed.">            for (int tileX: List.of((int)x1 / Tile.SIZE, (int)x2 / Tile.SIZE)) {</span>
-<span class="nc bnc" id="L155" title="All 2 branches missed.">                if (layer[tileY][tileX] != null)</span>
-<span class="nc" id="L156">                    return true;</span>
-<span class="nc" id="L157">            }</span>
-<span class="nc" id="L158">        }</span>
-<span class="nc" id="L159">        return false;</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        for (int tileY: List.of((int)y1 / Tile.SIZE, (int)y2 / Tile.SIZE)) {</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">            for (int tileX: List.of((int)x1 / Tile.SIZE, (int)x2 / Tile.SIZE)) {</span>
+<span class="fc bfc" id="L155" title="All 2 branches covered.">                if (layer[tileY][tileX] != null)</span>
+<span class="fc" id="L156">                    return true;</span>
+<span class="fc" id="L157">            }</span>
+<span class="fc" id="L158">        }</span>
+<span class="fc" id="L159">        return false;</span>
     }
 
     public boolean collidesLeft(Vector position, Vector size) {
@@ -180,26 +180,26 @@ public class Scene {
     }
 
     public boolean isPlayerDying() {
-<span class="nc" id="L183">        final int spikeHeightDiff = Tile.SIZE - Spike.SPIKE_HEIGHT;</span>
-<span class="nc" id="L184">        double x = player.getPosition().x(), y = player.getPosition().y();</span>
-<span class="nc" id="L185">        return checkCollision(x, x + player.getWidth() - 1, y, y + player.getHeight() - 1 - spikeHeightDiff, spikes);</span>
+<span class="fc" id="L183">        final int spikeHeightDiff = Tile.SIZE - Spike.SPIKE_HEIGHT;</span>
+<span class="fc" id="L184">        double x = player.getPosition().x(), y = player.getPosition().y();</span>
+<span class="fc" id="L185">        return checkCollision(x, x + player.getWidth() - 1, y, y + player.getHeight() - 1 - spikeHeightDiff, spikes);</span>
     }
 
     public boolean updateStars() {
-<span class="nc" id="L189">        double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();</span>
-<span class="nc" id="L190">        double width = player.getWidth(), height = player.getHeight();</span>
+<span class="fc" id="L189">        double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();</span>
+<span class="fc" id="L190">        double width = player.getWidth(), height = player.getHeight();</span>
 
-<span class="nc" id="L192">        boolean caughtStars = false;</span>
-<span class="nc bnc" id="L193" title="All 2 branches missed.">        for (int tileY: List.of((int)y / Tile.SIZE, (int)(y + height - 1) / Tile.SIZE)) {</span>
-<span class="nc bnc" id="L194" title="All 2 branches missed.">            for (int tileX: List.of((int)x / Tile.SIZE, (int)(x + width - 1) / Tile.SIZE)) {</span>
-<span class="nc bnc" id="L195" title="All 2 branches missed.">                if (stars[tileY][tileX] != null) {</span>
-<span class="nc" id="L196">                    caughtStars = true;</span>
-<span class="nc" id="L197">                    player.increaseStars();</span>
-<span class="nc" id="L198">                    stars[tileY][tileX] = null;</span>
+<span class="fc" id="L192">        boolean caughtStars = false;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        for (int tileY: List.of((int)y / Tile.SIZE, (int)(y + height - 1) / Tile.SIZE)) {</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">            for (int tileX: List.of((int)x / Tile.SIZE, (int)(x + width - 1) / Tile.SIZE)) {</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">                if (stars[tileY][tileX] != null) {</span>
+<span class="fc" id="L196">                    caughtStars = true;</span>
+<span class="fc" id="L197">                    player.increaseStars();</span>
+<span class="fc" id="L198">                    stars[tileY][tileX] = null;</span>
                 }
-<span class="nc" id="L200">            }</span>
-<span class="nc" id="L201">        }</span>
-<span class="nc" id="L202">        return caughtStars;</span>
+<span class="fc" id="L200">            }</span>
+<span class="fc" id="L201">        }</span>
+<span class="fc" id="L202">        return caughtStars;</span>
     }
 
     public List&lt;Particle&gt; getDeathParticles() {

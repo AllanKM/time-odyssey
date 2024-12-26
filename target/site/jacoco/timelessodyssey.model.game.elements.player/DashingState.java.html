@@ -6,35 +6,35 @@ public class DashingState extends PlayerState {
     public static final double MIN_VELOCITY = 2.0;
 
     public DashingState(Player player) {
-<span class="nc" id="L9">        super(player);</span>
-<span class="nc" id="L10">    }</span>
+<span class="fc" id="L9">        super(player);</span>
+<span class="fc" id="L10">    }</span>
 
     @Override
     public Vector jump() {
-<span class="nc" id="L14">        return updateVelocity(getPlayer().getVelocity());</span>
+<span class="fc" id="L14">        return updateVelocity(getPlayer().getVelocity());</span>
     }
 
     @Override
     public Vector dash() {
-<span class="nc" id="L19">        return updateVelocity(getPlayer().getVelocity());</span>
+<span class="fc" id="L19">        return updateVelocity(getPlayer().getVelocity());</span>
     }
 
     @Override
     public Vector updateVelocity(Vector velocity) {
-<span class="nc" id="L24">        Vector newVelocity = new Vector(</span>
-<span class="nc" id="L25">                velocity.x() * getPlayer().getScene().getFriction(),</span>
-<span class="nc" id="L26">                velocity.y() + getPlayer().getScene().getGravity()</span>
+<span class="fc" id="L24">        Vector newVelocity = new Vector(</span>
+<span class="fc" id="L25">                velocity.x() * getPlayer().getScene().getFriction(),</span>
+<span class="fc" id="L26">                velocity.y() + getPlayer().getScene().getGravity()</span>
         );
-<span class="nc" id="L28">        return applyCollisions(newVelocity);</span>
+<span class="fc" id="L28">        return applyCollisions(newVelocity);</span>
     }
 
     @Override
     public PlayerState getNextState() {
-<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (getPlayer().getScene().isPlayerDying())</span>
-<span class="nc" id="L34">            return new DeadState(getPlayer(), 50);</span>
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (Math.abs(getPlayer().getVelocity().x()) &lt; MIN_VELOCITY)</span>
-<span class="nc" id="L36">            return new AfterDashState(getPlayer());</span>
-<span class="nc" id="L37">        return this;</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (getPlayer().getScene().isPlayerDying())</span>
+<span class="fc" id="L34">            return new DeadState(getPlayer(), 50);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (Math.abs(getPlayer().getVelocity().x()) &lt; MIN_VELOCITY)</span>
+<span class="fc" id="L36">            return new AfterDashState(getPlayer());</span>
+<span class="fc" id="L37">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

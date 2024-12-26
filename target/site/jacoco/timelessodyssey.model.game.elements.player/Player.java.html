@@ -36,43 +36,43 @@ public class Player extends Element {
 <span class="fc" id="L36">    }</span>
 
     public Vector getVelocity() {
-<span class="nc" id="L39">        return velocity;</span>
+<span class="fc" id="L39">        return velocity;</span>
     }
 
     public void setVelocity(Vector velocity) {
-<span class="nc" id="L43">        this.velocity = velocity;</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        this.velocity = velocity;</span>
+<span class="fc" id="L44">    }</span>
 
     public int getWidth() {
-<span class="nc" id="L47">        return WIDTH;</span>
+<span class="fc" id="L47">        return WIDTH;</span>
     }
 
     public int getHeight() {
-<span class="nc" id="L51">        return HEIGHT;</span>
+<span class="fc" id="L51">        return HEIGHT;</span>
     }
 
     public boolean isFacingRight() {
-<span class="nc" id="L55">        return isFacingRight;</span>
+<span class="fc" id="L55">        return isFacingRight;</span>
     }
 
     public void setFacingRight(boolean facingRight) {
-<span class="nc" id="L59">        isFacingRight = facingRight;</span>
-<span class="nc" id="L60">    }</span>
+<span class="fc" id="L59">        isFacingRight = facingRight;</span>
+<span class="fc" id="L60">    }</span>
 
     public double getAcceleration() {
-<span class="nc" id="L63">        return acceleration;</span>
+<span class="fc" id="L63">        return acceleration;</span>
     }
 
     public double getJumpBoost() {
-<span class="nc" id="L67">        return jumpBoost;</span>
+<span class="fc" id="L67">        return jumpBoost;</span>
     }
 
     public Vector getMaxVelocity() {
-<span class="nc" id="L71">        return maxVelocity;</span>
+<span class="fc" id="L71">        return maxVelocity;</span>
     }
 
     public PlayerState getState() {
-<span class="nc" id="L75">        return state;</span>
+<span class="fc" id="L75">        return state;</span>
     }
 
     public void setState(PlayerState state) {
@@ -84,23 +84,23 @@ public class Player extends Element {
     }
 
     public Vector updatePosition() {
-<span class="nc" id="L87">        return new Vector(getPosition().x() + velocity.x(), getPosition().y() + velocity.y());</span>
+<span class="fc" id="L87">        return new Vector(getPosition().x() + velocity.x(), getPosition().y() + velocity.y());</span>
     }
 
     public Vector moveLeft() {
-<span class="nc" id="L91">        return state.movePlayerLeft();</span>
+<span class="fc" id="L91">        return state.movePlayerLeft();</span>
     }
 
     public Vector moveRight() {
-<span class="nc" id="L95">        return state.movePlayerRight();</span>
+<span class="fc" id="L95">        return state.movePlayerRight();</span>
     }
 
     public Vector jump() {
-<span class="nc" id="L99">        return state.jump();</span>
+<span class="fc" id="L99">        return state.jump();</span>
     }
 
     public Vector dash() {
-<span class="nc" id="L103">        return state.dash();</span>
+<span class="fc" id="L103">        return state.dash();</span>
     }
 
     public Vector updateVelocity() {
@@ -108,7 +108,7 @@ public class Player extends Element {
     }
 
     public Scene getScene() {
-<span class="nc" id="L111">        return scene;</span>
+<span class="fc" id="L111">        return scene;</span>
     }
 
     public void setScene(Scene scene) {
@@ -117,12 +117,12 @@ public class Player extends Element {
 
 
     public boolean isOnGround() {
-<span class="nc" id="L120">        Vector positionBelow = new Vector(</span>
-<span class="nc" id="L121">            getPosition().x(),</span>
-<span class="nc" id="L122">            getPosition().y() + 1</span>
+<span class="fc" id="L120">        Vector positionBelow = new Vector(</span>
+<span class="fc" id="L121">            getPosition().x(),</span>
+<span class="fc" id="L122">            getPosition().y() + 1</span>
         );
-<span class="nc" id="L124">        Vector playerSize = new Vector(WIDTH, HEIGHT);</span>
-<span class="nc" id="L125">        return scene.collidesDown(positionBelow, playerSize);</span>
+<span class="fc" id="L124">        Vector playerSize = new Vector(WIDTH, HEIGHT);</span>
+<span class="fc" id="L125">        return scene.collidesDown(positionBelow, playerSize);</span>
     }
 
     public boolean isOverMaxXVelocity() {
@@ -130,22 +130,22 @@ public class Player extends Element {
     }
 
     public double getDashBoost() {
-<span class="nc" id="L133">        return dashBoost;</span>
+<span class="fc" id="L133">        return dashBoost;</span>
     }
 
     public void increaseStars() {
-<span class="nc" id="L137">        this.stars++;</span>
-<span class="nc" id="L138">    }</span>
+<span class="fc" id="L137">        this.stars++;</span>
+<span class="fc" id="L138">    }</span>
 
     public int getStarCounter() {
-<span class="nc" id="L141">        return this.stars;</span>
+<span class="fc" id="L141">        return this.stars;</span>
     }
 
     public void increaseDeaths() {
-<span class="nc" id="L145">        this.deaths++;</span>
-<span class="nc" id="L146">    }</span>
+<span class="fc" id="L145">        this.deaths++;</span>
+<span class="fc" id="L146">    }</span>
     public int getNumberOfDeaths() {
-<span class="nc" id="L148">        return deaths;</span>
+<span class="fc" id="L148">        return deaths;</span>
     }
 
     public long getBirthTime() {

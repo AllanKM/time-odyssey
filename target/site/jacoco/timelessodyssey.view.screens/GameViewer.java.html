@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GameViewer extends ScreenViewer&lt;Scene&gt; {
-<span class="nc" id="L15">    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 28);</span>
+<span class="fc" id="L15">    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 28);</span>
 
     private final PlayerViewer playerViewer;
     private final TileViewer tileViewer;
@@ -21,13 +21,13 @@ public class GameViewer extends ScreenViewer&lt;Scene&gt; {
     private final ParticleViewer particleViewer;
 
     public GameViewer(Scene model, ViewerProvider viewerProvider) {
-<span class="nc" id="L24">        super(model);</span>
-<span class="nc" id="L25">        this.playerViewer = viewerProvider.getPlayerViewer();</span>
-<span class="nc" id="L26">        this.tileViewer = viewerProvider.getTileViewer();</span>
-<span class="nc" id="L27">        this.spikeViewer = viewerProvider.getSpikeViewer();</span>
-<span class="nc" id="L28">        this.starViewer = viewerProvider.getStarViewer();</span>
-<span class="nc" id="L29">        this.particleViewer = viewerProvider.getParticleViewer();</span>
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L24">        super(model);</span>
+<span class="fc" id="L25">        this.playerViewer = viewerProvider.getPlayerViewer();</span>
+<span class="fc" id="L26">        this.tileViewer = viewerProvider.getTileViewer();</span>
+<span class="fc" id="L27">        this.spikeViewer = viewerProvider.getSpikeViewer();</span>
+<span class="fc" id="L28">        this.starViewer = viewerProvider.getStarViewer();</span>
+<span class="fc" id="L29">        this.particleViewer = viewerProvider.getParticleViewer();</span>
+<span class="fc" id="L30">    }</span>
 
     @Override
     public void draw(ResizableGUI gui, long frameCount) throws IOException {

@@ -15,17 +15,17 @@ import java.net.URISyntaxException;
 
 public class GameState extends State&lt;Scene&gt; {
     public GameState(Scene model, SpriteLoader spriteLoader) throws IOException, URISyntaxException {
-<span class="nc" id="L18">        super(model, spriteLoader);</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L18">        super(model, spriteLoader);</span>
+<span class="fc" id="L19">    }</span>
 
     @Override
     protected Controller&lt;Scene&gt; createController() {
-<span class="nc" id="L23">        return new SceneController(getModel(), new PlayerController(getModel()), new ParticleController(getModel()));</span>
+<span class="fc" id="L23">        return new SceneController(getModel(), new PlayerController(getModel()), new ParticleController(getModel()));</span>
     }
 
     @Override
     protected ScreenViewer&lt;Scene&gt; createScreenViewer(ViewerProvider viewerProvider) {
-<span class="nc" id="L28">        return new GameViewer(getModel(), viewerProvider);</span>
+<span class="fc" id="L28">        return new GameViewer(getModel(), viewerProvider);</span>
     }
 
     @Override

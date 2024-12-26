@@ -31,20 +31,20 @@ public class Game {
     private State&lt;?&gt; state;
     private final BackgroundSoundPlayer backgroundSoundPlayer;
 
-<span class="nc" id="L34">    public Game() throws Exception {</span>
-<span class="nc" id="L35">        ScreenCreator screenCreator = new LanternaScreenCreator(</span>
+<span class="fc" id="L34">    public Game() throws Exception {</span>
+<span class="fc" id="L35">        ScreenCreator screenCreator = new LanternaScreenCreator(</span>
             new DefaultTerminalFactory(),
             new TerminalSize(PIXEL_WIDTH, PIXEL_HEIGHT),
-<span class="nc" id="L38">            GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()</span>
+<span class="fc" id="L38">            GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()</span>
         );
-<span class="nc" id="L40">        this.gui = new LanternaGUI(screenCreator, &quot;Timeless Odyssey&quot;);</span>
-<span class="nc" id="L41">        this.spriteLoader = new GameSpriteLoader();</span>
-<span class="nc" id="L42">        this.state = new MainMenuState(new MainMenu(), spriteLoader);</span>
-<span class="nc" id="L43">        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource(&quot;sounds/demo.wav&quot;))), AudioSystem.getClip()));</span>
+<span class="fc" id="L40">        this.gui = new LanternaGUI(screenCreator, &quot;Timeless Odyssey&quot;);</span>
+<span class="fc" id="L41">        this.spriteLoader = new GameSpriteLoader();</span>
+<span class="fc" id="L42">        this.state = new MainMenuState(new MainMenu(), spriteLoader);</span>
+<span class="fc" id="L43">        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource(&quot;sounds/demo.wav&quot;))), AudioSystem.getClip()));</span>
 
-<span class="nc" id="L45">        FloatControl gainControl = (FloatControl) backgroundSoundPlayer.getSound().getControl(FloatControl.Type.MASTER_GAIN);</span>
-<span class="nc" id="L46">        gainControl.setValue(-15f);</span>
-<span class="nc" id="L47">    }</span>
+<span class="fc" id="L45">        FloatControl gainControl = (FloatControl) backgroundSoundPlayer.getSound().getControl(FloatControl.Type.MASTER_GAIN);</span>
+<span class="fc" id="L46">        gainControl.setValue(-15f);</span>
+<span class="fc" id="L47">    }</span>
 
     public static void main(String[] args) {
 <span class="nc" id="L50">        Logger logger = Logger.getLogger(Game.class.getName());</span>
@@ -56,8 +56,8 @@ public class Game {
 <span class="nc" id="L56">    }</span>
 
     public void setState(State&lt;?&gt; state) {
-<span class="nc" id="L59">        this.state = state;</span>
-<span class="nc" id="L60">    }</span>
+<span class="fc" id="L59">        this.state = state;</span>
+<span class="fc" id="L60">    }</span>
 
     public ResizableGUI.Resolution getResolution() {
 <span class="nc" id="L63">        return gui.getResolution();</span>
@@ -65,19 +65,19 @@ public class Game {
 
     public void setResolution(ResizableGUI.Resolution resolution)
         throws IOException, URISyntaxException, FontFormatException {
-<span class="nc" id="L68">        gui.setResolution(resolution);</span>
-<span class="nc" id="L69">    }</span>
+<span class="fc" id="L68">        gui.setResolution(resolution);</span>
+<span class="fc" id="L69">    }</span>
 
     public void setKeySpam(boolean keySpam) {
-<span class="nc" id="L72">        gui.setKeySpam(keySpam);</span>
-<span class="nc" id="L73">    }</span>
+<span class="fc" id="L72">        gui.setKeySpam(keySpam);</span>
+<span class="fc" id="L73">    }</span>
 
     public SpriteLoader getSpriteLoader() {
 <span class="nc" id="L76">        return spriteLoader;</span>
     }
 
     public int getNumberOfLevels() {
-<span class="nc" id="L80">        return 11;</span>
+<span class="fc" id="L80">        return 11;</span>
     }
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {

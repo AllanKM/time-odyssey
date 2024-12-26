@@ -13,25 +13,25 @@ public abstract class Menu {
     protected abstract List&lt;Entry&gt; createEntries();
 
     public List&lt;Entry&gt; getEntries() {
-<span class="nc" id="L16">        return entries;</span>
+<span class="fc" id="L16">        return entries;</span>
     }
 
     public int getNumberEntries() {
-<span class="nc" id="L20">        return this.entries.size();</span>
+<span class="fc" id="L20">        return this.entries.size();</span>
     }
 
     public void moveDown() {
-<span class="nc" id="L24">        currentEntry++;</span>
-<span class="nc" id="L25">        currentEntry = currentEntry % getNumberEntries();</span>
-<span class="nc" id="L26">    }</span>
+<span class="fc" id="L24">        currentEntry++;</span>
+<span class="fc" id="L25">        currentEntry = currentEntry % getNumberEntries();</span>
+<span class="fc" id="L26">    }</span>
 
     public void moveUp() {
-<span class="nc" id="L29">        currentEntry += getNumberEntries() - 1;</span>
-<span class="nc" id="L30">        currentEntry = currentEntry % getNumberEntries();</span>
-<span class="nc" id="L31">    }</span>
+<span class="fc" id="L29">        currentEntry += getNumberEntries() - 1;</span>
+<span class="fc" id="L30">        currentEntry = currentEntry % getNumberEntries();</span>
+<span class="fc" id="L31">    }</span>
 
     public Entry getCurrentEntry() {
-<span class="nc" id="L34">        return entries.get(currentEntry);</span>
+<span class="fc" id="L34">        return entries.get(currentEntry);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

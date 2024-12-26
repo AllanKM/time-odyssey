@@ -6,14 +6,14 @@ import timelessodyssey.model.game.scene.Scene;
 
 public class DeathParticle extends Particle {
     public DeathParticle(double x, double y, double velocity, double angle) {
-<span class="nc" id="L9">        super(x, y, 1, TextColor.ANSI.RED_BRIGHT, new Vector(velocity * Math.cos(angle), velocity * Math.sin(angle)));</span>
-<span class="nc" id="L10">    }</span>
+<span class="fc" id="L9">        super(x, y, 1, TextColor.ANSI.RED_BRIGHT, new Vector(velocity * Math.cos(angle), velocity * Math.sin(angle)));</span>
+<span class="fc" id="L10">    }</span>
 
     @Override
     public Vector move(Scene scene) {
-<span class="nc" id="L14">        return new Vector(</span>
-<span class="nc" id="L15">            getPosition().x() + getVelocity().x(),</span>
-<span class="nc" id="L16">            getPosition().y() + getVelocity().y()</span>
+<span class="fc" id="L14">        return new Vector(</span>
+<span class="fc" id="L15">            getPosition().x() + getVelocity().x(),</span>
+<span class="fc" id="L16">            getPosition().y() + getVelocity().y()</span>
         );
     }
 }

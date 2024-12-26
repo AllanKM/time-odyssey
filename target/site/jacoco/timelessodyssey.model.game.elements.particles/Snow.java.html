@@ -15,13 +15,13 @@ public class Snow extends Particle {
 
     @Override
     public Vector move(Scene scene) {
-<span class="nc" id="L18">        double newX = floorMod(getPosition().x() + getVelocity().x(), scene.getWidth() * Tile.SIZE);</span>
-<span class="nc" id="L19">        double newY = floorMod(getPosition().y() + Math.sin((newX + initOffset) / 20),scene.getHeight() * Tile.SIZE);</span>
-<span class="nc" id="L20">        return new Vector(newX, newY);</span>
+<span class="fc" id="L18">        double newX = floorMod(getPosition().x() + getVelocity().x(), scene.getWidth() * Tile.SIZE);</span>
+<span class="fc" id="L19">        double newY = floorMod(getPosition().y() + Math.sin((newX + initOffset) / 20),scene.getHeight() * Tile.SIZE);</span>
+<span class="fc" id="L20">        return new Vector(newX, newY);</span>
     }
 
     private double floorMod(double x, int y) {
-<span class="nc" id="L24">        return x - Math.floor(x / y) * y;</span>
+<span class="fc" id="L24">        return x - Math.floor(x / y) * y;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

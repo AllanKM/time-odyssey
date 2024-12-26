@@ -56,19 +56,19 @@ public class LanternaScreenCreator implements ScreenCreator {
     }
 
     private Rectangle getTerminalBounds(ResizableGUI.Resolution resolution) {
-<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (resolution == null)</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (resolution == null)</span>
 <span class="fc" id="L60">            return defaultBounds;</span>
-<span class="nc" id="L61">        return new Rectangle(resolution.getWidth(), resolution.getHeight());</span>
+<span class="fc" id="L61">        return new Rectangle(resolution.getWidth(), resolution.getHeight());</span>
     }
 
     @Override
     public int getWidth() {
-<span class="nc" id="L66">        return terminalSize.getColumns();</span>
+<span class="fc" id="L66">        return terminalSize.getColumns();</span>
     }
 
     @Override
     public int getHeight() {
-<span class="nc" id="L71">        return terminalSize.getRows();</span>
+<span class="fc" id="L71">        return terminalSize.getRows();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

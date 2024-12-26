@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameViewer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.view.screens</a> &gt; <span class="el_source">GameViewer.java</span></div><h1>GameViewer.java</h1><pre class="source lang-java linenums">package timelessodyssey.view.screens;
+
+import com.googlecode.lanterna.TextColor;
+import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
+import timelessodyssey.model.game.elements.Element;
+import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.view.ViewerProvider;
+import timelessodyssey.view.elements.*;
+
+import java.io.IOException;
+import java.util.List;
+
+public class GameViewer extends ScreenViewer&lt;Scene&gt; {
+<span class="nc" id="L15">    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 28);</span>
+
+    private final PlayerViewer playerViewer;
+    private final TileViewer tileViewer;
+    private final SpikeViewer spikeViewer;
+    private final StarViewer starViewer;
+    private final ParticleViewer particleViewer;
+
+    public GameViewer(Scene model, ViewerProvider viewerProvider) {
+<span class="nc" id="L24">        super(model);</span>
+<span class="nc" id="L25">        this.playerViewer = viewerProvider.getPlayerViewer();</span>
+<span class="nc" id="L26">        this.tileViewer = viewerProvider.getTileViewer();</span>
+<span class="nc" id="L27">        this.spikeViewer = viewerProvider.getSpikeViewer();</span>
+<span class="nc" id="L28">        this.starViewer = viewerProvider.getStarViewer();</span>
+<span class="nc" id="L29">        this.particleViewer = viewerProvider.getParticleViewer();</span>
+<span class="nc" id="L30">    }</span>
+
+    @Override
+    public void draw(ResizableGUI gui, long frameCount) throws IOException {
+<span class="nc" id="L34">        gui.clear();</span>
+<span class="nc" id="L35">        gui.drawRectangle(0, 0, gui.getWidth(), gui.getHeight(), backgroundColor);</span>
+
+<span class="nc" id="L37">        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);</span>
+<span class="nc" id="L38">        drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);</span>
+<span class="nc" id="L39">        drawElements(gui, getModel().getTiles(), tileViewer, frameCount);</span>
+<span class="nc" id="L40">        drawElements(gui, getModel().getGoals(), tileViewer, frameCount);</span>
+<span class="nc" id="L41">        drawElements(gui, getModel().getStars(), starViewer, frameCount);</span>
+<span class="nc" id="L42">        drawElements(gui, getModel().getSnow(), particleViewer, frameCount);</span>
+<span class="nc" id="L43">        drawElements(gui, getModel().getDeathParticles(), particleViewer, frameCount);</span>
+
+<span class="nc" id="L45">        gui.refresh();</span>
+<span class="nc" id="L46">    }</span>
+
+    private &lt;T extends Element&gt; void drawElement(GUI gui, T element, ElementViewer&lt;T&gt; viewer, long frameCount) {
+<span class="nc" id="L49">        viewer.draw(element, gui, frameCount);</span>
+<span class="nc" id="L50">    }</span>
+
+    private &lt;T extends Element&gt; void drawElements(GUI gui, List&lt;T&gt; elements, ElementViewer&lt;T&gt; viewer, long frameCount) {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        for (T element: elements)</span>
+<span class="nc" id="L54">            drawElement(gui, element, viewer, frameCount);</span>
+<span class="nc" id="L55">    }</span>
+
+    private &lt;T extends Element&gt; void drawElements(GUI gui, T[][] elements, ElementViewer&lt;T&gt; viewer, long frameCount) {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (T[] elementLine : elements) {</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            for (T element : elementLine) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                if (element != null)</span>
+<span class="nc" id="L61">                    drawElement(gui, element, viewer, frameCount);</span>
+            }
+        }
+<span class="nc" id="L64">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

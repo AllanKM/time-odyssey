@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayerState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.model.game.elements.player</a> &gt; <span class="el_source">PlayerState.java</span></div><h1>PlayerState.java</h1><pre class="source lang-java linenums">package timelessodyssey.model.game.elements.player;
+
+import timelessodyssey.model.Vector;
+
+import static java.lang.Math.max;
+
+public abstract class PlayerState {
+    private final Player player;
+
+<span class="fc" id="L10">    public PlayerState(Player player) {</span>
+<span class="fc" id="L11">        this.player = player;</span>
+<span class="fc" id="L12">    }</span>
+
+    public Player getPlayer() {
+<span class="nc" id="L15">        return player;</span>
+    }
+
+    public Vector movePlayerLeft() {
+<span class="nc" id="L19">        Vector newVelocity = new Vector(</span>
+<span class="nc" id="L20">                player.getVelocity().x() - player.getAcceleration(),</span>
+<span class="nc" id="L21">                player.getVelocity().y()</span>
+        );
+<span class="nc" id="L23">        return updateVelocity(newVelocity);</span>
+    }
+
+    public Vector movePlayerRight() {
+<span class="nc" id="L27">        Vector newVelocity = new Vector(</span>
+<span class="nc" id="L28">                player.getVelocity().x() + player.getAcceleration(),</span>
+<span class="nc" id="L29">                player.getVelocity().y()</span>
+        );
+<span class="nc" id="L31">        return updateVelocity(newVelocity);</span>
+    }
+
+    protected Vector applyCollisions(Vector velocity) {
+<span class="nc" id="L35">        double x = player.getPosition().x(), y = player.getPosition().y();</span>
+<span class="nc" id="L36">        double vx = velocity.x(), vy = velocity.y();</span>
+<span class="nc" id="L37">        Vector playerSize = new Vector(player.getWidth(), player.getHeight());</span>
+
+<span class="nc bnc" id="L39" title="All 4 branches missed.">        while (vy &gt; 0 &amp;&amp; player.getScene().collidesDown(new Vector(x, y + vy), playerSize))</span>
+<span class="nc" id="L40">            vy = Math.max(vy - 1, 0);</span>
+
+<span class="nc bnc" id="L42" title="All 4 branches missed.">        while (vy &lt; 0 &amp;&amp; player.getScene().collidesUp(new Vector(x, y + vy), playerSize))</span>
+<span class="nc" id="L43">            vy = Math.min(vy + 1, 0);</span>
+
+<span class="nc bnc" id="L45" title="All 4 branches missed.">        while (vx &lt; 0 &amp;&amp; player.getScene().collidesLeft(new Vector(x + vx, y + vy), playerSize))</span>
+<span class="nc" id="L46">            vx = Math.min(vx + 1, 0);</span>
+
+<span class="nc bnc" id="L48" title="All 4 branches missed.">        while (vx &gt; 0 &amp;&amp; player.getScene().collidesRight(new Vector(x + vx, y + vy), playerSize))</span>
+<span class="nc" id="L49">            vx = max(vx - 1, 0);</span>
+
+<span class="nc" id="L51">        return new Vector(vx, vy);</span>
+    }
+
+    protected Vector limitVelocity(Vector velocity) {
+<span class="nc" id="L55">        double vx = Math.min(player.getMaxVelocity().x(), Math.max(-player.getMaxVelocity().x(), velocity.x()));</span>
+<span class="nc" id="L56">        double vy = Math.min(player.getMaxVelocity().y(), velocity.y());</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (Math.abs(vx) &lt; 0.2)</span>
+<span class="nc" id="L58">            vx = 0;</span>
+<span class="nc" id="L59">        return new Vector(vx, vy);</span>
+    }
+
+    protected PlayerState getNextGroundState() {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (Math.abs(getPlayer().getVelocity().x()) &gt;= RunningState.MIN_VELOCITY)</span>
+<span class="nc" id="L64">            return new RunningState(getPlayer());</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (Math.abs(getPlayer().getVelocity().x()) &gt;= WalkingState.MIN_VELOCITY)</span>
+<span class="nc" id="L66">            return new WalkingState(getPlayer());</span>
+<span class="nc" id="L67">        return new IdleState(getPlayer());</span>
+    }
+
+    protected PlayerState getNextOnAirState() {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (getPlayer().getVelocity().y() &lt; 0)</span>
+<span class="nc" id="L72">            return new JumpingState(getPlayer());</span>
+<span class="nc" id="L73">        return new FallingState(getPlayer());</span>
+    }
+
+    public abstract Vector jump();
+    public abstract Vector dash();
+    public abstract Vector updateVelocity(Vector velocity);
+    public abstract PlayerState getNextState();
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

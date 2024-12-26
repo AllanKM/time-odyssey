@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreditsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.control.credits</a> &gt; <span class="el_source">CreditsController.java</span></div><h1>CreditsController.java</h1><pre class="source lang-java linenums">package timelessodyssey.control.credits;
+
+import timelessodyssey.Game;
+import timelessodyssey.control.Controller;
+import timelessodyssey.gui.GUI;
+import timelessodyssey.model.credits.Credits;
+import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.states.MainMenuState;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static timelessodyssey.gui.GUI.Action.QUIT;
+
+public class CreditsController extends Controller&lt;Credits&gt; {
+    public CreditsController(Credits model) {
+<span class="fc" id="L17">        super(model);</span>
+<span class="fc" id="L18">    }</span>
+
+    @Override
+    public void step(Game game, GUI.Action action, long frameCount) throws IOException, URISyntaxException {
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (action == QUIT) {</span>
+<span class="fc" id="L23">            game.setState(new MainMenuState(new MainMenu(), game.getSpriteLoader()));</span>
+        }
+<span class="fc" id="L25">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

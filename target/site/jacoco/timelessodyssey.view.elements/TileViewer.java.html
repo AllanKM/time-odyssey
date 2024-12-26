@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TileViewer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.view.elements</a> &gt; <span class="el_source">TileViewer.java</span></div><h1>TileViewer.java</h1><pre class="source lang-java linenums">package timelessodyssey.view.elements;
+
+import timelessodyssey.gui.GUI;
+import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.view.Sprite;
+import timelessodyssey.view.SpriteLoader;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class TileViewer implements ElementViewer&lt;Tile&gt;  {
+    private final Map&lt;Character, Sprite&gt; tileMap;
+
+<span class="fc" id="L15">    public TileViewer(SpriteLoader spriteLoader) throws IOException {</span>
+<span class="fc" id="L16">        tileMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L17">        tileMap.put('G', spriteLoader.get(&quot;sprites/tiles/futuristic/Gray.png&quot;));</span>
+<span class="fc" id="L18">        tileMap.put('K', spriteLoader.get(&quot;sprites/tiles/futuristic/Gray_Spots.png&quot;));</span>
+<span class="fc" id="L19">        tileMap.put('T', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Top.png&quot;));</span>
+<span class="fc" id="L20">        tileMap.put('L', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Left.png&quot;));</span>
+<span class="fc" id="L21">        tileMap.put('R', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Right.png&quot;));</span>
+<span class="fc" id="L22">        tileMap.put('B', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Bottom.png&quot;));</span>
+<span class="fc" id="L23">        tileMap.put('Z', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Top_Left.png&quot;));</span>
+<span class="fc" id="L24">        tileMap.put('X', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Top_Right.png&quot;));</span>
+<span class="fc" id="L25">        tileMap.put('C', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Bottom_Left.png&quot;));</span>
+<span class="fc" id="L26">        tileMap.put('V', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Bottom_Right.png&quot;));</span>
+<span class="fc" id="L27">        tileMap.put('A', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Top_Left_Corner.png&quot;));</span>
+<span class="fc" id="L28">        tileMap.put('S', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Top_Right_Corner.png&quot;));</span>
+<span class="fc" id="L29">        tileMap.put('D', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Bottom_Left_Corner.png&quot;));</span>
+<span class="fc" id="L30">        tileMap.put('F', spriteLoader.get(&quot;sprites/tiles/futuristic/ground/Bottom_Right_Corner.png&quot;));</span>
+<span class="fc" id="L31">        tileMap.put('M', spriteLoader.get(&quot;sprites/tiles/futuristic/metal/Metal.png&quot;));</span>
+<span class="fc" id="L32">        tileMap.put('I', spriteLoader.get(&quot;sprites/tiles/futuristic/metal/Vertical_Metal.png&quot;));</span>
+<span class="fc" id="L33">        tileMap.put('O', spriteLoader.get(&quot;sprites/tiles/futuristic/metal/Horizontal_Metal.png&quot;));</span>
+<span class="fc" id="L34">        tileMap.put('1', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Top.png&quot;));</span>
+<span class="fc" id="L35">        tileMap.put('2', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Left.png&quot;));</span>
+<span class="fc" id="L36">        tileMap.put('3', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Right.png&quot;));</span>
+<span class="fc" id="L37">        tileMap.put('4', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Bottom.png&quot;));</span>
+<span class="fc" id="L38">        tileMap.put('5', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Top_Left.png&quot;));</span>
+<span class="fc" id="L39">        tileMap.put('6', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Top_Right.png&quot;));</span>
+<span class="fc" id="L40">        tileMap.put('7', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Bottom_Left.png&quot;));</span>
+<span class="fc" id="L41">        tileMap.put('8', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Bottom_Right.png&quot;));</span>
+<span class="fc" id="L42">        tileMap.put('9', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Vertical.png&quot;));</span>
+<span class="fc" id="L43">        tileMap.put('0', spriteLoader.get(&quot;sprites/tiles/futuristic/pipes/Horizontal.png&quot;));</span>
+<span class="fc" id="L44">        tileMap.put('g', spriteLoader.get(&quot;sprites/tiles/cave/background/Dirt.png&quot;));</span>
+<span class="fc" id="L45">        tileMap.put('k', spriteLoader.get(&quot;sprites/tiles/cave/background/Rock.png&quot;));</span>
+<span class="fc" id="L46">        tileMap.put('m', spriteLoader.get(&quot;sprites/tiles/cave/background/Coal.png&quot;));</span>
+<span class="fc" id="L47">        tileMap.put('n', spriteLoader.get(&quot;sprites/tiles/cave/background/Gold.png&quot;));</span>
+<span class="fc" id="L48">        tileMap.put('u', spriteLoader.get(&quot;sprites/tiles/cave/background/Diamond.png&quot;));</span>
+<span class="fc" id="L49">        tileMap.put('t', spriteLoader.get(&quot;sprites/tiles/cave/ground/Top.png&quot;));</span>
+<span class="fc" id="L50">        tileMap.put('l', spriteLoader.get(&quot;sprites/tiles/cave/ground/Left.png&quot;));</span>
+<span class="fc" id="L51">        tileMap.put('r', spriteLoader.get(&quot;sprites/tiles/cave/ground/Right.png&quot;));</span>
+<span class="fc" id="L52">        tileMap.put('b', spriteLoader.get(&quot;sprites/tiles/cave/ground/Bottom.png&quot;));</span>
+<span class="fc" id="L53">        tileMap.put('z', spriteLoader.get(&quot;sprites/tiles/cave/ground/Top_Left.png&quot;));</span>
+<span class="fc" id="L54">        tileMap.put('x', spriteLoader.get(&quot;sprites/tiles/cave/ground/Top_Right.png&quot;));</span>
+<span class="fc" id="L55">        tileMap.put('c', spriteLoader.get(&quot;sprites/tiles/cave/ground/Bottom_Left.png&quot;));</span>
+<span class="fc" id="L56">        tileMap.put('v', spriteLoader.get(&quot;sprites/tiles/cave/ground/Bottom_Right.png&quot;));</span>
+<span class="fc" id="L57">        tileMap.put('a', spriteLoader.get(&quot;sprites/tiles/cave/ground/Top_Left_Corner.png&quot;));</span>
+<span class="fc" id="L58">        tileMap.put('s', spriteLoader.get(&quot;sprites/tiles/cave/ground/Top_Right_Corner.png&quot;));</span>
+<span class="fc" id="L59">        tileMap.put('d', spriteLoader.get(&quot;sprites/tiles/cave/ground/Bottom_Left_Corner.png&quot;));</span>
+<span class="fc" id="L60">        tileMap.put('f', spriteLoader.get(&quot;sprites/tiles/cave/ground/Bottom_Right_Corner.png&quot;));</span>
+<span class="fc" id="L61">        tileMap.put('W', spriteLoader.get(&quot;sprites/tiles/goals/Cake.png&quot;));</span>
+<span class="fc" id="L62">    }</span>
+
+    @Override
+    public void draw(Tile model, GUI gui, long frameCount) {
+<span class="nc" id="L66">        Sprite sprite = tileMap.get(model.getCharacter());</span>
+<span class="nc" id="L67">        sprite.draw(gui, model.getPosition().x(), model.getPosition().y());</span>
+<span class="nc" id="L68">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

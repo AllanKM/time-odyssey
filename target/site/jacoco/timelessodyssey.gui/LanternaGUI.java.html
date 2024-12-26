@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LanternaGUI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.gui</a> &gt; <span class="el_source">LanternaGUI.java</span></div><h1>LanternaGUI.java</h1><pre class="source lang-java linenums">package timelessodyssey.gui;
+
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
+
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import static java.awt.event.KeyEvent.*;
+
+
+public class LanternaGUI implements ResizableGUI {
+<span class="fc" id="L20">    private static final List&lt;Integer&gt; SPAM_KEYS = List.of(VK_LEFT, VK_RIGHT);</span>
+
+    private final ScreenCreator screenCreator;
+    private final String title;
+    private Screen screen;
+    private boolean keySpam;
+    private Resolution resolution;
+    private KeyEvent priorityKeyPressed;
+    private final KeyAdapter keyAdapter;
+    private KeyEvent keyPressed;
+
+<span class="fc" id="L31">    public LanternaGUI(ScreenCreator screenCreator, String title) throws IOException, URISyntaxException, FontFormatException {</span>
+<span class="fc" id="L32">        this.screenCreator = screenCreator;</span>
+<span class="fc" id="L33">        this.title = title;</span>
+<span class="fc" id="L34">        this.keySpam = false;</span>
+<span class="fc" id="L35">        this.priorityKeyPressed = null;</span>
+<span class="fc" id="L36">        this.keyAdapter = createKeyAdapter();</span>
+<span class="fc" id="L37">        this.keyPressed = null;</span>
+<span class="fc" id="L38">        setResolution(null);</span>
+<span class="fc" id="L39">    }</span>
+
+    private Screen createScreen(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+<span class="fc" id="L42">        Screen screen = screenCreator.createScreen(resolution, title, getKeyAdapter());</span>
+
+<span class="fc" id="L44">        screen.setCursorPosition(null);</span>
+<span class="fc" id="L45">        screen.startScreen();</span>
+<span class="fc" id="L46">        screen.doResizeIfNecessary();</span>
+<span class="fc" id="L47">        return screen;</span>
+    }
+
+    private KeyAdapter createKeyAdapter() {
+<span class="fc" id="L51">        return new KeyAdapter() {</span>
+            @Override
+            public void keyPressed(KeyEvent e) {
+<span class="nc bnc" id="L54" title="All 4 branches missed.">                if (keySpam &amp;&amp; SPAM_KEYS.contains(e.getKeyCode()))</span>
+<span class="nc" id="L55">                    keyPressed = priorityKeyPressed = e;</span>
+                else
+<span class="nc" id="L57">                    keyPressed = e;</span>
+<span class="nc" id="L58">            }</span>
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+<span class="nc bnc" id="L62" title="All 4 branches missed.">                if (keySpam &amp;&amp; SPAM_KEYS.contains(e.getKeyCode()))</span>
+<span class="nc" id="L63">                    keyPressed = priorityKeyPressed = null;</span>
+                else
+<span class="nc" id="L65">                    keyPressed = priorityKeyPressed;</span>
+<span class="nc" id="L66">            }</span>
+        };
+    }
+
+    @Override
+    public int getWidth() {
+<span class="nc" id="L72">        return screenCreator.getWidth();</span>
+    }
+
+    @Override
+    public int getHeight() {
+<span class="nc" id="L77">        return screenCreator.getHeight();</span>
+    }
+
+    @Override
+    public Resolution getResolution() {
+<span class="nc" id="L82">        return resolution;</span>
+    }
+
+    @Override
+    public void setResolution(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (screen != null)</span>
+<span class="nc" id="L88">            screen.close();</span>
+<span class="fc" id="L89">        this.resolution = resolution;</span>
+<span class="fc" id="L90">        this.screen = createScreen(resolution);</span>
+<span class="fc" id="L91">    }</span>
+
+    @Override
+    public void drawPixel(double x, double y, TextColor color) {
+<span class="fc" id="L95">        TextGraphics tg = screen.newTextGraphics();</span>
+<span class="fc" id="L96">        tg.setBackgroundColor(color);</span>
+<span class="fc" id="L97">        tg.setCharacter((int) x, (int) y, ' ');</span>
+<span class="fc" id="L98">    }</span>
+
+    @Override
+    public void drawRectangle(double x, double y, int width, int height, TextColor color) {
+<span class="nc bnc" id="L102" title="All 4 branches missed.">        if (width &gt; 0 &amp;&amp; height &gt; 0) {</span>
+<span class="nc" id="L103">            TextGraphics tg = screen.newTextGraphics();</span>
+<span class="nc" id="L104">            tg.setBackgroundColor(color);</span>
+<span class="nc" id="L105">            tg.fillRectangle(new TerminalPosition((int) x, (int) y), new TerminalSize(width, height), ' ');</span>
+        }
+<span class="nc" id="L107">    }</span>
+
+    @Override
+    public Action getNextAction() {
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (keyPressed == null)</span>
+<span class="nc" id="L112">            return Action.NONE;</span>
+
+<span class="nc" id="L114">        int keyCode = keyPressed.getKeyCode();</span>
+<span class="nc" id="L115">        keyPressed = priorityKeyPressed;</span>
+
+<span class="nc bnc" id="L117" title="All 9 branches missed.">        return switch (keyCode) {</span>
+<span class="nc" id="L118">            case VK_LEFT -&gt; Action.LEFT;</span>
+<span class="nc" id="L119">            case VK_RIGHT -&gt; Action.RIGHT;</span>
+<span class="nc" id="L120">            case VK_UP -&gt; Action.UP;</span>
+<span class="nc" id="L121">            case VK_DOWN -&gt; Action.DOWN;</span>
+<span class="nc" id="L122">            case VK_ESCAPE -&gt; Action.QUIT;</span>
+<span class="nc" id="L123">            case VK_ENTER -&gt; Action.SELECT;</span>
+<span class="nc" id="L124">            case VK_SPACE -&gt; Action.JUMP;</span>
+<span class="nc" id="L125">            case VK_X -&gt; Action.DASH;</span>
+<span class="nc" id="L126">            default -&gt; Action.NONE;</span>
+        };
+    }
+
+
+    @Override
+    public void clear() {
+<span class="nc" id="L133">        screen.clear();</span>
+<span class="nc" id="L134">    }</span>
+
+    @Override
+    public void refresh() throws IOException {
+<span class="nc" id="L138">        screen.refresh();</span>
+<span class="nc" id="L139">    }</span>
+
+    @Override
+    public void close() throws IOException {
+<span class="nc" id="L143">        screen.close();</span>
+<span class="nc" id="L144">    }</span>
+
+    public void setKeySpam(boolean keySpam) {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (!keySpam)</span>
+<span class="nc" id="L148">            priorityKeyPressed = null;</span>
+<span class="nc" id="L149">        this.keySpam = keySpam;</span>
+<span class="nc" id="L150">    }</span>
+
+    public KeyAdapter getKeyAdapter() {
+<span class="fc" id="L153">        return keyAdapter;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

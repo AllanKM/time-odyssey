@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SceneController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.control.game</a> &gt; <span class="el_source">SceneController.java</span></div><h1>SceneController.java</h1><pre class="source lang-java linenums">package timelessodyssey.control.game;
+
+import timelessodyssey.Game;
+import timelessodyssey.control.Controller;
+import timelessodyssey.gui.GUI;
+import timelessodyssey.model.credits.Credits;
+import timelessodyssey.model.game.elements.player.Player;
+import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.model.game.scene.SceneBuilder;
+import timelessodyssey.states.CreditsState;
+import timelessodyssey.states.GameState;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static timelessodyssey.gui.GUI.Action.QUIT;
+
+public class SceneController extends Controller&lt;Scene&gt; {
+    private final PlayerController playerController;
+    private final ParticleController particleController;
+
+    public SceneController(Scene scene, PlayerController playerController, ParticleController particleController) {
+<span class="fc" id="L23">        super(scene);</span>
+<span class="fc" id="L24">        this.playerController = playerController;</span>
+<span class="fc" id="L25">        this.particleController = particleController;</span>
+<span class="fc" id="L26">    }</span>
+
+    @Override
+    public void step(Game game, GUI.Action action, long frameCount) throws IOException, URISyntaxException {
+<span class="fc" id="L30">        Player player = getModel().getPlayer();</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (action == QUIT) {</span>
+<span class="fc" id="L32">            game.setState(null);</span>
+        } else {
+<span class="fc" id="L34">            playerController.step(game, action, frameCount);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            if (getModel().isAtTransitionPosition()) {</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">                if (getModel().getSceneCode() + 1 &gt;= game.getNumberOfLevels()) {</span>
+<span class="fc" id="L37">                    Credits credits = new Credits(player);</span>
+<span class="fc" id="L38">                    game.setState(new CreditsState(credits, game.getSpriteLoader()));</span>
+<span class="fc" id="L39">                } else {</span>
+<span class="fc" id="L40">                    SceneBuilder sceneBuilder = new SceneBuilder((getModel().getSceneCode() + 1));</span>
+<span class="fc" id="L41">                    Scene newScene = sceneBuilder.createScene(player);</span>
+<span class="nc" id="L42">                    game.setState(new GameState(newScene, game.getSpriteLoader()));</span>
+                }
+            }
+<span class="fc" id="L45">            getModel().updateStars();</span>
+<span class="fc" id="L46">            particleController.step(game, action, frameCount);</span>
+        }
+<span class="fc" id="L48">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

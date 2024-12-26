@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Scene.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.model.game.scene</a> &gt; <span class="el_source">Scene.java</span></div><h1>Scene.java</h1><pre class="source lang-java linenums">package timelessodyssey.model.game.scene;
+
+import timelessodyssey.model.Vector;
+import timelessodyssey.model.game.elements.Element;
+import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Star;
+import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.game.elements.player.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Scene {
+    private final int width;
+    private final int height;
+    private final int sceneCode;
+    private final double gravity;
+    private final double friction;
+
+    private Player player;
+    private Tile[][] tiles;
+    private Spike[][] spikes;
+    private Star[][] stars;
+    private Tile[][] goals;
+    private List&lt;Particle&gt; snow;
+    private List&lt;Particle&gt; deathParticles;
+    private Vector transitionPositionBegin;
+    private Vector transitionPositionEnd;
+
+    private Vector startingPosition;
+
+<span class="fc" id="L33">    public Scene(int width, int height, int sceneCode) {</span>
+<span class="fc" id="L34">        this.width = width;</span>
+<span class="fc" id="L35">        this.height = height;</span>
+<span class="fc" id="L36">        this.sceneCode = sceneCode;</span>
+<span class="fc" id="L37">        this.gravity = 0.25;</span>
+<span class="fc" id="L38">        this.friction = 0.75;</span>
+<span class="fc" id="L39">        this.tiles = new Tile[height][width];</span>
+<span class="fc" id="L40">        this.goals = new Tile[height][width];</span>
+<span class="fc" id="L41">        this.spikes = new Spike[height][width];</span>
+<span class="fc" id="L42">        this.stars = new Star[height][width];</span>
+<span class="fc" id="L43">        this.snow = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L44">        this.deathParticles = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L45">    }</span>
+
+    public int getWidth() {
+<span class="fc" id="L48">        return width;</span>
+    }
+
+    public int getHeight() {
+<span class="fc" id="L52">        return height;</span>
+    }
+
+    public double getGravity() {
+<span class="nc" id="L56">        return gravity;</span>
+    }
+
+    public double getFriction() {
+<span class="nc" id="L60">        return friction;</span>
+    }
+
+    public int getSceneCode() {
+<span class="nc" id="L64">        return sceneCode;</span>
+    }
+
+    public Player getPlayer() {
+<span class="fc" id="L68">        return player;</span>
+    }
+
+    public void setPlayer(Player player) {
+<span class="fc" id="L72">        this.player = player;</span>
+<span class="fc" id="L73">    }</span>
+
+    public Tile[][] getTiles() {
+<span class="nc" id="L76">        return tiles;</span>
+    }
+
+    public void setTiles(Tile[][] tiles) {
+<span class="fc" id="L80">        this.tiles = tiles;</span>
+<span class="fc" id="L81">    }</span>
+
+    public Spike[][] getSpikes() {
+<span class="nc" id="L84">        return spikes;</span>
+    }
+
+    public void setSpikes(Spike[][] spikes) {
+<span class="fc" id="L88">        this.spikes = spikes;</span>
+<span class="fc" id="L89">    }</span>
+
+    public Star[][] getStars() {
+<span class="nc" id="L92">        return stars;</span>
+    }
+
+    public void setStars(Star[][] stars) {
+<span class="fc" id="L96">        this.stars = stars;</span>
+<span class="fc" id="L97">    }</span>
+
+    public Tile[][] getGoals() {
+<span class="nc" id="L100">        return goals;</span>
+    }
+
+    public void setGoals(Tile[][] goals) {
+<span class="fc" id="L104">        this.goals = goals;</span>
+<span class="fc" id="L105">    }</span>
+
+    public List&lt;Particle&gt; getSnow() {
+<span class="nc" id="L108">        return snow;</span>
+    }
+
+    public void setSnow(List&lt;Particle&gt; snow) {
+<span class="fc" id="L112">        this.snow = snow;</span>
+<span class="fc" id="L113">    }</span>
+
+    public Vector getTransitionPositionBegin() {
+<span class="nc" id="L116">        return transitionPositionBegin;</span>
+    }
+
+    public void setTransitionPositionBegin(Vector transitionPositionBegin) {
+<span class="fc" id="L120">        this.transitionPositionBegin = transitionPositionBegin;</span>
+<span class="fc" id="L121">    }</span>
+
+    public Vector getTransitionPositionEnd() {
+<span class="nc" id="L124">        return transitionPositionEnd;</span>
+    }
+
+    public void setTransitionPositionEnd(Vector transitionPositionEnd) {
+<span class="fc" id="L128">        this.transitionPositionEnd = transitionPositionEnd;</span>
+<span class="fc" id="L129">    }</span>
+
+    public boolean isAtTransitionPosition() {
+<span class="nc" id="L132">        double x1 = player.getPosition().x(), x2 = player.getPosition().x() + player.getWidth();</span>
+<span class="nc" id="L133">        double y1 = player.getPosition().y(), y2 = player.getPosition().y() + player.getHeight();</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">        return x1 &lt;= transitionPositionEnd.x() &amp;&amp; x2 &gt;= transitionPositionBegin.x()</span>
+<span class="nc bnc" id="L135" title="All 4 branches missed.">                &amp;&amp; y1 &lt;= transitionPositionEnd.y() &amp;&amp; y2 &gt;= transitionPositionBegin.y();</span>
+    }
+
+    public Vector getStartingPosition() {
+<span class="nc" id="L139">        return startingPosition;</span>
+    }
+
+    public void setStartingPosition(Vector startingPosition) {
+<span class="fc" id="L143">        this.startingPosition = startingPosition;</span>
+<span class="fc" id="L144">    }</span>
+
+    private boolean checkOutsideScene(double x1, double x2, double y1, double y2) {
+<span class="nc bnc" id="L147" title="All 8 branches missed.">        return x1 &lt; 0 || x2 &gt;= width * Tile.SIZE || y1 &lt; 0 || y2 &gt;= height * Tile.SIZE;</span>
+    }
+
+    private boolean checkCollision(double x1, double x2, double y1, double y2, Element[][] layer) {
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        if (checkOutsideScene(x1, x2, y1, y2))</span>
+<span class="nc" id="L152">            return true;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        for (int tileY: List.of((int)y1 / Tile.SIZE, (int)y2 / Tile.SIZE)) {</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">            for (int tileX: List.of((int)x1 / Tile.SIZE, (int)x2 / Tile.SIZE)) {</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">                if (layer[tileY][tileX] != null)</span>
+<span class="nc" id="L156">                    return true;</span>
+<span class="nc" id="L157">            }</span>
+<span class="nc" id="L158">        }</span>
+<span class="nc" id="L159">        return false;</span>
+    }
+
+    public boolean collidesLeft(Vector position, Vector size) {
+<span class="nc" id="L163">        double x = position.x(), y = position.y();</span>
+<span class="nc" id="L164">        return checkCollision(x, x + 1, y, y + size.y() - 1, tiles);</span>
+    }
+
+    public boolean collidesRight(Vector position, Vector size) {
+<span class="nc" id="L168">        double x = position.x(), y = position.y();</span>
+<span class="nc" id="L169">        return checkCollision(x + size.x() - 1, x + size.x() - 1, y, y + size.y() - 1, tiles);</span>
+    }
+
+    public boolean collidesUp(Vector position, Vector size) {
+<span class="nc" id="L173">        double x = position.x(), y = position.y();</span>
+<span class="nc" id="L174">        return checkCollision(x, x + size.x() - 1, y, y + 1, tiles);</span>
+    }
+
+    public boolean collidesDown(Vector position, Vector size) {
+<span class="nc" id="L178">        double x = position.x(), y = position.y();</span>
+<span class="nc" id="L179">        return checkCollision(x, x + size.x() - 1, y + size.y() - 2, y + size.y() - 1, tiles);</span>
+    }
+
+    public boolean isPlayerDying() {
+<span class="nc" id="L183">        final int spikeHeightDiff = Tile.SIZE - Spike.SPIKE_HEIGHT;</span>
+<span class="nc" id="L184">        double x = player.getPosition().x(), y = player.getPosition().y();</span>
+<span class="nc" id="L185">        return checkCollision(x, x + player.getWidth() - 1, y, y + player.getHeight() - 1 - spikeHeightDiff, spikes);</span>
+    }
+
+    public boolean updateStars() {
+<span class="nc" id="L189">        double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();</span>
+<span class="nc" id="L190">        double width = player.getWidth(), height = player.getHeight();</span>
+
+<span class="nc" id="L192">        boolean caughtStars = false;</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">        for (int tileY: List.of((int)y / Tile.SIZE, (int)(y + height - 1) / Tile.SIZE)) {</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">            for (int tileX: List.of((int)x / Tile.SIZE, (int)(x + width - 1) / Tile.SIZE)) {</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                if (stars[tileY][tileX] != null) {</span>
+<span class="nc" id="L196">                    caughtStars = true;</span>
+<span class="nc" id="L197">                    player.increaseStars();</span>
+<span class="nc" id="L198">                    stars[tileY][tileX] = null;</span>
+                }
+<span class="nc" id="L200">            }</span>
+<span class="nc" id="L201">        }</span>
+<span class="nc" id="L202">        return caughtStars;</span>
+    }
+
+    public List&lt;Particle&gt; getDeathParticles() {
+<span class="nc" id="L206">        return deathParticles;</span>
+    }
+
+    public void setDeathParticles(List&lt;Particle&gt; deathParticles) {
+<span class="nc" id="L210">        this.deathParticles = deathParticles;</span>
+<span class="nc" id="L211">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

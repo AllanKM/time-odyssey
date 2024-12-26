@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SceneBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TimelessOdyssey</a> &gt; <a href="index.source.html" class="el_package">timelessodyssey.model.game.scene</a> &gt; <span class="el_source">SceneBuilder.java</span></div><h1>SceneBuilder.java</h1><pre class="source lang-java linenums">package timelessodyssey.model.game.scene;
+
+import timelessodyssey.model.Vector;
+import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Star;
+import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.game.elements.particles.Snow;
+import timelessodyssey.model.game.elements.player.Player;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import static java.lang.Character.isLetterOrDigit;
+import static java.lang.Character.isSpaceChar;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+public class SceneBuilder {
+    private final List&lt;String&gt; lines;
+    private final int sceneCode;
+
+    public Scene createScene(Player player) {
+<span class="fc" id="L31">        int numberParticles = 30;</span>
+<span class="fc" id="L32">        Scene scene = new Scene(getWidth(), getHeight(), sceneCode);</span>
+
+<span class="fc" id="L34">        scene.setPlayer(createPlayer(scene, player));</span>
+<span class="fc" id="L35">        scene.setTiles(createWalls());</span>
+<span class="fc" id="L36">        scene.setSpikes(createSpikes());</span>
+<span class="fc" id="L37">        scene.setGoals(createGoals());</span>
+<span class="fc" id="L38">        scene.setTransitionPositionBegin(createTransitionPositionBegin());</span>
+<span class="fc" id="L39">        scene.setTransitionPositionEnd(createTransitionPositionEnd());</span>
+<span class="fc" id="L40">        scene.setStartingPosition(scene.getPlayer().getPosition());</span>
+<span class="fc" id="L41">        scene.setStars(createStars());</span>
+<span class="fc" id="L42">        scene.setSnow(createParticles(numberParticles, scene));</span>
+<span class="fc" id="L43">        return scene;</span>
+    }
+
+<span class="fc" id="L46">    public SceneBuilder(int n) throws IOException, URISyntaxException {</span>
+<span class="fc" id="L47">        this.sceneCode = n;</span>
+<span class="fc" id="L48">        URL resource = getClass().getClassLoader().getResource(&quot;levels/scene&quot; + n + &quot;.lvl&quot;);</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (resource == null){</span>
+<span class="nc" id="L50">            throw new FileNotFoundException(&quot;Level file not found!&quot;);</span>
+        }
+<span class="fc" id="L52">        BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.toURI()), UTF_8);</span>
+
+<span class="fc" id="L54">        lines = readLines(bufferedReader);</span>
+<span class="fc" id="L55">    }</span>
+
+    private List&lt;String&gt; readLines(BufferedReader bufferedReader) throws IOException {
+<span class="fc" id="L58">        List&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (String line; (line = bufferedReader.readLine()) != null; )</span>
+<span class="fc" id="L60">            lines.add(line);</span>
+<span class="fc" id="L61">        return lines;</span>
+    }
+
+    private int getWidth() {
+<span class="fc" id="L65">        int width = 0;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        for (String line : lines)</span>
+<span class="fc" id="L67">            width = Math.max(width, line.length());</span>
+<span class="fc" id="L68">        return width;</span>
+    }
+
+    private int getHeight() {
+<span class="fc" id="L72">        return lines.size();</span>
+    }
+
+    private Tile[][] createWalls() {
+<span class="fc" id="L76">        Tile[][] walls = new Tile[lines.size()-4][lines.get(0).length()+1];</span>
+
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (int y = 0; y &lt; lines.size() - 4; y++) {</span>
+<span class="fc" id="L79">            String line = lines.get(y);</span>
+<span class="fc" id="L80">            Tile[] lineTiles = new Tile[21];</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">            for (int x = 0; x &lt; line.length(); x++) {</span>
+<span class="pc bpc" id="L82" title="1 of 6 branches missed.">                if (line.charAt(x) != 'P' &amp;&amp; isLetterOrDigit(line.charAt(x)) &amp;&amp; line.charAt(x) != 'W') {</span>
+<span class="fc" id="L83">                    lineTiles[x] = new Tile(x * 8, y * 8, line.charAt(x));</span>
+                } else {
+<span class="fc" id="L85">                    lineTiles[x] = null;</span>
+                }
+            }
+<span class="fc" id="L88">            lineTiles[20] = null;</span>
+<span class="fc" id="L89">            walls[y] = lineTiles;</span>
+        }
+<span class="fc" id="L91">        return walls;</span>
+    }
+
+    private Spike[][] createSpikes() {
+<span class="fc" id="L95">        Spike[][] spikes = new Spike[lines.size()-4][lines.get(0).length()+1];</span>
+
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        for (int y = 0; y &lt; lines.size() - 4; y++) {</span>
+<span class="fc" id="L98">            String line = lines.get(y);</span>
+<span class="fc" id="L99">            Spike[] lineSpikes = new Spike[21];</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">            for (int x = 0; x &lt; line.length(); x++) {</span>
+<span class="fc bfc" id="L101" title="All 6 branches covered.">                if (!isLetterOrDigit(line.charAt(x)) &amp;&amp; !isSpaceChar(line.charAt(x)) &amp;&amp; line.charAt(x) != '*')</span>
+<span class="fc" id="L102">                    lineSpikes[x] = new Spike(x * 8, y * 8, line.charAt(x));</span>
+                else {
+<span class="fc" id="L104">                    lineSpikes[x] = null;</span>
+                }
+            }
+<span class="fc" id="L107">            lineSpikes[20] = null;</span>
+<span class="fc" id="L108">            spikes[y] = lineSpikes;</span>
+        }
+<span class="fc" id="L110">        return spikes;</span>
+    }
+
+    private Star[][] createStars() {
+<span class="fc" id="L114">        Star[][] stars = new Star[lines.size()-4][lines.get(0).length()+1];</span>
+
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        for (int y = 0; y &lt; lines.size() - 4; y++) {</span>
+<span class="fc" id="L117">            String line = lines.get(y);</span>
+<span class="fc" id="L118">            Star[] lineStars = new Star[21];</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">            for (int x = 0; x &lt; line.length(); x++) {</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">                if (line.charAt(x) == '*')</span>
+<span class="fc" id="L121">                    lineStars[x] = new Star(x * 8, y * 8);</span>
+                else {
+<span class="fc" id="L123">                    lineStars[x] = null;</span>
+                }
+            }
+<span class="fc" id="L126">            lineStars[20] = null;</span>
+<span class="fc" id="L127">            stars[y] = lineStars;</span>
+        }
+<span class="fc" id="L129">        return stars;</span>
+    }
+
+    private Player createPlayer(Scene scene, Player player) {
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        for (int y = 0; y &lt; lines.size() - 4; y++) {</span>
+<span class="fc" id="L134">            String line = lines.get(y);</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            for (int x = 0; x &lt; line.length(); x++){</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">                if (line.charAt(x) == 'P'){</span>
+<span class="fc" id="L137">                    player.setPosition(new Vector(x * Tile.SIZE, y * Tile.SIZE));</span>
+<span class="fc" id="L138">                    player.setScene(scene);</span>
+<span class="fc" id="L139">                    player.resetValues();</span>
+<span class="fc" id="L140">                    return player;</span>
+                }
+            }
+        }
+<span class="nc" id="L144">        throw new IllegalStateException(&quot;Player not found within the level file!&quot;);</span>
+    }
+
+    private Tile[][] createGoals() {
+<span class="fc" id="L148">        Tile[][] goals = new Tile[lines.size()-4][lines.get(0).length()+1];</span>
+
+<span class="fc bfc" id="L150" title="All 2 branches covered.">        for (int y = 0; y &lt; lines.size() - 4; y++) {</span>
+<span class="fc" id="L151">            String line = lines.get(y);</span>
+<span class="fc" id="L152">            Tile[] lineGoals = new Tile[21];</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            for (int x = 0; x &lt; line.length(); x++) {</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">                if (line.charAt(x) == 'W') {</span>
+<span class="nc" id="L155">                    lineGoals[x] = new Tile(x * 8, y * 8, line.charAt(x));</span>
+                } else {
+<span class="fc" id="L157">                    lineGoals[x] = null;</span>
+                }
+            }
+<span class="fc" id="L160">            lineGoals[20] = null;</span>
+<span class="fc" id="L161">            goals[y] = lineGoals;</span>
+        }
+<span class="fc" id="L163">        return goals;</span>
+    }
+
+    private Vector createTransitionPositionBegin() {
+<span class="fc" id="L167">        return new Vector(Integer.parseInt(lines.get(lines.size()-4)) * Tile.SIZE,</span>
+<span class="fc" id="L168">                Integer.parseInt(lines.get(lines.size()-3)) * Tile.SIZE);</span>
+    }
+    private Vector createTransitionPositionEnd() {
+<span class="fc" id="L171">        return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,</span>
+<span class="fc" id="L172">                            Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);</span>
+    }
+
+    private List&lt;Particle&gt; createParticles(int number, Scene scene) {
+<span class="fc" id="L176">        List&lt;Particle&gt; particles = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L177">        Random random = new Random();</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        for (int i = 0; i &lt; number; i++) {</span>
+<span class="fc" id="L179">            Particle particle = new Snow(</span>
+<span class="fc" id="L180">                    random.nextDouble(scene.getWidth() * Tile.SIZE),</span>
+<span class="fc" id="L181">                    random.nextDouble(scene.getHeight() * Tile.SIZE),</span>
+<span class="fc" id="L182">                    random.nextInt(2, 5) / 2,</span>
+<span class="fc" id="L183">                    random.nextDouble(.5, 2),</span>
+<span class="fc" id="L184">                    random.nextDouble(scene.getWidth() * Tile.SIZE)</span>
+            );
+<span class="fc" id="L186">            particles.add(particle);</span>
+        }
+
+<span class="fc" id="L189">        return particles;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

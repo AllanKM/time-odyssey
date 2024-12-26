@@ -33,12 +33,12 @@ public class SceneController extends Controller&lt;Scene&gt; {
         } else {
 <span class="fc" id="L34">            playerController.step(game, action, frameCount);</span>
 <span class="fc bfc" id="L35" title="All 2 branches covered.">            if (getModel().isAtTransitionPosition()) {</span>
-<span class="fc bfc" id="L36" title="All 2 branches covered.">                if (getModel().getSceneCode() + 1 &gt;= game.getNumberOfLevels()) {</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">                if (getModel().getSceneCode() + 1 &gt;= game.getNumberOfLevels()) {</span>
 <span class="fc" id="L37">                    Credits credits = new Credits(player);</span>
 <span class="fc" id="L38">                    game.setState(new CreditsState(credits, game.getSpriteLoader()));</span>
 <span class="fc" id="L39">                } else {</span>
-<span class="fc" id="L40">                    SceneBuilder sceneBuilder = new SceneBuilder((getModel().getSceneCode() + 1));</span>
-<span class="fc" id="L41">                    Scene newScene = sceneBuilder.createScene(player);</span>
+<span class="nc" id="L40">                    SceneBuilder sceneBuilder = new SceneBuilder((getModel().getSceneCode() + 1));</span>
+<span class="nc" id="L41">                    Scene newScene = sceneBuilder.createScene(player);</span>
 <span class="nc" id="L42">                    game.setState(new GameState(newScene, game.getSpriteLoader()));</span>
                 }
             }

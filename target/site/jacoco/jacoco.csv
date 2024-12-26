@@ -9,7 +9,7 @@ TimelessOdyssey,timelessodyssey.model.game.elements.player,Player,34,177,2,0,7,4
 TimelessOdyssey,timelessodyssey.model.game.elements.player,PlayerState,33,238,5,19,5,32,5,15,0,8
 TimelessOdyssey,timelessodyssey.model.game.elements.player,AfterDashState,0,61,0,4,0,13,0,7,0,5
 TimelessOdyssey,timelessodyssey.model.game.elements.player,DashingState,0,66,0,4,0,13,0,7,0,5
-TimelessOdyssey,timelessodyssey.control.game,SceneController,8,82,0,6,1,18,0,5,0,2
+TimelessOdyssey,timelessodyssey.control.game,SceneController,22,68,1,5,3,16,1,4,0,2
 TimelessOdyssey,timelessodyssey.control.game,PlayerController,0,76,1,6,0,23,1,6,0,2
 TimelessOdyssey,timelessodyssey.control.game,ParticleController,0,47,0,4,0,7,0,4,0,2
 TimelessOdyssey,timelessodyssey.model.credits,Credits,0,94,0,0,0,28,0,10,0,10

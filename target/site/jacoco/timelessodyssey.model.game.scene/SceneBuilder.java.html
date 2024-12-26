@@ -46,8 +46,8 @@ public class SceneBuilder {
 <span class="fc" id="L46">    public SceneBuilder(int n) throws IOException, URISyntaxException {</span>
 <span class="fc" id="L47">        this.sceneCode = n;</span>
 <span class="fc" id="L48">        URL resource = getClass().getClassLoader().getResource(&quot;levels/scene&quot; + n + &quot;.lvl&quot;);</span>
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (resource == null){</span>
-<span class="nc" id="L50">            throw new FileNotFoundException(&quot;Level file not found!&quot;);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (resource == null){</span>
+<span class="fc" id="L50">            throw new FileNotFoundException(&quot;Level file not found!&quot;);</span>
         }
 <span class="fc" id="L52">        BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.toURI()), UTF_8);</span>
 

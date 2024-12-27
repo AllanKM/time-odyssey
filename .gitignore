@@ -8,5 +8,3 @@
 # Ignore IDE specific files
 .classpath
 .project
-.settings/
-.target/

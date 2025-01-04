@@ -49,11 +49,11 @@ public class GameTextViewer implements TextViewer {
 
     @Override
     public void draw(char character, double x, double y, TextColor foregroundColor, GUI gui) {
-<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if (charMap.containsKey(character)) {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (charMap.containsKey(character)) {</span>
 <span class="fc" id="L53">            CharPosition charPosition = charMap.get(character);</span>
 <span class="fc" id="L54">            drawKnownChar(charPosition, x, y, foregroundColor, gui);</span>
 <span class="fc" id="L55">        } else {</span>
-<span class="nc" id="L56">            drawUnknownChar(x, y, foregroundColor, gui);</span>
+<span class="fc" id="L56">            drawUnknownChar(x, y, foregroundColor, gui);</span>
         }
 <span class="fc" id="L58">    }</span>
 
@@ -70,8 +70,8 @@ public class GameTextViewer implements TextViewer {
 <span class="fc" id="L70">    }</span>
 
     private void drawUnknownChar(double x, double y, TextColor foregroundColor, GUI gui) {
-<span class="nc" id="L73">        gui.drawRectangle(x, y, charWidth, charHeight, foregroundColor);</span>
-<span class="nc" id="L74">    }</span>
+<span class="fc" id="L73">        gui.drawRectangle(x, y, charWidth, charHeight, foregroundColor);</span>
+<span class="fc" id="L74">    }</span>
 
     @Override
     public void draw(String string, double x, double y, TextColor foregroundColor, GUI gui) {

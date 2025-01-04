@@ -1,8 +1,5 @@
 package timelessodyssey.model.game.scene;
 
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.model.Vector;
@@ -12,10 +9,13 @@ import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.player.Player;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SceneBuilderTest {
+
     private SceneBuilder sceneBuilder;
     private Scene scene;
     private Player player;
@@ -30,15 +30,21 @@ class SceneBuilderTest {
     @Test
     void testCreateScene() {
         Scene createdScene = sceneBuilder.createScene(player);
-        assertNotNull(createdScene);
-        assertEquals(player, createdScene.getPlayer());
-        assertEquals(player.getPosition(), createdScene.getStartingPosition());
-        assertNotNull(createdScene.getTiles());
-        assertNotNull(createdScene.getSpikes());
-        assertNotNull(createdScene.getStars());
-        assertNotNull(createdScene.getGoals());
-        assertNotNull(createdScene.getTransitionPositionBegin());
-        assertNotNull(createdScene.getTransitionPositionEnd());
+        assertNotNull(createdScene, "Scene should not be null");
+        assertEquals(player, createdScene.getPlayer(), "Player should match");
+        assertEquals(player.getPosition(), createdScene.getStartingPosition(), "Starting position should match");
+        assertNotNull(createdScene.getTiles(), "Tiles should not be null");
+        assertNotNull(createdScene.getSpikes(), "Spikes should not be null");
+        assertNotNull(createdScene.getStars(), "Stars should not be null");
+        assertNotNull(createdScene.getGoals(), "Goals should not be null");
+        assertNotNull(createdScene.getTransitionPositionBegin(), "Transition start position should not be null");
+        assertNotNull(createdScene.getTransitionPositionEnd(), "Transition end position should not be null");
+    }
+
+    @Test
+    void testInvalidSceneCode() {
+        Exception exception = assertThrows(IOException.class, () -> new SceneBuilder(999));
+        assertTrue(exception.getMessage().contains("Level file not found!"));
     }
 
     @Test
@@ -66,16 +72,6 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testInvalidSceneCode() {
-        Exception exception = assertThrows(IOException.class, () -> new SceneBuilder(999));
-
-        String expectedMessage = "Level file not found!";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
     void testSceneDimensions() {
         Scene createdScene = sceneBuilder.createScene(player);
         assertEquals(20, createdScene.getWidth());
@@ -95,15 +91,52 @@ class SceneBuilderTest {
     void testTransitionPositionsNotNull() {
         scene.setTransitionPositionBegin(new Vector(0, 0));
         scene.setTransitionPositionEnd(new Vector(10, 10));
+
         assertNotNull(scene.getTransitionPositionBegin());
         assertNotNull(scene.getTransitionPositionEnd());
     }
 
     @Test
-    void testValidSceneCode() throws IOException, URISyntaxException {
-        SceneBuilder validBuilder = new SceneBuilder(1);
-        Scene validScene = validBuilder.createScene(player);
-        assertNotNull(validScene);
+    void testSceneBuilderHandlesPlayer() {
+        Player newPlayer = new Player(10, 10, scene);
+        scene.setPlayer(newPlayer);
+        assertEquals(newPlayer, scene.getPlayer());
+    }
+
+    @Test
+    void testCreateSceneEmptyTiles() {
+        Scene createdScene = sceneBuilder.createScene(player);
+        assertNotNull(createdScene.getTiles());
+
+        for (Tile[] row : createdScene.getTiles()) {
+            assertNotNull(row);
+            for (Tile tile : row) {
+                if (tile != null) {
+                    assertEquals(Tile.class, tile.getClass(), "Tile should be of correct type");
+                }
+            }
+        }
+    }
+
+    @Test
+    void testSceneBuilderHandlesSpikes() {
+        Spike[][] spikes = new Spike[20][60];
+        scene.setSpikes(spikes);
+        assertEquals(spikes, scene.getSpikes());
+    }
+
+    @Test
+    void testSceneBuilderHandlesStars() {
+        Star[][] stars = new Star[20][60];
+        scene.setStars(stars);
+        assertEquals(stars, scene.getStars());
+    }
+
+    @Test
+    void testSceneBuilderHandlesGoals() {
+        Tile[][] goals = new Tile[20][60];
+        scene.setGoals(goals);
+        assertEquals(goals, scene.getGoals());
     }
 
     @Test
@@ -139,50 +172,5 @@ class SceneBuilderTest {
         assertNotNull(createdGoals);
         assertEquals(goals.length, createdGoals.length);
         assertEquals(goals[0].length, createdGoals[0].length);
-    }
-
-
-    @Test
-    void testCreateSceneEmptyTiles() {
-        Scene createdScene = sceneBuilder.createScene(player);
-        assertNotNull(createdScene.getTiles());
-        for (Tile[] row : createdScene.getTiles()) {
-            assertNotNull(row);
-            for (Tile tile : row) {
-                if (tile != null) {
-                    assertEquals(Tile.class, tile.getClass()); // Verify tile is of the expected type
-                } else {
-                    assertNull(tile); // Ensure no unexpected null tiles
-                }
-            }
-        }
-    }
-
-    @Test
-    void testSceneBuilderHandlesSpikes() {
-        Spike[][] spikes = new Spike[20][60];
-        scene.setSpikes(spikes);
-        assertEquals(spikes, scene.getSpikes());
-    }
-
-    @Test
-    void testSceneBuilderHandlesGoals() {
-        Tile[][] goals = new Tile[20][60];
-        scene.setGoals(goals);
-        assertEquals(goals, scene.getGoals());
-    }
-
-    @Test
-    void testSceneBuilderHandlesStars() {
-        Star[][] stars = new Star[20][60];
-        scene.setStars(stars);
-        assertEquals(stars, scene.getStars());
-    }
-
-    @Test
-    void testSceneBuilderHandlesPlayer() {
-        Player newPlayer = new Player(10, 10, scene);
-        scene.setPlayer(newPlayer);
-        assertEquals(newPlayer, scene.getPlayer());
     }
 }

@@ -19,7 +19,7 @@ TimelessOdyssey,timelessodyssey.view,GameSpriteLoader,0,28,0,2,0,6,0,3,0,2
 TimelessOdyssey,timelessodyssey.control.credits,CreditsController,0,18,0,2,0,5,0,3,0,2
 TimelessOdyssey,timelessodyssey.model,Vector,0,9,0,0,0,1,0,1,0,1
 TimelessOdyssey,timelessodyssey,Game,16,137,1,3,6,33,2,9,1,8
-TimelessOdyssey,timelessodyssey.view.text,GameTextViewer,14,170,1,13,3,33,2,14,1,8
+TimelessOdyssey,timelessodyssey.view.text,GameTextViewer,0,184,0,14,0,36,0,16,0,9
 TimelessOdyssey,timelessodyssey.view.text,CharPosition,0,9,0,0,0,1,0,1,0,1
 TimelessOdyssey,timelessodyssey.model.game.elements.particles,Snow,0,64,0,0,0,7,0,3,0,3
 TimelessOdyssey,timelessodyssey.model.game.elements.particles,DeathParticle,0,36,0,0,0,5,0,2,0,2

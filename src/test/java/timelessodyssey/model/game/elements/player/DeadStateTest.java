@@ -40,13 +40,12 @@ class DeadStateTest {
 
     @Test
     void testCreateDeathParticles() throws Exception {
-        // Use reflection to access the private method createDeathParticles
         Method createDeathParticlesMethod = DeadState.class.getDeclaredMethod("createDeathParticles");
         createDeathParticlesMethod.setAccessible(true);
 
         List<Particle> particles = (List<Particle>) createDeathParticlesMethod.invoke(deadState);
 
-        assertEquals(21, particles.size()); // 20 particles + 1 for loop condition
+        assertEquals(21, particles.size());
         for (Particle particle : particles) {
             assertTrue(particle instanceof DeathParticle);
             assertEquals(10, particle.getPosition().x(), 0.001);
@@ -62,22 +61,20 @@ class DeadStateTest {
 
         assertEquals(0, result.x(), 0.001);
         assertEquals(0, result.y(), 0.001);
-        assertEquals(4, deadState.getDuration()); // Duration should decrease by 1
+        assertEquals(4, deadState.getDuration());
     }
 
     @Test
     void testGetNextState_DurationNotExpired() {
         PlayerState nextState = deadState.getNextState();
 
-        assertSame(deadState, nextState); // Should return itself
+        assertSame(deadState, nextState);
     }
 
     @Test
     void testGetNextState_DurationExpired() {
-        deadState = new DeadState(player, 0); // Set duration to 0
-
+        deadState = new DeadState(player, 0);
         PlayerState nextState = deadState.getNextState();
-
-        assertNull(nextState); // Should return null when duration is expired
+        assertNull(nextState);
     }
 }

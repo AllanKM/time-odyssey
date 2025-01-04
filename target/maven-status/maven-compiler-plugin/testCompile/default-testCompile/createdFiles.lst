@@ -43,10 +43,10 @@ timelessodyssey\states\StateTest$TestState.class
 timelessodyssey\model\menu\SettingsMenuTest.class
 timelessodyssey\view\screens\CreditsViewerTest.class
 timelessodyssey\model\game\elements\player\AfterDashStateTest.class
+timelessodyssey\control\menu\MenuControllerTest$TestMenuController.class
 timelessodyssey\control\menu\EntryControllerTest.class
 timelessodyssey\control\game\SceneControllerTest.class
 timelessodyssey\model\game\elements\StarTest.class
-timelessodyssey\control\menu\MenuControllerTest$1.class
 timelessodyssey\view\SpriteLoaderTest.class
 timelessodyssey\model\menu\EntryTest.class
 timelessodyssey\states\SettingsMenuStateTest.class

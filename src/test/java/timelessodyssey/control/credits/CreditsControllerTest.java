@@ -34,11 +34,8 @@ class CreditsControllerTest {
 
     @Test
     void testStepQuitAction() throws IOException, URISyntaxException {
-        // Arrange
         GUI.Action action = GUI.Action.QUIT;
         long frameCount = 0;
-
-        // Mock the SpriteLoader
         SpriteLoader spriteLoader = mock(SpriteLoader.class);
         when(game.getSpriteLoader()).thenReturn(spriteLoader);
 
@@ -49,23 +46,15 @@ class CreditsControllerTest {
             return null;
         }).when(game).setState(any(MainMenuState.class));
 
-        // Act
         creditsController.step(game, action, frameCount);
-
-        // Assert
         verify(game, times(1)).setState(any(MainMenuState.class));
     }
 
     @Test
     void testStepNonQuitAction() throws IOException, URISyntaxException {
-        // Arrange
-        GUI.Action action = GUI.Action.NONE; // Assuming NONE is a valid non-QUIT action
+        GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
-
-        // Act
         creditsController.step(game, action, frameCount);
-
-        // Assert
         verify(game, never()).setState(any());
     }
 }

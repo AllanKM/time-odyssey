@@ -48,32 +48,23 @@ class StateTest {
 
     @BeforeEach
     void setUp() throws IOException, URISyntaxException {
-        // Mock dependencies
         mockModel = new Object();
         mockSpriteLoader = mock(SpriteLoader.class);
         mockGame = mock(Game.class);
         mockGUI = mock(ResizableGUI.class);
-
-        // Create instance of TestState
         testState = new TestState(mockModel, mockSpriteLoader);
     }
 
     @Test
     void testGetModel() {
-        // Assert
         assertEquals(mockModel, testState.getModel(), "The model should match the initialized value");
     }
 
     @Test
     void testStep() throws IOException, URISyntaxException, FontFormatException {
-        // Arrange
         GUI.Action mockAction = mock(GUI.Action.class);
         when(mockGUI.getNextAction()).thenReturn(mockAction);
-
-        // Act
         testState.step(mockGame, mockGUI, 100L);
-
-        // Assert
         verify(mockGame).setKeySpam(true);
         verify(testState.controller).step(mockGame, mockAction, 100L);
         verify(testState.screenViewer).draw(mockGUI, 100L);

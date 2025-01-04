@@ -32,7 +32,6 @@ class SceneControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Mock dependencies
         sceneMock = mock(Scene.class);
         playerControllerMock = mock(PlayerController.class);
         particleControllerMock = mock(ParticleController.class);
@@ -41,31 +40,28 @@ class SceneControllerTest {
         spriteLoaderMock = mock(SpriteLoader.class);
         sceneBuilderMock = mock(SceneBuilder.class);
 
-        // Configure the scene to return the mocked player
         when(sceneMock.getPlayer()).thenReturn(playerMock);
         when(gameMock.getSpriteLoader()).thenReturn(spriteLoaderMock);
-
-        // Instantiate the SceneController with mocked dependencies
+        when(sceneMock.getSceneCode()).thenReturn(1);
+        when(sceneMock.isAtTransitionPosition()).thenReturn(true);
+        when(gameMock.getNumberOfLevels()).thenReturn(2);
+        when(sceneMock.getSceneCode()).thenReturn(1);
+        when(sceneBuilderMock.createScene(playerMock)).thenReturn(mock(Scene.class));
         sceneController = new SceneController(sceneMock, playerControllerMock, particleControllerMock);
     }
 
     @Test
     void testStepQuitAction() throws IOException, URISyntaxException {
-        // Arrange
         GUI.Action action = GUI.Action.QUIT;
         long frameCount = 0;
-
-        // Act
+        when(sceneMock.isAtTransitionPosition()).thenReturn(false);
         sceneController.step(gameMock, action, frameCount);
-
-        // Assert
         verify(gameMock).setState(null);
         verifyNoInteractions(playerControllerMock, particleControllerMock);
     }
 
     @Test
     void testStepTransitionToCredits() throws IOException, URISyntaxException {
-        // Arrange
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
 
@@ -73,57 +69,37 @@ class SceneControllerTest {
         when(sceneMock.getSceneCode()).thenReturn(1);
         when(gameMock.getNumberOfLevels()).thenReturn(2);
         when(gameMock.getSpriteLoader()).thenReturn(spriteLoaderMock);
-
-        // Act
+        when(sceneBuilderMock.createScene(playerMock)).thenReturn(mock(Scene.class));
         sceneController.step(gameMock, action, frameCount);
 
-        // Assert
         verify(gameMock).setState(any(CreditsState.class));
-        verify(playerControllerMock).step(gameMock, action, frameCount); // Confirm interaction with playerControllerMock
-        verify(particleControllerMock).step(gameMock, action, frameCount); // Confirm interaction with particleControllerMock
+        verify(playerControllerMock).step(gameMock, action, frameCount);
+        verify(particleControllerMock).step(gameMock, action, frameCount);
     }
 
-
-
-//    @Test
-//    void testStepTransitionToNextScene() throws IOException, URISyntaxException {
-//        // Arrange
-//        GUI.Action action = GUI.Action.NONE;
-//        long frameCount = 0;
-//
-//        when(sceneMock.isAtTransitionPosition()).thenReturn(true);
-//        when(sceneMock.getSceneCode()).thenReturn(0);
-//        when(gameMock.getNumberOfLevels()).thenReturn(2);
-//        when(sceneBuilderMock.createScene(playerMock)).thenReturn(mock(Scene.class));
-//
-//        // Replace SceneBuilder instantiation with manual creation
-//        doAnswer(invocation -> {
-//            int sceneCode = invocation.getArgument(0);
-//            assertEquals(1, sceneCode); // Ensure the correct scene code is passed
-//            return sceneBuilderMock;
-//        }).when(sceneMock).getSceneCode();
-//
-//        // Act
-//        sceneController.step(gameMock, action, frameCount);
-//
-//        // Assert
-//        verify(gameMock).setState(any(GameState.class));
-//        verify(playerControllerMock).step(gameMock, action, frameCount); // Validate interaction with player controller
-//        verify(particleControllerMock).step(gameMock, action, frameCount); // Validate interaction with particle controller
-//    }
-
     @Test
-    void testStepUpdateStarsAndParticles() throws IOException, URISyntaxException {
+    void testStepTransitionToNextScene() throws IOException, URISyntaxException {
         // Arrange
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
 
-        when(sceneMock.isAtTransitionPosition()).thenReturn(false);
-
-        // Act
+        when(sceneMock.isAtTransitionPosition()).thenReturn(true);
+        when(sceneMock.getSceneCode()).thenReturn(0);
+        when(gameMock.getNumberOfLevels()).thenReturn(2);
+        when(sceneBuilderMock.createScene(playerMock)).thenReturn(mock(Scene.class));
         sceneController.step(gameMock, action, frameCount);
 
-        // Assert
+        verify(gameMock).setState(any(GameState.class));
+        verify(playerControllerMock).step(gameMock, action, frameCount);
+        verify(particleControllerMock).step(gameMock, action, frameCount);
+    }
+
+    @Test
+    void testStepUpdateStarsAndParticles() throws IOException, URISyntaxException {
+        GUI.Action action = GUI.Action.NONE;
+        long frameCount = 0;
+        when(sceneMock.isAtTransitionPosition()).thenReturn(false);
+        sceneController.step(gameMock, action, frameCount);
         verify(playerControllerMock).step(gameMock, action, frameCount);
         verify(sceneMock).updateStars();
         verify(particleControllerMock).step(gameMock, action, frameCount);

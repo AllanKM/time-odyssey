@@ -25,10 +25,7 @@ class MainMenuControllerTest {
 
     @Test
     void testOnQuit() {
-        // Act
         mainMenuController.onQuit(gameMock);
-
-        // Assert
         verify(gameMock).setState(null);
     }
 }

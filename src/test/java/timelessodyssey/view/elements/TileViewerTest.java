@@ -22,43 +22,28 @@ class TileViewerTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        // Mock dependencies
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockTile = mock(Tile.class);
         mockSprite = mock(Sprite.class);
-
-        // Mock behavior for SpriteLoader
         when(mockSpriteLoader.get("sprites/tiles/futuristic/Gray.png")).thenReturn(mockSprite);
         when(mockSpriteLoader.get("sprites/tiles/cave/ground/Top.png")).thenReturn(mockSprite);
-
-        // Create TileViewer instance
         tileViewer = new TileViewer(mockSpriteLoader);
     }
 
     @Test
     void testDrawFuturisticGrayTile() {
-        // Arrange
         when(mockTile.getCharacter()).thenReturn('G');
         when(mockTile.getPosition()).thenReturn(new Vector(10, 20));
-
-        // Act
         tileViewer.draw(mockTile, mockGUI, 100L);
-
-        // Assert
         verify(mockSprite).draw(mockGUI, 10, 20);
     }
 
     @Test
     void testDrawCaveTopTile() {
-        // Arrange
         when(mockTile.getCharacter()).thenReturn('t');
         when(mockTile.getPosition()).thenReturn(new Vector(15, 25));
-
-        // Act
         tileViewer.draw(mockTile, mockGUI, 101L);
-
-        // Assert
         verify(mockSprite).draw(mockGUI, 15, 25);
     }
 }

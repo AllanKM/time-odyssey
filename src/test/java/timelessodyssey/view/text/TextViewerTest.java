@@ -14,10 +14,7 @@ class TextViewerTest {
 
     @BeforeEach
     void setUp() {
-        // Mock GUI
         mockGUI = mock(GUI.class);
-
-        // Create a mock implementation of TextViewer
         textViewer = new TextViewer() {
             @Override
             public void draw(char character, double x, double y, TextColor foregroundColor, GUI gui) {
@@ -35,31 +32,21 @@ class TextViewerTest {
 
     @Test
     void testDrawCharacter() {
-        // Arrange
         char character = 'A';
         double x = 10;
         double y = 20;
         TextColor color = TextColor.ANSI.RED;
-
-        // Act
         textViewer.draw(character, x, y, color, mockGUI);
-
-        // Assert
         verify(mockGUI).drawPixel(x, y, color);
     }
 
     @Test
     void testDrawString() {
-        // Arrange
         String string = "HELLO";
         double x = 10;
         double y = 20;
         TextColor color = TextColor.ANSI.GREEN;
-
-        // Act
         textViewer.draw(string, x, y, color, mockGUI);
-
-        // Assert
         for (int i = 0; i < string.length(); i++) {
             verify(mockGUI).drawPixel(x + i, y, color);
         }

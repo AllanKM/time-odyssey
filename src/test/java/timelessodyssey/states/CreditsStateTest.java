@@ -25,41 +25,29 @@ class CreditsStateTest {
 
     @BeforeEach
     void setUp() throws IOException, URISyntaxException {
-        // Mock dependencies
         mockCredits = mock(Credits.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockViewerProvider = mock(ViewerProvider.class);
-
-        // Create instance of CreditsState
         creditsState = new CreditsState(mockCredits, mockSpriteLoader);
     }
 
     @Test
     void testCreateScreenViewer() {
-        // Act
         ScreenViewer<Credits> screenViewer = creditsState.createScreenViewer(mockViewerProvider);
-
-        // Assert
         assertNotNull(screenViewer, "ScreenViewer should not be null");
         assertTrue(screenViewer instanceof CreditsViewer, "ScreenViewer should be an instance of CreditsViewer");
     }
 
     @Test
     void testCreateController() {
-        // Act
         Controller<Credits> controller = creditsState.createController();
-
-        // Assert
         assertNotNull(controller, "Controller should not be null");
         assertTrue(controller instanceof CreditsController, "Controller should be an instance of CreditsController");
     }
 
     @Test
     void testAllowArrowSpam() {
-        // Act
         boolean result = creditsState.allowArrowSpam();
-
-        // Assert
         assertFalse(result, "allowArrowSpam should return false");
     }
 }

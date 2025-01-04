@@ -17,29 +17,29 @@ public class Sprite {
 <span class="fc" id="L17">        this.image = ImageIO.read(Objects.requireNonNull(resource));</span>
 <span class="fc" id="L18">    }</span>
     public BufferedImage getImage() {
-<span class="nc" id="L20">        return image;</span>
+<span class="fc" id="L20">        return image;</span>
     }
 
     public void draw(GUI gui, double x, double y) {
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        for (int dx = 0; dx &lt; image.getWidth(); dx++) {</span>
-<span class="nc bnc" id="L25" title="All 2 branches missed.">            for (int dy = 0; dy &lt; image.getHeight(); dy++) {</span>
-<span class="nc" id="L26">                int ARGB = image.getRGB(dx, dy);</span>
-<span class="nc bnc" id="L27" title="All 2 branches missed.">                if (getTransparency(ARGB) == 0)</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (int dx = 0; dx &lt; image.getWidth(); dx++) {</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">            for (int dy = 0; dy &lt; image.getHeight(); dy++) {</span>
+<span class="fc" id="L26">                int ARGB = image.getRGB(dx, dy);</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">                if (getTransparency(ARGB) == 0)</span>
 <span class="nc" id="L28">                    continue;</span>
-<span class="nc" id="L29">                gui.drawPixel(x + dx, y + dy, getRGB(ARGB));</span>
+<span class="fc" id="L29">                gui.drawPixel(x + dx, y + dy, getRGB(ARGB));</span>
             }
         }
-<span class="nc" id="L32">    }</span>
+<span class="fc" id="L32">    }</span>
 
     private int getTransparency(int ARGB) {
-<span class="nc" id="L35">        return ARGB &gt;&gt; 24;</span>
+<span class="fc" id="L35">        return ARGB &gt;&gt; 24;</span>
     }
 
     private TextColor getRGB(int ARGB) {
-<span class="nc" id="L39">        int red = ARGB &gt;&gt; 16 &amp; 0xFF;</span>
-<span class="nc" id="L40">        int green = ARGB &gt;&gt; 8 &amp; 0xFF;</span>
-<span class="nc" id="L41">        int blue = ARGB &amp; 0xFF;</span>
-<span class="nc" id="L42">        return new TextColor.RGB(red, green, blue);</span>
+<span class="fc" id="L39">        int red = ARGB &gt;&gt; 16 &amp; 0xFF;</span>
+<span class="fc" id="L40">        int green = ARGB &gt;&gt; 8 &amp; 0xFF;</span>
+<span class="fc" id="L41">        int blue = ARGB &amp; 0xFF;</span>
+<span class="fc" id="L42">        return new TextColor.RGB(red, green, blue);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

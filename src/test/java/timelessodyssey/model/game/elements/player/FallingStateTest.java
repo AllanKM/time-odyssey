@@ -36,8 +36,8 @@ class FallingStateTest {
     void testJump() {
         Vector result = fallingState.jump();
 
-        assertEquals(4.5, result.x(), 0.001); // Friction applied
-        assertEquals(0.5, result.y(), 0.001); // Gravity applied
+        assertEquals(4.5, result.x(), 0.001);
+        assertEquals(0.5, result.y(), 0.001);
     }
 
     @Test
@@ -47,8 +47,8 @@ class FallingStateTest {
 
         Vector result = fallingState.dash();
 
-        assertEquals(3.0, result.x(), 0.001); // Dash boost to the right
-        assertEquals(0.0, result.y(), 0.001); // No vertical movement
+        assertEquals(3.0, result.x(), 0.001);
+        assertEquals(0.0, result.y(), 0.001);
     }
 
     @Test
@@ -58,18 +58,18 @@ class FallingStateTest {
 
         Vector result = fallingState.dash();
 
-        assertEquals(-3.0, result.x(), 0.001); // Dash boost to the left
-        assertEquals(0.0, result.y(), 0.001); // No vertical movement
+        assertEquals(-3.0, result.x(), 0.001);
+        assertEquals(0.0, result.y(), 0.001);
     }
 
     @Test
     void testUpdateVelocity() {
-        Vector initialVelocity = new Vector(5, 2); // Initial horizontal and vertical velocity
+        Vector initialVelocity = new Vector(5, 2);
 
         Vector result = fallingState.updateVelocity(initialVelocity);
 
-        assertEquals(4.5, result.x(), 0.001); // Friction applied to x velocity
-        assertEquals(2.5, result.y(), 0.001); // Gravity applied to y velocity (2 + 0.5)
+        assertEquals(4.5, result.x(), 0.001);
+        assertEquals(2.5, result.y(), 0.001);
     }
 
     @Test
@@ -98,8 +98,6 @@ class FallingStateTest {
         when(player.isOnGround()).thenReturn(true);
 
         PlayerState nextState = fallingState.getNextState();
-
-        //assertInstanceOf(GroundState.class, nextState); // Assuming GroundState is the next state on ground
     }
 
     @Test
@@ -110,6 +108,6 @@ class FallingStateTest {
 
         PlayerState nextState = fallingState.getNextState();
 
-        assertSame(fallingState, nextState); // Should return itself if still in air
+        assertSame(fallingState, nextState);
     }
 }

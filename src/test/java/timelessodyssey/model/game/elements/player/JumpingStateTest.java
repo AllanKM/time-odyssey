@@ -24,7 +24,7 @@ class JumpingStateTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
-        when(player.getVelocity()).thenReturn(new Vector(0, 5)); // Initial upward velocity
+        when(player.getVelocity()).thenReturn(new Vector(0, 5));
         when(player.getPosition()).thenReturn(new Vector(0, 0));
         when(player.getJumpBoost()).thenReturn(5.0);
         when(player.getMaxVelocity()).thenReturn(new Vector(10, 10));
@@ -37,8 +37,8 @@ class JumpingStateTest {
     void testJump() {
         Vector result = jumpingState.jump();
 
-        assertEquals(0, result.x(), 0.001); // Horizontal velocity remains unchanged
-        assertEquals(5.5, result.y(), 0.001); // Upward velocity remains unchanged
+        assertEquals(0, result.x(), 0.001);
+        assertEquals(5.5, result.y(), 0.001);
     }
 
     @Test
@@ -48,8 +48,8 @@ class JumpingStateTest {
 
         Vector result = jumpingState.dash();
 
-        assertEquals(3.0, result.x(), 0.001); // Dash boost to the right
-        assertEquals(5.0, result.y(), 0.001); // Vertical velocity should remain unchanged
+        assertEquals(3.0, result.x(), 0.001);
+        assertEquals(5.0, result.y(), 0.001);
     }
 
     @Test
@@ -59,18 +59,17 @@ class JumpingStateTest {
 
         Vector result = jumpingState.dash();
 
-        assertEquals(-3.0, result.x(), 0.001); // Dash boost to the left
-        assertEquals(5.0, result.y(), 0.001); // Vertical velocity should remain unchanged
+        assertEquals(-3.0, result.x(), 0.001);
+        assertEquals(5.0, result.y(), 0.001);
     }
 
     @Test
     void testUpdateVelocity() {
-        Vector initialVelocity = new Vector(5, 2); // Initial horizontal and vertical velocity
-
+        Vector initialVelocity = new Vector(5, 2);
         Vector result = jumpingState.updateVelocity(initialVelocity);
 
-        assertEquals(4.5, result.x(), 0.001); // Friction applied to x velocity (5 * 0.9)
-        assertEquals(2.5, result.y(), 0.001); // Gravity applied to y velocity (2 + 0.5)
+        assertEquals(4.5, result.x(), 0.001);
+        assertEquals(2.5, result.y(), 0.001);
     }
 
     @Test
@@ -96,25 +95,20 @@ class JumpingStateTest {
     void testGetNextState_Falling() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
-
-        // Set vertical velocity to be non-negative to trigger falling state transition
         when(player.getVelocity()).thenReturn(new Vector(0, 1));
 
         PlayerState nextState = jumpingState.getNextState();
 
-        assertTrue(nextState instanceof FallingState); // Should transition to Falling state
+        assertTrue(nextState instanceof FallingState);
     }
 
     @Test
     void testGetNextState_StillJumping() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
-
-        // Set vertical velocity to be positive to stay in jumping state
         when(player.getVelocity()).thenReturn(new Vector(0, -1));
-
         PlayerState nextState = jumpingState.getNextState();
 
-        assertSame(jumpingState, nextState); // Should return itself if still jumping
+        assertSame(jumpingState, nextState);
     }
 }

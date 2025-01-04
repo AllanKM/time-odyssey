@@ -23,45 +23,33 @@ class ParticleControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Mock the Scene and Game objects
         sceneMock = mock(Scene.class);
         gameMock = mock(Game.class);
-
-        // Mock Particle lists
         snowParticles = new ArrayList<>();
         deathParticles = new ArrayList<>();
 
-        // Populate particle lists with mocked particles
         for (int i = 0; i < 5; i++) {
             snowParticles.add(mock(Particle.class));
             deathParticles.add(mock(Particle.class));
         }
 
-        // Configure the scene to return the mocked particle lists
         when(sceneMock.getSnow()).thenReturn(snowParticles);
         when(sceneMock.getDeathParticles()).thenReturn(deathParticles);
 
-        // Instantiate the ParticleController with the mocked scene
         particleController = new ParticleController(sceneMock);
     }
 
     @Test
     void testStep() {
-        // Arrange
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
-
-        // Act
         particleController.step(gameMock, action, frameCount);
 
-        // Assert
-        // Verify that the move and setPosition methods are called for each snow particle
         for (Particle particle : snowParticles) {
             verify(particle, times(1)).move(sceneMock);
             verify(particle, times(1)).setPosition(any());
         }
 
-        // Verify that the move and setPosition methods are called for each death particle
         for (Particle particle : deathParticles) {
             verify(particle, times(1)).move(sceneMock);
             verify(particle, times(1)).setPosition(any());

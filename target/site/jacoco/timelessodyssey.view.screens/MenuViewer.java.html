@@ -27,16 +27,16 @@ public class MenuViewer&lt;T extends Menu&gt; extends ScreenViewer&lt;T&gt; {
 
     @Override
     public void draw(ResizableGUI gui, long frameCount) throws IOException {
-<span class="nc" id="L30">        gui.clear();</span>
-<span class="nc" id="L31">        drawBackgroundAndFrame(gui, frameColor, backgroundColor);</span>
-<span class="nc" id="L32">        drawEntries(gui, getModel().getEntries());</span>
-<span class="nc" id="L33">        logoViewer.draw(gui, 44, 16);</span>
-<span class="nc" id="L34">        gui.refresh();</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L30">        gui.clear();</span>
+<span class="fc" id="L31">        drawBackgroundAndFrame(gui, frameColor, backgroundColor);</span>
+<span class="fc" id="L32">        drawEntries(gui, getModel().getEntries());</span>
+<span class="fc" id="L33">        logoViewer.draw(gui, 44, 16);</span>
+<span class="fc" id="L34">        gui.refresh();</span>
+<span class="fc" id="L35">    }</span>
 
     private void drawEntries(ResizableGUI gui, List&lt;Entry&gt; entries) {
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        for (Entry entry: entries)</span>
-<span class="nc bnc" id="L39" title="All 2 branches missed.">            entryViewer.draw(entry, gui, getModel().getCurrentEntry() == entry ? selectedColor : unselectedColor);</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        for (Entry entry: entries)</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            entryViewer.draw(entry, gui, getModel().getCurrentEntry() == entry ? selectedColor : unselectedColor);</span>
+<span class="fc" id="L40">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

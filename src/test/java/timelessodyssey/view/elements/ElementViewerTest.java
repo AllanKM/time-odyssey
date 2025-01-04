@@ -22,20 +22,14 @@ class ElementViewerTest {
 
     @BeforeEach
     void setUp() {
-        // Mock dependencies
         mockModel = new Object();
         mockGUI = mock(GUI.class);
-
-        // Create instance of TestElementViewer
         elementViewer = new TestElementViewer();
     }
 
     @Test
     void testDraw() {
-        // Act
         elementViewer.draw(mockModel, mockGUI, 100L);
-
-        // Assert
         verify(mockGUI).drawPixel(0, 0, TextColor.ANSI.WHITE);
     }
 }

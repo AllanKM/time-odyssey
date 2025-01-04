@@ -17,25 +17,17 @@ class ParticleViewerTest {
 
     @BeforeEach
     void setUp() {
-        // Mock dependencies
         mockGUI = mock(GUI.class);
         mockParticle = mock(Particle.class);
-
-        // Create instance of ParticleViewer
         particleViewer = new ParticleViewer();
     }
 
     @Test
     void testDraw() {
-        // Arrange
         when(mockParticle.getPosition()).thenReturn(new Vector(10, 20));
         when(mockParticle.getSize()).thenReturn(5);
         when(mockParticle.getColor()).thenReturn(TextColor.ANSI.RED);
-
-        // Act
         particleViewer.draw(mockParticle, mockGUI, 100L);
-
-        // Assert
         verify(mockGUI).drawRectangle(10, 20, 5, 5, TextColor.ANSI.RED);
     }
 }

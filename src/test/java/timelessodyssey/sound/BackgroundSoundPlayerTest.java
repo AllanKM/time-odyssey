@@ -15,19 +15,14 @@ class BackgroundSoundPlayerTest {
 
     @BeforeEach
     void setUp() {
-        // Mock the Clip object
         mockClip = mock(Clip.class);
-
-        // Create an instance of BackgroundSoundPlayer with the mocked Clip
         soundPlayer = new BackgroundSoundPlayer(mockClip);
     }
 
     @Test
     void testStart() {
-        // Act
         soundPlayer.start();
 
-        // Assert
         verify(mockClip).setMicrosecondPosition(0);
         verify(mockClip).start();
         verify(mockClip).loop(Clip.LOOP_CONTINUOUSLY);
@@ -35,31 +30,20 @@ class BackgroundSoundPlayerTest {
 
     @Test
     void testStop() {
-        // Act
         soundPlayer.stop();
-
-        // Assert
         verify(mockClip).stop();
     }
 
     @Test
     void testSetSound() {
-        // Arrange
         Clip newMockClip = mock(Clip.class);
-
-        // Act
         soundPlayer.setSound(newMockClip);
-
-        // Assert
         assertEquals(newMockClip, soundPlayer.getSound(), "The set sound should match the retrieved sound");
     }
 
     @Test
     void testGetSound() {
-        // Act
         Clip retrievedClip = soundPlayer.getSound();
-
-        // Assert
         assertEquals(mockClip, retrievedClip, "The retrieved sound should match the initial sound");
     }
 }

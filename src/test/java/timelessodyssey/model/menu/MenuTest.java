@@ -30,17 +30,12 @@ class MenuTest {
 
     @Test
     void testGetEntries() {
-        // Act
         List<Entry> entries = menu.getEntries();
-
-        // Assert
-        assertNotNull(entries, "Entries list should not be null");
-        assertEquals(3, entries.size(), "Entries list should contain exactly 3 entries");
-
-        // Verify each entry
-        assertEquals(Entry.Type.START_GAME, entries.get(0).getType(), "First entry type should be START_GAME");
-        assertEquals(Entry.Type.SETTINGS, entries.get(1).getType(), "Second entry type should be SETTINGS");
-        assertEquals(Entry.Type.EXIT, entries.get(2).getType(), "Third entry type should be EXIT");
+        assertNotNull(entries, "The Entries list should not be null");
+        assertEquals(3, entries.size(), "The Entries list should contain exactly 3 entries");
+        assertEquals(Entry.Type.START_GAME, entries.get(0).getType(), "The First entry type should be START_GAME");
+        assertEquals(Entry.Type.SETTINGS, entries.get(1).getType(), "The Second entry type should be SETTINGS");
+        assertEquals(Entry.Type.EXIT, entries.get(2).getType(), "The Third entry type should be EXIT");
     }
 
     @Test

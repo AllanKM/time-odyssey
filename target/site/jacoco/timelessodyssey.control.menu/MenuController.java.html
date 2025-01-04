@@ -19,20 +19,20 @@ public abstract class MenuController&lt;T extends Menu&gt; extends Controller&lt
 
     @Override
     public void step(Game game, GUI.Action action, long frameCount) throws IOException, URISyntaxException, FontFormatException {
-<span class="nc bnc" id="L22" title="All 4 branches missed.">        switch (action) {</span>
+<span class="fc bfc" id="L22" title="All 4 branches covered.">        switch (action) {</span>
             case UP:
-<span class="nc" id="L24">                this.getModel().moveUp();</span>
-<span class="nc" id="L25">                break;</span>
+<span class="fc" id="L24">                this.getModel().moveUp();</span>
+<span class="fc" id="L25">                break;</span>
             case DOWN:
-<span class="nc" id="L27">                this.getModel().moveDown();</span>
-<span class="nc" id="L28">                break;</span>
+<span class="fc" id="L27">                this.getModel().moveDown();</span>
+<span class="fc" id="L28">                break;</span>
             case QUIT:
-<span class="nc" id="L30">                onQuit(game);</span>
-<span class="nc" id="L31">                break;</span>
+<span class="fc" id="L30">                onQuit(game);</span>
+<span class="fc" id="L31">                break;</span>
             default:
-<span class="nc" id="L33">                entryController.step(game, action, frameCount);</span>
+<span class="fc" id="L33">                entryController.step(game, action, frameCount);</span>
         }
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L35">    }</span>
 
     protected abstract void onQuit(Game game) throws IOException, URISyntaxException;
 }

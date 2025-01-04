@@ -51,11 +51,11 @@ public class LanternaGUI implements ResizableGUI {
 <span class="fc" id="L51">        return new KeyAdapter() {</span>
             @Override
             public void keyPressed(KeyEvent e) {
-<span class="nc bnc" id="L54" title="All 4 branches missed.">                if (keySpam &amp;&amp; SPAM_KEYS.contains(e.getKeyCode()))</span>
-<span class="nc" id="L55">                    keyPressed = priorityKeyPressed = e;</span>
+<span class="pc bpc" id="L54" title="1 of 4 branches missed.">                if (keySpam &amp;&amp; SPAM_KEYS.contains(e.getKeyCode()))</span>
+<span class="fc" id="L55">                    keyPressed = priorityKeyPressed = e;</span>
                 else
-<span class="nc" id="L57">                    keyPressed = e;</span>
-<span class="nc" id="L58">            }</span>
+<span class="fc" id="L57">                    keyPressed = e;</span>
+<span class="fc" id="L58">            }</span>
 
             @Override
             public void keyReleased(KeyEvent e) {
@@ -69,23 +69,23 @@ public class LanternaGUI implements ResizableGUI {
 
     @Override
     public int getWidth() {
-<span class="nc" id="L72">        return screenCreator.getWidth();</span>
+<span class="fc" id="L72">        return screenCreator.getWidth();</span>
     }
 
     @Override
     public int getHeight() {
-<span class="nc" id="L77">        return screenCreator.getHeight();</span>
+<span class="fc" id="L77">        return screenCreator.getHeight();</span>
     }
 
     @Override
     public Resolution getResolution() {
-<span class="nc" id="L82">        return resolution;</span>
+<span class="fc" id="L82">        return resolution;</span>
     }
 
     @Override
     public void setResolution(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (screen != null)</span>
-<span class="nc" id="L88">            screen.close();</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (screen != null)</span>
+<span class="fc" id="L88">            screen.close();</span>
 <span class="fc" id="L89">        this.resolution = resolution;</span>
 <span class="fc" id="L90">        this.screen = createScreen(resolution);</span>
 <span class="fc" id="L91">    }</span>
@@ -99,23 +99,23 @@ public class LanternaGUI implements ResizableGUI {
 
     @Override
     public void drawRectangle(double x, double y, int width, int height, TextColor color) {
-<span class="nc bnc" id="L102" title="All 4 branches missed.">        if (width &gt; 0 &amp;&amp; height &gt; 0) {</span>
-<span class="nc" id="L103">            TextGraphics tg = screen.newTextGraphics();</span>
-<span class="nc" id="L104">            tg.setBackgroundColor(color);</span>
-<span class="nc" id="L105">            tg.fillRectangle(new TerminalPosition((int) x, (int) y), new TerminalSize(width, height), ' ');</span>
+<span class="pc bpc" id="L102" title="2 of 4 branches missed.">        if (width &gt; 0 &amp;&amp; height &gt; 0) {</span>
+<span class="fc" id="L103">            TextGraphics tg = screen.newTextGraphics();</span>
+<span class="fc" id="L104">            tg.setBackgroundColor(color);</span>
+<span class="fc" id="L105">            tg.fillRectangle(new TerminalPosition((int) x, (int) y), new TerminalSize(width, height), ' ');</span>
         }
-<span class="nc" id="L107">    }</span>
+<span class="fc" id="L107">    }</span>
 
     @Override
     public Action getNextAction() {
-<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (keyPressed == null)</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (keyPressed == null)</span>
 <span class="nc" id="L112">            return Action.NONE;</span>
 
-<span class="nc" id="L114">        int keyCode = keyPressed.getKeyCode();</span>
-<span class="nc" id="L115">        keyPressed = priorityKeyPressed;</span>
+<span class="fc" id="L114">        int keyCode = keyPressed.getKeyCode();</span>
+<span class="fc" id="L115">        keyPressed = priorityKeyPressed;</span>
 
-<span class="nc bnc" id="L117" title="All 9 branches missed.">        return switch (keyCode) {</span>
-<span class="nc" id="L118">            case VK_LEFT -&gt; Action.LEFT;</span>
+<span class="pc bpc" id="L117" title="8 of 9 branches missed.">        return switch (keyCode) {</span>
+<span class="fc" id="L118">            case VK_LEFT -&gt; Action.LEFT;</span>
 <span class="nc" id="L119">            case VK_RIGHT -&gt; Action.RIGHT;</span>
 <span class="nc" id="L120">            case VK_UP -&gt; Action.UP;</span>
 <span class="nc" id="L121">            case VK_DOWN -&gt; Action.DOWN;</span>
@@ -130,24 +130,24 @@ public class LanternaGUI implements ResizableGUI {
 
     @Override
     public void clear() {
-<span class="nc" id="L133">        screen.clear();</span>
-<span class="nc" id="L134">    }</span>
+<span class="fc" id="L133">        screen.clear();</span>
+<span class="fc" id="L134">    }</span>
 
     @Override
     public void refresh() throws IOException {
-<span class="nc" id="L138">        screen.refresh();</span>
-<span class="nc" id="L139">    }</span>
+<span class="fc" id="L138">        screen.refresh();</span>
+<span class="fc" id="L139">    }</span>
 
     @Override
     public void close() throws IOException {
-<span class="nc" id="L143">        screen.close();</span>
-<span class="nc" id="L144">    }</span>
+<span class="fc" id="L143">        screen.close();</span>
+<span class="fc" id="L144">    }</span>
 
     public void setKeySpam(boolean keySpam) {
-<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (!keySpam)</span>
-<span class="nc" id="L148">            priorityKeyPressed = null;</span>
-<span class="nc" id="L149">        this.keySpam = keySpam;</span>
-<span class="nc" id="L150">    }</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        if (!keySpam)</span>
+<span class="fc" id="L148">            priorityKeyPressed = null;</span>
+<span class="fc" id="L149">        this.keySpam = keySpam;</span>
+<span class="fc" id="L150">    }</span>
 
     public KeyAdapter getKeyAdapter() {
 <span class="fc" id="L153">        return keyAdapter;</span>

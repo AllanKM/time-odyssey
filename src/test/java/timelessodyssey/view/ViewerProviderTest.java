@@ -26,7 +26,6 @@ class ViewerProviderTest {
 
     @Test
     void testViewerInitialization() {
-        // Verify that all viewers are initialized correctly
         assertNotNull(viewerProvider.getParticleViewer());
         assertNotNull(viewerProvider.getPlayerViewer());
         assertNotNull(viewerProvider.getSpikeViewer());
@@ -48,6 +47,4 @@ class ViewerProviderTest {
         LogoViewer logoViewer = viewerProvider.getLogoViewer();
         assertEquals(logoViewer, viewerProvider.getLogoViewer());
     }
-
-    // Add more tests for other viewers as needed...
 }

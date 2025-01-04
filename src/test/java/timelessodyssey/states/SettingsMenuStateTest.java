@@ -26,45 +26,32 @@ class SettingsMenuStateTest {
 
     @BeforeEach
     void setUp() throws IOException, URISyntaxException {
-        // Mock dependencies
         mockSettingsMenu = mock(SettingsMenu.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockViewerProvider = mock(ViewerProvider.class);
-
-        // Create instance of SettingsMenuState
         settingsMenuState = new SettingsMenuState(mockSettingsMenu, mockSpriteLoader);
     }
 
     @Test
     void testCreateController() {
-        // Act
         Controller<SettingsMenu> controller = settingsMenuState.createController();
-
-        // Assert
         assertNotNull(controller, "Controller should not be null");
         assertTrue(controller instanceof SettingsMenuController, "Controller should be an instance of SettingsMenuController");
 
-        // Verify that the SettingsMenuController is created with the correct sub-controller
         SettingsMenuController settingsMenuController = (SettingsMenuController) controller;
         assertNotNull(settingsMenuController.getModel(), "EntryController should not be null");
     }
 
     @Test
     void testCreateScreenViewer() {
-        // Act
         ScreenViewer<SettingsMenu> screenViewer = settingsMenuState.createScreenViewer(mockViewerProvider);
-
-        // Assert
         assertNotNull(screenViewer, "ScreenViewer should not be null");
         assertTrue(screenViewer instanceof MenuViewer, "ScreenViewer should be an instance of MenuViewer");
     }
 
     @Test
     void testAllowArrowSpam() {
-        // Act
         boolean result = settingsMenuState.allowArrowSpam();
-
-        // Assert
         assertFalse(result, "allowArrowSpam should return false");
     }
 }

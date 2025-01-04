@@ -55,7 +55,7 @@ class LanternaScreenCreatorTest {
         when(screen.getTerminal()).thenReturn(terminal);
         when(terminal.getComponent(0)).thenReturn(mock(Component.class));
 
-        ResizableGUI.Resolution resolution = ResizableGUI.Resolution.FHD; // Using a predefined enum constant
+        ResizableGUI.Resolution resolution = ResizableGUI.Resolution.FHD;
         KeyListener keyListener = mock(KeyListener.class);
         Screen result = screenCreator.createScreen(resolution, "Test Title", keyListener);
 

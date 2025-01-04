@@ -44,7 +44,6 @@ class ControllerTest {
         assertEquals(100L, testController.lastFrameCount);
     }
 
-    // Concrete implementation of Controller for testing
     private static class TestController<T> extends Controller<T> {
         boolean stepCalled = false;
         Game lastGame;

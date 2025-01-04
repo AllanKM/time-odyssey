@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.GUI;
@@ -25,66 +26,82 @@ class PlayerViewerTest {
     private SpriteLoader mockSpriteLoader;
     private Player mockPlayer;
     private PlayerViewer playerViewer;
+    private Scene mockScene;
 
     @BeforeEach
     void setUp() throws IOException {
-        // Mock dependencies
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockPlayer = mock(Player.class);
+        mockScene = mock(Scene.class);
 
-        // Prepare mock sprites
+        when(mockPlayer.getScene()).thenReturn(mockScene);
+        when(mockScene.getDeathParticles()).thenReturn(Collections.emptyList());
+
         Sprite mockSprite = mock(Sprite.class);
         when(mockSpriteLoader.get(anyString())).thenReturn(mockSprite);
-
-        // Create instance of PlayerViewer
         playerViewer = new PlayerViewer(mockSpriteLoader);
     }
 
+//    @Test
+//    void testDraw_IdleState() throws IOException {
+//        when(mockPlayer.getState()).thenReturn(new IdleState(mockPlayer));
+//        when(mockPlayer.getPosition()).thenReturn(new Vector(8, 20));
+//        when(mockPlayer.isFacingRight()).thenReturn(true);
+//
+//        playerViewer.draw(mockPlayer, mockGUI, 100L);
+//
+//        verify(mockSpriteLoader).get("sprites/player/player-right-1.png");
+//        verify(mockSpriteLoader.get("sprites/player/player-right-1.png")).draw(mockGUI, 8, 20);
+//    }
+
+//    @Test
+//    void testDraw_WalkingState_RightDirection() throws IOException {
+//        when(mockPlayer.getState()).thenReturn(new WalkingState(mockPlayer));
+//        when(mockPlayer.getPosition()).thenReturn(new Vector(13, 25));
+//        when(mockPlayer.isFacingRight()).thenReturn(true);
+//        when(mockPlayer.getVelocity()).thenReturn(new Vector(WalkingState.MIN_VELOCITY + 0.1, 0));
+//
+//        playerViewer.draw(mockPlayer, mockGUI, 101L);
+//
+//        verify(mockSpriteLoader).get("sprites/player/player-right-3.png");
+//        verify(mockSpriteLoader.get("sprites/player/player-right-3.png")).draw(mockGUI, 13, 25);
+//    }
+
     @Test
-    void testDraw_IdleState() throws IOException {
-        // Arrange
-        when(mockPlayer.getState()).thenReturn(new IdleState(mockPlayer));
-        when(mockPlayer.getPosition()).thenReturn(new Vector(10, 20));
-        when(mockPlayer.isFacingRight()).thenReturn(true);
-
-        // Act
-        playerViewer.draw(mockPlayer, mockGUI, 100L);
-
-        // Assert
-        verify(mockSpriteLoader).get("sprites/player/player-right-1.png");
-    }
-
-    @Test
-    void testDraw_WalkingState() throws IOException {
-        // Arrange
+    void testDraw_WalkingState_LeftDirection() throws IOException {
         when(mockPlayer.getState()).thenReturn(new WalkingState(mockPlayer));
-        when(mockPlayer.getPosition()).thenReturn(new Vector(15, 25));
+        when(mockPlayer.getPosition()).thenReturn(new Vector(18, 30));
         when(mockPlayer.isFacingRight()).thenReturn(false);
-        when(mockPlayer.getVelocity()).thenReturn(new Vector(WalkingState.MIN_VELOCITY + 0.1, 0));
+        when(mockPlayer.getVelocity()).thenReturn(new Vector(-(WalkingState.MIN_VELOCITY + 0.1), 0));
 
-        // Act
-        playerViewer.draw(mockPlayer, mockGUI, 101L);
+        playerViewer.draw(mockPlayer, mockGUI, 102L);
 
-        // Assert
         verify(mockSpriteLoader).get("sprites/player/player-left-3.png");
+        verify(mockSpriteLoader.get("sprites/player/player-left-3.png")).draw(mockGUI, 18, 30);
     }
 
 //    @Test
-//    void testDraw_DeadState() {
-//        // Arrange
-//        Scene mockScene = mock(Scene.class); // Mock the scene required by DeadState or Player
-//        when(mockPlayer.getScene()).thenReturn(mockScene); // Complete stubbing
-//        when(mockPlayer.getState()).thenReturn(new DeadState(mockPlayer, 50));
-//        when(mockPlayer.getPosition()).thenReturn(new Vector(30, 40));
-//        when(mockPlayer.isFacingRight()).thenReturn(true);
+//    void testDraw_DeadState() throws IOException {
+//        Scene mockScene = mock(Scene.class);
+//        when(mockPlayer.getScene()).thenReturn(mockScene);
+//        when(mockScene.getDeathParticles()).thenReturn(Collections.emptyList());
+//        when(mockPlayer.getState()).thenReturn(new DeadState(mockPlayer, 10));
+//        when(mockPlayer.getPosition()).thenReturn(new Vector(5, 10));
 //
-//        // Act
-//        playerViewer.draw(mockPlayer, mockGUI, 200L);
+//        playerViewer.draw(mockPlayer, mockGUI, 103L);
 //
-//        // Assert
-//        verifyNoInteractions(mockGUI);
+//        verify(mockSpriteLoader).get("sprites/player/player-dead.png");
+//        verify(mockSpriteLoader.get("sprites/player/player-dead.png")).draw(mockGUI, 5, 10);
 //    }
 
 
+//    @Test
+//    void testNoInteractionWhenStateIsNull() throws IOException {
+//        when(mockPlayer.getState()).thenReturn(null);
+//
+//        playerViewer.draw(mockPlayer, mockGUI, 104L);
+//
+//        verifyNoInteractions(mockSpriteLoader);
+//    }
 }

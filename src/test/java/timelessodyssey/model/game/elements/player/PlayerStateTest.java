@@ -18,7 +18,7 @@ class PlayerStateTest {
     @Mock
     private Scene scene;
 
-    private TestPlayerState testPlayerState; // A concrete implementation for testing
+    private TestPlayerState testPlayerState;
 
     @BeforeEach
     void setUp() {
@@ -28,8 +28,8 @@ class PlayerStateTest {
         when(player.getWidth()).thenReturn(6);
         when(player.getHeight()).thenReturn(8);
         when(player.getMaxVelocity()).thenReturn(new Vector(2.0, 3.0));
-        when(player.getPosition()).thenReturn(new Vector(0, 0)); // Ensure position is initialized
-        testPlayerState = new TestPlayerState(player); // Use a concrete subclass for testing
+        when(player.getPosition()).thenReturn(new Vector(0, 0));
+        testPlayerState = new TestPlayerState(player);
     }
 
     @Test
@@ -37,8 +37,8 @@ class PlayerStateTest {
         when(player.getVelocity()).thenReturn(new Vector(1, 0));
         Vector result = testPlayerState.movePlayerLeft();
 
-        assertEquals(1.0, result.x(), 0.001); // Velocity should be capped at zero
-        assertEquals(0, result.y(), 0.001); // Vertical velocity remains unchanged
+        assertEquals(1.0, result.x(), 0.001);
+        assertEquals(0, result.y(), 0.001);
     }
 
     @Test
@@ -46,8 +46,8 @@ class PlayerStateTest {
         when(player.getVelocity()).thenReturn(new Vector(1, 0));
         Vector result = testPlayerState.movePlayerRight();
 
-        assertEquals(1.0, result.x(), 0.001); // Velocity should increase by acceleration (1 + 0.75)
-        assertEquals(0.0, result.y(), 0.001); // Vertical velocity remains unchanged
+        assertEquals(1.0, result.x(), 0.001);
+        assertEquals(0.0, result.y(), 0.001);
     }
 
     @Test
@@ -60,32 +60,30 @@ class PlayerStateTest {
 
         Vector result = testPlayerState.applyCollisions(velocity);
 
-        assertEquals(5, result.x(), 0.001); // No collision, velocity remains the same
-        assertEquals(5, result.y(), 0.001); // No collision, velocity remains the same
-
-        // Simulate a collision downwards
+        assertEquals(5, result.x(), 0.001);
+        assertEquals(5, result.y(), 0.001);
         when(scene.collidesDown(any(), any())).thenReturn(true);
 
         result = testPlayerState.applyCollisions(velocity);
 
-        assertEquals(5, result.x(), 0.001); // Horizontal velocity should remain the same
-        assertEquals(0, result.y(), 0.001); // Vertical velocity should be capped at zero due to collision
+        assertEquals(5, result.x(), 0.001);
+        assertEquals(0, result.y(), 0.001);
     }
 
     @Test
     void testLimitVelocity() {
-        Vector highVelocity = new Vector(10, 4); // Exceeds max x velocity and y velocity
+        Vector highVelocity = new Vector(10, 4);
         Vector limitedVelocity = testPlayerState.limitVelocity(highVelocity);
 
-        assertEquals(2.0, limitedVelocity.x(), 0.001); // Should be capped to max x velocity
-        assertEquals(3.0, limitedVelocity.y(), 0.001); // Should be capped to max y velocity
+        assertEquals(2.0, limitedVelocity.x(), 0.001);
+        assertEquals(3.0, limitedVelocity.y(), 0.001);
 
         Vector lowVelocity = new Vector(0.1, 2);
 
         limitedVelocity = testPlayerState.limitVelocity(lowVelocity);
 
-        assertEquals(0, limitedVelocity.x(), 0.001); // Should be set to zero if below threshold
-        assertEquals(2, limitedVelocity.y(), 0.001); // Should remain unchanged
+        assertEquals(0, limitedVelocity.x(), 0.001);
+        assertEquals(2, limitedVelocity.y(), 0.001);
     }
 
     private static class TestPlayerState extends PlayerState {
@@ -111,7 +109,7 @@ class PlayerStateTest {
 
         @Override
         public PlayerState getNextState() {
-            return this; // For testing purposes, just return itself.
+            return this;
         }
     }
 }

@@ -40,19 +40,13 @@ class SettingsMenuControllerTest {
 
     @Test
     void onQuit_shouldSetMainMenuState() throws IOException, URISyntaxException {
-        // Arrange
-        // Act
         settingsMenuController.onQuit(game);
-
-        // Assert
         verify(game).setState(any(MainMenuState.class));
     }
 
     @Test
     void onQuit_shouldCreateMainMenuStateWithCorrectParameters() throws IOException, URISyntaxException {
-        // Arrange
-        // Act
         settingsMenuController.onQuit(game);
-
+        verify(game).setState(any(MainMenuState.class));
     }
 }

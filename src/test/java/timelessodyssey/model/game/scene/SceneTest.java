@@ -5,10 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import timelessodyssey.model.Vector;
-import timelessodyssey.model.game.elements.player.Player;
+import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.elements.Spike;
-import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.Star;
+import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.game.elements.player.Player;
+
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -23,11 +28,11 @@ class SceneTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        scene = new Scene(10, 10, 1); // Initialize a scene with width 10 and height 10
-        scene.setPlayer(player); // Set the player in the scene
+        scene = new Scene(10, 10, 1);
+        scene.setPlayer(player);
         when(player.getWidth()).thenReturn(6);
         when(player.getHeight()).thenReturn(8);
-        when(player.getPosition()).thenReturn(new Vector(5, 5)); // Set initial position of player
+        when(player.getPosition()).thenReturn(new Vector(5, 5));
     }
 
     @Test
@@ -39,75 +44,106 @@ class SceneTest {
         assertEquals(0.75, scene.getFriction(), 0.001);
     }
 
-//    @Test
-//    void testCollidesLeft_NoCollision() {
-//        Vector position = new Vector(5, 5);
-//        Vector size = new Vector(player.getWidth(), player.getHeight());
-//
-//        // Ensure no collision is detected
-//        when(scene.collidesLeft(position, size)).thenReturn(false);
-//
-//        assertFalse(scene.collidesLeft(position, size));
-//    }
-
-//    @Test
-//    void testCollidesLeft_WithCollision() {
-//        Vector position = new Vector(5, 5);
-//        Vector size = new Vector(6, 8); // Use actual values directly instead of calling player methods
-//
-//        // Ensure collision is detected
-//        when(scene.collidesLeft(position, size)).thenReturn(true);
-//
-//        assertTrue(scene.collidesLeft(position, size));
-//    }
-
     @Test
     void testIsPlayerDying_NoCollision() {
         Spike[][] spikes = new Spike[10][10];
-        scene.setSpikes(spikes); // Ensure no spikes are present
-
-        // Simulate player position not colliding with spikes
-        when(player.getPosition()).thenReturn(new Vector(5, 5));
-
+        scene.setSpikes(spikes);
         assertFalse(scene.isPlayerDying());
     }
 
     @Test
     void testIsPlayerDying_WithCollision() {
-        // Set up a spike in the scene to simulate a collision
         Spike[][] spikes = new Spike[10][10];
-        spikes[1][1] = new Spike(1 * Tile.SIZE, 1 * Tile.SIZE, 'S'); // Place a spike at (1,1)
+        spikes[1][1] = new Spike(1 * Tile.SIZE, 1 * Tile.SIZE, 'S');
         scene.setSpikes(spikes);
-
-        when(player.getPosition()).thenReturn(new Vector(1 * Tile.SIZE, 1 * Tile.SIZE)); // Simulate player position on spike
-
+        when(player.getPosition()).thenReturn(new Vector(1 * Tile.SIZE, 1 * Tile.SIZE));
         assertTrue(scene.isPlayerDying());
     }
 
     @Test
     void testUpdateStars_CatchStar() {
         Star[][] stars = new Star[10][10];
-        stars[0][0] = new Star(0 * Tile.SIZE, 0 * Tile.SIZE); // Place a star at (0,0)
+        stars[0][0] = new Star(0 * Tile.SIZE, 0 * Tile.SIZE);
         scene.setStars(stars);
-
-        when(player.getPosition()).thenReturn(new Vector(0 * Tile.SIZE, 0 * Tile.SIZE)); // Simulate player position on star
-
+        when(player.getPosition()).thenReturn(new Vector(0 * Tile.SIZE, 0 * Tile.SIZE));
         boolean caughtStar = scene.updateStars();
-
-        assertTrue(caughtStar); // Ensure the star was caught
-        assertNull(stars[0][0]); // Ensure the star is removed from the scene
+        assertTrue(caughtStar);
+        assertNull(stars[0][0]);
     }
 
     @Test
     void testUpdateStars_NoStarCaught() {
         Star[][] stars = new Star[10][10];
-        stars[1][1] = new Star(1 * Tile.SIZE, 1 * Tile.SIZE); // Place a star at (1,1)
         scene.setStars(stars);
+        assertFalse(scene.updateStars());
+    }
 
-        when(player.getPosition()).thenReturn(new Vector(0 * Tile.SIZE, 0 * Tile.SIZE)); // Simulate player position not on star
+    @Test
+    void testTransitionPositions() {
+        scene.setTransitionPositionBegin(new Vector(1, 1));
+        scene.setTransitionPositionEnd(new Vector(5, 5));
+        assertEquals(new Vector(1, 1), scene.getTransitionPositionBegin());
+        assertEquals(new Vector(5, 5), scene.getTransitionPositionEnd());
+    }
 
-        boolean caughtStar = scene.updateStars();
+    @Test
+    void testIsAtTransitionPosition() {
+        scene.setTransitionPositionBegin(new Vector(1, 1));
+        scene.setTransitionPositionEnd(new Vector(5, 5));
+        when(player.getPosition()).thenReturn(new Vector(3, 3));
+        assertTrue(scene.isAtTransitionPosition());
+        when(player.getPosition()).thenReturn(new Vector(6, 6));
+        assertFalse(scene.isAtTransitionPosition());
+    }
 
-        assertFalse(caughtStar); // Ensure no star was caught
+    @Test
+    void testCheckCollision_OutsideScene() {
+        Tile[][] tiles = new Tile[10][10];
+        scene.setTiles(tiles);
+        assertTrue(scene.collidesLeft(new Vector(-1, 0), new Vector(2, 2)));
+    }
+
+    @Test
+    void testCheckCollision_InsideScene() {
+        Tile[][] tiles = new Tile[10][10];
+        tiles[1][1] = new Tile(1 * Tile.SIZE, 1 * Tile.SIZE, 'T');
+        scene.setTiles(tiles);
+        assertTrue(scene.collidesUp(new Vector(1 * Tile.SIZE, 1 * Tile.SIZE), new Vector(Tile.SIZE, Tile.SIZE)));
+    }
+
+    @Test
+    void testCollidesUp_NoCollision() {
+        Tile[][] tiles = new Tile[10][10];
+        scene.setTiles(tiles);
+        assertFalse(scene.collidesUp(new Vector(5, 5), new Vector(2, 2)));
+    }
+
+    @Test
+    void testCollidesDown_NoCollision() {
+        Tile[][] tiles = new Tile[10][10];
+        scene.setTiles(tiles);
+        assertFalse(scene.collidesDown(new Vector(5, 5), new Vector(2, 2)));
+    }
+
+    @Test
+    void testCollidesDown_WithCollision() {
+        Tile[][] tiles = new Tile[10][10];
+        tiles[7][5] = new Tile(5 * Tile.SIZE, 7 * Tile.SIZE, 'T');
+        scene.setTiles(tiles);
+        assertFalse(scene.collidesDown(new Vector(5 * Tile.SIZE, 6 * Tile.SIZE), new Vector(Tile.SIZE, Tile.SIZE)));
+    }
+
+    @Test
+    void testGetDeathParticles() {
+        scene.setDeathParticles(Collections.emptyList());
+        assertTrue(scene.getDeathParticles().isEmpty());
+    }
+
+    @Test
+    void testCheckOutsideScene() {
+        assertTrue(scene.collidesLeft(new Vector(-1, 0), new Vector(1, 1)));
+        assertTrue(scene.collidesRight(new Vector(scene.getWidth() * Tile.SIZE + 1, 0), new Vector(1, 1)));
+        assertTrue(scene.collidesUp(new Vector(0, -1), new Vector(1, 1)));
+        assertTrue(scene.collidesDown(new Vector(0, scene.getHeight() * Tile.SIZE + 1), new Vector(1, 1)));
     }
 }

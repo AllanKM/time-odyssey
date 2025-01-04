@@ -36,8 +36,8 @@ class IdleStateTest {
     void testJump() {
         Vector result = idleState.jump();
 
-        assertEquals(0, result.x(), 0.001); // Horizontal velocity remains unchanged
-        assertEquals(-5.0, result.y(), 0.001); // Jump boost applied to vertical velocity
+        assertEquals(0, result.x(), 0.001);
+        assertEquals(-5.0, result.y(), 0.001);
     }
 
     @Test
@@ -47,8 +47,8 @@ class IdleStateTest {
 
         Vector result = idleState.dash();
 
-        assertEquals(3.0, result.x(), 0.001); // Dash boost to the right
-        assertEquals(0.0, result.y(), 0.001); // No vertical movement
+        assertEquals(3.0, result.x(), 0.001);
+        assertEquals(0.0, result.y(), 0.001);
     }
 
     @Test
@@ -58,18 +58,18 @@ class IdleStateTest {
 
         Vector result = idleState.dash();
 
-        assertEquals(-3.0, result.x(), 0.001); // Dash boost to the left
-        assertEquals(0.0, result.y(), 0.001); // No vertical movement
+        assertEquals(-3.0, result.x(), 0.001);
+        assertEquals(0.0, result.y(), 0.001);
     }
 
     @Test
     void testUpdateVelocity() {
-        Vector initialVelocity = new Vector(5, 2); // Initial horizontal and vertical velocity
+        Vector initialVelocity = new Vector(5, 2);
 
         Vector result = idleState.updateVelocity(initialVelocity);
 
-        assertEquals(4.5, result.x(), 0.001); // Friction applied to x velocity (5 * 0.9)
-        assertEquals(2, result.y(), 0.001); // Vertical velocity remains unchanged
+        assertEquals(4.5, result.x(), 0.001);
+        assertEquals(2, result.y(), 0.001);
     }
 
     @Test
@@ -98,8 +98,6 @@ class IdleStateTest {
         when(player.isOnGround()).thenReturn(false);
 
         PlayerState nextState = idleState.getNextState();
-
-        //assertInstanceOf(OnAirState.class, nextState); // Assuming OnAirState is the next state in air
     }
 
     @Test
@@ -108,11 +106,10 @@ class IdleStateTest {
         when(player.isOverMaxXVelocity()).thenReturn(false);
         when(player.isOnGround()).thenReturn(true);
 
-        // Set velocity to be above the minimum for walking state transition
         when(player.getVelocity()).thenReturn(new Vector(WalkingState.MIN_VELOCITY, 0));
 
         PlayerState nextState = idleState.getNextState();
 
-        assertTrue(nextState instanceof WalkingState); // Should transition to Walking state
+        assertTrue(nextState instanceof WalkingState);
     }
 }

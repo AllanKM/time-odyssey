@@ -1,5 +1,9 @@
 package timelessodyssey.model.game.elements.particles;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+
 import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,9 +12,6 @@ import org.mockito.MockitoAnnotations;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.scene.Scene;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class SnowTest {
 
@@ -63,7 +64,6 @@ class SnowTest {
 
     @Test
     void testFloorMod() {
-        // This test uses reflection to test the private method
         try {
             java.lang.reflect.Method floorMod = Snow.class.getDeclaredMethod("floorMod", double.class, int.class);
             floorMod.setAccessible(true);

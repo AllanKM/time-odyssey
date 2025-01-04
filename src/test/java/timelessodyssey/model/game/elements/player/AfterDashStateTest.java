@@ -69,9 +69,7 @@ class AfterDashStateTest {
     @Test
     void testGetNextState_Dying() {
         when(scene.isPlayerDying()).thenReturn(true);
-
         PlayerState nextState = afterDashState.getNextState();
-
         assertTrue(nextState instanceof DeadState);
     }
 

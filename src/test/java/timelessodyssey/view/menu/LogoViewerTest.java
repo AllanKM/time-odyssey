@@ -19,28 +19,18 @@ class LogoViewerTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        // Mock dependencies
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockSprite = mock(Sprite.class);
-
-        // Mock SpriteLoader behavior
         when(mockSpriteLoader.get("menu/logo.png")).thenReturn(mockSprite);
-
-        // Create LogoViewer instance
         logoViewer = new LogoViewer(mockSpriteLoader);
     }
 
     @Test
     void testDraw() {
-        // Arrange
         int x = 10;
         int y = 20;
-
-        // Act
         logoViewer.draw(mockGUI, x, y);
-
-        // Assert
         verify(mockSprite).draw(mockGUI, x, y);
     }
 }

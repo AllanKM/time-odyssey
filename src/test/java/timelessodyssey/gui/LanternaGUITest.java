@@ -1,25 +1,25 @@
 package timelessodyssey.gui;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import java.awt.Component;
+import java.awt.FontFormatException;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import timelessodyssey.gui.GUI.Action;
+import timelessodyssey.gui.ResizableGUI.Resolution;
 
 class LanternaGUITest {
+
     private DefaultTerminalFactory terminalFactoryMock;
-    private TerminalScreen terminalScreenMock;
-    private AWTTerminalFrame terminalFrameMock;
     private Screen screenMock;
     private TextGraphics textGraphicsMock;
     private LanternaScreenCreator screenCreator;
@@ -27,42 +27,97 @@ class LanternaGUITest {
 
     @BeforeEach
     void setUp() throws Exception {
-        // Mock dependencies
         terminalFactoryMock = mock(DefaultTerminalFactory.class);
-        terminalScreenMock = mock(TerminalScreen.class);
-        terminalFrameMock = mock(AWTTerminalFrame.class);
         screenMock = mock(Screen.class);
         textGraphicsMock = mock(TextGraphics.class);
 
-        // Mock the component
-        Component componentMock = mock(Component.class);
-        when(terminalFrameMock.getComponent(0)).thenReturn(componentMock);
+        when(screenMock.newTextGraphics()).thenReturn(textGraphicsMock);
 
-        // Stub methods for terminal and screen creation
-        when(terminalFactoryMock.createScreen()).thenReturn(terminalScreenMock);
-        when(terminalScreenMock.getTerminal()).thenReturn(terminalFrameMock);
-        when(terminalScreenMock.newTextGraphics()).thenReturn(textGraphicsMock);
+        screenCreator = mock(LanternaScreenCreator.class);
+        when(screenCreator.createScreen(any(), any(), any())).thenReturn(screenMock);
 
-        // Create the real LanternaScreenCreator
-        TerminalSize terminalSize = new TerminalSize(80, 24);
-        Rectangle defaultBounds = new Rectangle(800, 600);
-        screenCreator = new LanternaScreenCreator(terminalFactoryMock, terminalSize, defaultBounds);
-
-        // Create LanternaGUI instance using the real screenCreator
         lanternaGUI = new LanternaGUI(screenCreator, "TestTitle");
+    }
+
+    @Test
+    void testSetResolution() throws Exception {
+        Resolution resolution = ResizableGUI.Resolution.FHD;
+        lanternaGUI.setResolution(resolution);
+        verify(screenMock, atLeastOnce()).setCursorPosition(null);
+        verify(screenMock, atLeastOnce()).startScreen();
     }
 
 
     @Test
     void testDrawPixel() {
         TextColor color = TextColor.Factory.fromString("#FFFFFF");
-
-        // Act
         lanternaGUI.drawPixel(10, 15, color);
-
-        // Verify interactions based on the current implementation
         verify(textGraphicsMock).setBackgroundColor(color);
         verify(textGraphicsMock).setCharacter(10, 15, ' ');
     }
 
+    @Test
+    void testDrawRectangle() {
+        TextColor color = TextColor.Factory.fromString("#FF0000");
+        lanternaGUI.drawRectangle(5, 5, 10, 15, color);
+        verify(textGraphicsMock).setBackgroundColor(color);
+        verify(textGraphicsMock).fillRectangle(any(), any(), eq(' '));
+    }
+
+    @Test
+    void testClearScreen() {
+        lanternaGUI.clear();
+        verify(screenMock).clear();
+    }
+
+    @Test
+    void testRefreshScreen() throws Exception {
+        lanternaGUI.refresh();
+        verify(screenMock).refresh();
+    }
+
+    @Test
+    void testCloseScreen() throws Exception {
+        lanternaGUI.close();
+        verify(screenMock).close();
+    }
+
+    @Test
+    void testGetWidth() {
+        when(screenCreator.getWidth()).thenReturn(80);
+        assertEquals(80, lanternaGUI.getWidth());
+        verify(screenCreator).getWidth();
+    }
+
+    @Test
+    void testGetHeight() {
+        when(screenCreator.getHeight()).thenReturn(24);
+        assertEquals(24, lanternaGUI.getHeight());
+        verify(screenCreator).getHeight();
+    }
+
+    @Test
+    void testGetResolution() throws IOException, URISyntaxException, FontFormatException {
+        Resolution resolution = Resolution.FHD;
+        lanternaGUI.setResolution(resolution);
+        assertEquals(resolution, lanternaGUI.getResolution());
+    }
+
+    @Test
+    void testGetNextAction() {
+        KeyEvent keyEvent = mock(KeyEvent.class);
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
+        lanternaGUI.setKeySpam(false);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEvent);
+        assertEquals(Action.LEFT, lanternaGUI.getNextAction());
+    }
+
+    @Test
+    void testGetNextActionWithSpamKey() {
+        KeyEvent keyEvent = mock(KeyEvent.class);
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
+        lanternaGUI.setKeySpam(true);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEvent);
+        assertEquals(Action.LEFT, lanternaGUI.getNextAction());
+    }
 }

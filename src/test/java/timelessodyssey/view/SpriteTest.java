@@ -5,65 +5,63 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.GUI;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class SpriteTest {
 
     private GUI mockGUI;
     private Sprite sprite;
-    private BufferedImage mockImage;
+    private BufferedImage testImage;
 
     @BeforeEach
-    void setUp() {
-        // Mock the GUI
+    void setUp() throws IOException {
         mockGUI = mock(GUI.class);
 
-        // Mock a BufferedImage
-        mockImage = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
-                mockImage.setRGB(x, y, (255 << 24) | (x << 16) | (y << 8) | 0); // ARGB format
-            }
-        }
+        String testImagePath = "test_image.png";
+        URL resource = getClass().getClassLoader().getResource(testImagePath);
+        assertNotNull(resource, "Test image resource should exist");
+        File imageFile = new File(resource.getFile());
 
-        // Mock Sprite
-        sprite = mock(Sprite.class);
-        when(sprite.getImage()).thenReturn(mockImage);
+        testImage = ImageIO.read(imageFile);
+        assertNotNull(testImage, "Test image should be loaded");
+
+        sprite = new Sprite(testImagePath);
     }
-
-//    @Test
-//    void testDraw() {
-//        // Act
-//        sprite.draw(mockGUI, 5.0, 5.0);
-//
-//        // Assert
-//        for (int x = 0; x < 10; x++) {
-//            for (int y = 0; y < 10; y++) {
-//                int ARGB = mockImage.getRGB(x, y);
-//                int red = (ARGB >> 16) & 0xFF;
-//                int green = (ARGB >> 8) & 0xFF;
-//                int blue = ARGB & 0xFF;
-//                TextColor expectedColor = new TextColor.RGB(red, green, blue);
-//
-//                if ((ARGB >> 24) != 0) { // Non-transparent pixel
-//                    verify(mockGUI).drawPixel(5.0 + x, 5.0 + y, expectedColor);
-//                }
-//            }
-//        }
-//    }
 
     @Test
     void testGetImage() {
-        // Act
         BufferedImage image = sprite.getImage();
-
-        // Assert
         assertNotNull(image, "Image should not be null");
-        assertEquals(10, image.getWidth(), "Image width should be 10");
-        assertEquals(10, image.getHeight(), "Image height should be 10");
+        assertEquals(testImage.getWidth(), image.getWidth(), "Image width should match the expected value");
+        assertEquals(testImage.getHeight(), image.getHeight(), "Image height should match the expected value");
+    }
+
+    @Test
+    void testDraw() {
+        sprite.draw(mockGUI, 5, 5);
+
+        for (int dx = 0; dx < testImage.getWidth(); dx++) {
+            for (int dy = 0; dy < testImage.getHeight(); dy++) {
+                int ARGB = testImage.getRGB(dx, dy);
+                int transparency = ARGB >> 24;
+                if (transparency == 0) {
+                    verify(mockGUI, never()).drawPixel(anyDouble(), anyDouble(), any(TextColor.class));
+                } else {
+                    TextColor expectedColor = new TextColor.RGB(
+                            (ARGB >> 16) & 0xFF,
+                            (ARGB >> 8) & 0xFF,
+                            ARGB & 0xFF
+                    );
+                    verify(mockGUI).drawPixel(5 + dx, 5 + dy, expectedColor);
+                }
+            }
+        }
     }
 }

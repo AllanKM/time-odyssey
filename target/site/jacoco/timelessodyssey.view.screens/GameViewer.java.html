@@ -31,36 +31,36 @@ public class GameViewer extends ScreenViewer&lt;Scene&gt; {
 
     @Override
     public void draw(ResizableGUI gui, long frameCount) throws IOException {
-<span class="nc" id="L34">        gui.clear();</span>
-<span class="nc" id="L35">        gui.drawRectangle(0, 0, gui.getWidth(), gui.getHeight(), backgroundColor);</span>
+<span class="fc" id="L34">        gui.clear();</span>
+<span class="fc" id="L35">        gui.drawRectangle(0, 0, gui.getWidth(), gui.getHeight(), backgroundColor);</span>
 
-<span class="nc" id="L37">        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);</span>
-<span class="nc" id="L38">        drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);</span>
-<span class="nc" id="L39">        drawElements(gui, getModel().getTiles(), tileViewer, frameCount);</span>
-<span class="nc" id="L40">        drawElements(gui, getModel().getGoals(), tileViewer, frameCount);</span>
-<span class="nc" id="L41">        drawElements(gui, getModel().getStars(), starViewer, frameCount);</span>
-<span class="nc" id="L42">        drawElements(gui, getModel().getSnow(), particleViewer, frameCount);</span>
-<span class="nc" id="L43">        drawElements(gui, getModel().getDeathParticles(), particleViewer, frameCount);</span>
+<span class="fc" id="L37">        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);</span>
+<span class="fc" id="L38">        drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);</span>
+<span class="fc" id="L39">        drawElements(gui, getModel().getTiles(), tileViewer, frameCount);</span>
+<span class="fc" id="L40">        drawElements(gui, getModel().getGoals(), tileViewer, frameCount);</span>
+<span class="fc" id="L41">        drawElements(gui, getModel().getStars(), starViewer, frameCount);</span>
+<span class="fc" id="L42">        drawElements(gui, getModel().getSnow(), particleViewer, frameCount);</span>
+<span class="fc" id="L43">        drawElements(gui, getModel().getDeathParticles(), particleViewer, frameCount);</span>
 
-<span class="nc" id="L45">        gui.refresh();</span>
-<span class="nc" id="L46">    }</span>
+<span class="fc" id="L45">        gui.refresh();</span>
+<span class="fc" id="L46">    }</span>
 
     private &lt;T extends Element&gt; void drawElement(GUI gui, T element, ElementViewer&lt;T&gt; viewer, long frameCount) {
-<span class="nc" id="L49">        viewer.draw(element, gui, frameCount);</span>
-<span class="nc" id="L50">    }</span>
+<span class="fc" id="L49">        viewer.draw(element, gui, frameCount);</span>
+<span class="fc" id="L50">    }</span>
 
     private &lt;T extends Element&gt; void drawElements(GUI gui, List&lt;T&gt; elements, ElementViewer&lt;T&gt; viewer, long frameCount) {
-<span class="nc bnc" id="L53" title="All 2 branches missed.">        for (T element: elements)</span>
-<span class="nc" id="L54">            drawElement(gui, element, viewer, frameCount);</span>
-<span class="nc" id="L55">    }</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (T element: elements)</span>
+<span class="fc" id="L54">            drawElement(gui, element, viewer, frameCount);</span>
+<span class="fc" id="L55">    }</span>
 
     private &lt;T extends Element&gt; void drawElements(GUI gui, T[][] elements, ElementViewer&lt;T&gt; viewer, long frameCount) {
-<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (T[] elementLine : elements) {</span>
-<span class="nc bnc" id="L59" title="All 2 branches missed.">            for (T element : elementLine) {</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">                if (element != null)</span>
-<span class="nc" id="L61">                    drawElement(gui, element, viewer, frameCount);</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (T[] elementLine : elements) {</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            for (T element : elementLine) {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">                if (element != null)</span>
+<span class="fc" id="L61">                    drawElement(gui, element, viewer, frameCount);</span>
             }
         }
-<span class="nc" id="L64">    }</span>
+<span class="fc" id="L64">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -22,28 +22,18 @@ class StarViewerTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        // Mock dependencies
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockStar = mock(Star.class);
         mockSprite = mock(Sprite.class);
-
-        // Stub SpriteLoader to return a mock sprite
         when(mockSpriteLoader.get("sprites/star.png")).thenReturn(mockSprite);
-
-        // Create instance of StarViewer
         starViewer = new StarViewer(mockSpriteLoader);
     }
 
     @Test
     void testDraw() {
-        // Arrange
         when(mockStar.getPosition()).thenReturn(new Vector(10, 20));
-
-        // Act
         starViewer.draw(mockStar, mockGUI, 100L);
-
-        // Assert
         verify(mockSprite).draw(mockGUI, 10, 20);
     }
 }

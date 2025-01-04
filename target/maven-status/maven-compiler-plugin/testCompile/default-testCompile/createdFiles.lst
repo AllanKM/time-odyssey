@@ -56,7 +56,6 @@ timelessodyssey\view\menu\LogoViewerTest.class
 timelessodyssey\states\GameStateTest.class
 timelessodyssey\model\game\elements\particles\SnowTest.class
 timelessodyssey\model\game\elements\player\FallingStateTest.class
-timelessodyssey\GameTest$1.class
 timelessodyssey\sound\SoundPlayerTest.class
 timelessodyssey\control\ControllerTest.class
 timelessodyssey\model\game\elements\TileTest.class

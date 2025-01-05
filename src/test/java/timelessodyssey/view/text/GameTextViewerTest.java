@@ -25,7 +25,7 @@ class GameTextViewerTest {
 
     @Test
     void testDrawKnownChar() {
-        char character = 'A'; // Assuming 'A' is defined in the font map
+        char character = 'A';
         double x = 10;
         double y = 20;
         TextColor color = TextColor.ANSI.RED;
@@ -38,14 +38,13 @@ class GameTextViewerTest {
 
     @Test
     void testDrawUnknownChar() {
-        char unknownCharacter = '\uFFFF'; // Use a character that is highly unlikely to exist in the charMap
+        char unknownCharacter = '\uFFFF';
         double x = 10.0;
         double y = 20.0;
         TextColor color = TextColor.ANSI.BLUE;
 
         gameTextViewer.draw(unknownCharacter, x, y, color, mockGUI);
 
-        // Verify that drawRectangle is called for unknown characters
         verify(mockGUI).drawRectangle(
                 eq(x),
                 eq(y),
@@ -54,7 +53,6 @@ class GameTextViewerTest {
                 eq(color)
         );
 
-        // Ensure no additional unexpected interactions occurred
         verifyNoMoreInteractions(mockGUI);
     }
 
@@ -72,6 +70,72 @@ class GameTextViewerTest {
             verify(mockGUI, atLeastOnce()).drawPixel(anyDouble(), anyDouble(), eq(color));
         }
         verifyNoMoreInteractions(mockGUI);
+    }
+
+    @Test
+    void testDrawEmptyString() {
+        String text = "";
+        double x = 10;
+        double y = 20;
+        TextColor color = TextColor.ANSI.GREEN;
+
+        gameTextViewer.draw(text, x, y, color, mockGUI);
+
+        // Ensure no interaction happens for an empty string
+        verifyNoInteractions(mockGUI);
+    }
+
+    @Test
+    void testDrawInvalidChar() {
+        char character = '\u0000'; // Non-mapped character
+        double x = 10.0;
+        double y = 20.0;
+        TextColor color = TextColor.ANSI.YELLOW;
+
+        gameTextViewer.draw(character, x, y, color, mockGUI);
+
+        verify(mockGUI).drawRectangle(
+                eq(x),
+                eq(y),
+                eq(GameTextViewer.getCharWidth()),
+                eq(GameTextViewer.getCharHeight()),
+                eq(color)
+        );
+        verifyNoMoreInteractions(mockGUI);
+    }
+
+    @Test
+    void testSpacingIncrements() {
+        String text = "AB";
+        double x = 10.0;
+        double y = 20.0;
+        TextColor color = TextColor.ANSI.YELLOW;
+
+        gameTextViewer.draw(text, x, y, color, mockGUI);
+
+        double expectedXIncrement = GameTextViewer.getCharWidth() + GameTextViewer.getSpacing();
+        verify(mockGUI, atLeastOnce()).drawPixel(anyDouble(), anyDouble(), eq(color));
+        assertEquals(expectedXIncrement, 4.0, "Spacing and character width must match increments.");
+    }
+
+    @Test
+    void testNegativeCoordinates() {
+        char character = 'C';
+        double x = -5.0;
+        double y = -10.0;
+        TextColor color = TextColor.ANSI.GREEN;
+
+        assertDoesNotThrow(() -> gameTextViewer.draw(character, x, y, color, mockGUI));
+    }
+
+    @Test
+    void testNullGUI() {
+        char character = 'Z';
+        double x = 0.0;
+        double y = 0.0;
+        TextColor color = TextColor.ANSI.CYAN;
+
+        assertThrows(NullPointerException.class, () -> gameTextViewer.draw(character, x, y, color, null));
     }
 
     @Test
@@ -101,8 +165,7 @@ class GameTextViewerTest {
 
     @Test
     void testDrawKnownCharIntegration() throws IOException, URISyntaxException {
-        // Ensures font map and font image integration works
-        char character = 'A'; // Assuming 'A' exists in the font map
+        char character = 'A';
         double x = 0;
         double y = 0;
         TextColor color = TextColor.ANSI.RED;
@@ -112,7 +175,7 @@ class GameTextViewerTest {
 
     @Test
     void testDrawUnknownCharIntegration() {
-        char character = '?'; // Assuming '?' does not exist in the font map
+        char character = '?';
         double x = 0;
         double y = 0;
         TextColor color = TextColor.ANSI.BLUE;

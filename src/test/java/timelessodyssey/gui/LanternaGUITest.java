@@ -1,14 +1,18 @@
 package timelessodyssey.gui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import java.awt.FontFormatException;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -119,5 +123,42 @@ class LanternaGUITest {
         lanternaGUI.setKeySpam(true);
         lanternaGUI.getKeyAdapter().keyPressed(keyEvent);
         assertEquals(Action.LEFT, lanternaGUI.getNextAction());
+    }
+
+    @Test
+    void testGetNextActionForAllKeys() {
+        KeyEvent keyEventMock = mock(KeyEvent.class);
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_RIGHT);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.RIGHT, lanternaGUI.getNextAction());
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_UP);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.UP, lanternaGUI.getNextAction());
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_DOWN);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.DOWN, lanternaGUI.getNextAction());
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_ESCAPE);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.QUIT, lanternaGUI.getNextAction());
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_ENTER);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.SELECT, lanternaGUI.getNextAction());
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_SPACE);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.JUMP, lanternaGUI.getNextAction());
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_X);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.DASH, lanternaGUI.getNextAction());
+
+        when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_A);
+        lanternaGUI.getKeyAdapter().keyPressed(keyEventMock);
+        assertEquals(Action.NONE, lanternaGUI.getNextAction());
     }
 }

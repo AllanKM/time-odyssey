@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.menu.Entry;
+import timelessodyssey.model.menu.Entry.Type;
 import timelessodyssey.view.text.TextViewer;
 
 import static org.mockito.Mockito.*;
@@ -25,7 +26,7 @@ class EntryViewerTest {
 
     @Test
     void testDrawStartGameEntry() {
-        Entry startGameEntry = new Entry(10, 20, Entry.Type.START_GAME);
+        Entry startGameEntry = new Entry(10, 20, Type.START_GAME);
         TextColor mockColor = TextColor.ANSI.WHITE;
         entryViewer.draw(startGameEntry, mockResizableGUI, mockColor);
         verify(mockTextViewer).draw("Start", 10, 20, mockColor, mockResizableGUI);
@@ -33,12 +34,43 @@ class EntryViewerTest {
 
     @Test
     void testDrawResolutionEntryWithAutomatic() {
-        Entry resolutionEntry = new Entry(15, 25, Entry.Type.RESOLUTION);
+        Entry resolutionEntry = new Entry(15, 25, Type.RESOLUTION);
         TextColor mockColor = TextColor.ANSI.GREEN;
         when(mockResizableGUI.getResolution()).thenReturn(null);
         entryViewer.draw(resolutionEntry, mockResizableGUI, mockColor);
         verify(mockTextViewer).draw("Resolution:   Automatic >", 15, 25, mockColor, mockResizableGUI);
     }
+
+    @Test
+    void testDrawExitEntryWithAutomatic() {
+        Entry resolutionEntry = new Entry(15, 25, Type.EXIT);
+        TextColor mockColor = TextColor.ANSI.GREEN;
+        when(mockResizableGUI.getResolution()).thenReturn(null);
+        entryViewer.draw(resolutionEntry, mockResizableGUI, mockColor);
+        verify(mockTextViewer).draw(
+                eq("Exit"),
+                eq(15.0),
+                eq(25.0),
+                eq(mockColor),
+                eq(mockResizableGUI)
+        );
+    }
+
+    @Test
+    void testDrawSettingsEntryWithAutomatic() {
+        Entry resolutionEntry = new Entry(15, 25, Type.SETTINGS);
+        TextColor mockColor = TextColor.ANSI.GREEN;
+        when(mockResizableGUI.getResolution()).thenReturn(null);
+        entryViewer.draw(resolutionEntry, mockResizableGUI, mockColor);
+        verify(mockTextViewer).draw(
+                eq("Settings"),
+                eq(15.0),
+                eq(25.0),
+                eq(mockColor),
+                eq(mockResizableGUI)
+        );
+    }
+
 
     @Test
     void testDrawResolutionEntryWithSpecificResolution() {

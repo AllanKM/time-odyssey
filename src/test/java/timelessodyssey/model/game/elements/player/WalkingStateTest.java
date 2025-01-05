@@ -35,7 +35,6 @@ class WalkingStateTest {
     @Test
     void testJump() {
         Vector result = walkingState.jump();
-
         assertEquals(0.9, result.x(), 0.001);
         assertEquals(-3.6, result.y(), 0.001);
     }
@@ -65,7 +64,6 @@ class WalkingStateTest {
     @Test
     void testUpdateVelocity() {
         Vector initialVelocity = new Vector(1.5, 2);
-
         Vector result = walkingState.updateVelocity(initialVelocity);
 
         assertEquals(1.35, result.x(), 0.001);
@@ -91,6 +89,7 @@ class WalkingStateTest {
     void testGetNextState_Falling() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
+        when(player.isOnGround()).thenReturn(false);
         when(player.getVelocity()).thenReturn(new Vector(1.0, 1));
 
         PlayerState nextState = walkingState.getNextState();
@@ -102,17 +101,23 @@ class WalkingStateTest {
     void testGetNextState_Running() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
+        when(player.isOnGround()).thenReturn(true);
         when(player.getVelocity()).thenReturn(new Vector(RunningState.MIN_VELOCITY, 0));
+
         PlayerState nextState = walkingState.getNextState();
-        assertFalse(nextState instanceof RunningState);
+
+        assertTrue(nextState instanceof RunningState);
     }
 
     @Test
     void testGetNextState_Idle() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
+        when(player.isOnGround()).thenReturn(true);
         when(player.getVelocity()).thenReturn(new Vector(WalkingState.MIN_VELOCITY - 0.1, 0));
+
         PlayerState nextState = walkingState.getNextState();
-        assertFalse(nextState instanceof IdleState);
+
+        assertTrue(nextState instanceof IdleState);
     }
 }

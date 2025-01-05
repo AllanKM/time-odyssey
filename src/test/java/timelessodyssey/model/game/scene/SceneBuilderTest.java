@@ -6,13 +6,17 @@ import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.player.Player;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class SceneBuilderTest {
 
@@ -40,6 +44,7 @@ class SceneBuilderTest {
         assertNotNull(createdScene.getTransitionPositionBegin(), "Transition start position should not be null");
         assertNotNull(createdScene.getTransitionPositionEnd(), "Transition end position should not be null");
         assertNotNull(createdScene.getSnow(), "Snow should not be null");
+        assertNotNull(createdScene.getDeathParticles(), "Death particles should not be null");
     }
 
     @Test
@@ -127,8 +132,10 @@ class SceneBuilderTest {
 
     @Test
     void testSceneBuilderHandlesSnow() {
-        scene.setSnow(Collections.emptyList());
-        assertNotNull(scene.getSnow(), "Snow list should not be null");
+        Particle mockParticle = mock(Particle.class);
+        scene.setSnow(new ArrayList<>(List.of(mockParticle)));
+        assertFalse(scene.getSnow().isEmpty(), "Snow list should not be empty");
+        assertEquals(mockParticle, scene.getSnow().get(0), "First snow particle should match");
     }
 
     @Test

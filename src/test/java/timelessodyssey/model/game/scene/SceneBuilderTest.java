@@ -7,6 +7,7 @@ import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.game.elements.particles.Snow;
 import timelessodyssey.model.game.elements.player.Player;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class SceneBuilderTest {
 
@@ -34,6 +35,7 @@ class SceneBuilderTest {
     @Test
     void testCreateScene() {
         Scene createdScene = sceneBuilder.createScene(player);
+
         assertNotNull(createdScene, "Scene should not be null");
         assertEquals(player, createdScene.getPlayer(), "Player should match");
         assertEquals(player.getPosition(), createdScene.getStartingPosition(), "Starting position should match");
@@ -45,6 +47,9 @@ class SceneBuilderTest {
         assertNotNull(createdScene.getTransitionPositionEnd(), "Transition end position should not be null");
         assertNotNull(createdScene.getSnow(), "Snow should not be null");
         assertNotNull(createdScene.getDeathParticles(), "Death particles should not be null");
+
+        assertEquals(20, createdScene.getWidth(), "Default width should match");
+        assertEquals(16, createdScene.getHeight(), "Default height should match");
     }
 
     @Test
@@ -75,13 +80,6 @@ class SceneBuilderTest {
         assertEquals(new Vector(10, 10), scene.getTransitionPositionBegin());
         assertEquals(new Vector(20, 20), scene.getTransitionPositionEnd());
         assertEquals(new Vector(5, 5), scene.getStartingPosition());
-    }
-
-    @Test
-    void testSceneDimensions() {
-        Scene createdScene = sceneBuilder.createScene(player);
-        assertEquals(20, createdScene.getWidth());
-        assertEquals(16, createdScene.getHeight());
     }
 
     @Test
@@ -132,7 +130,7 @@ class SceneBuilderTest {
 
     @Test
     void testSceneBuilderHandlesSnow() {
-        Particle mockParticle = mock(Particle.class);
+        Particle mockParticle = mock(Snow.class);
         scene.setSnow(new ArrayList<>(List.of(mockParticle)));
         assertFalse(scene.getSnow().isEmpty(), "Snow list should not be empty");
         assertEquals(mockParticle, scene.getSnow().get(0), "First snow particle should match");

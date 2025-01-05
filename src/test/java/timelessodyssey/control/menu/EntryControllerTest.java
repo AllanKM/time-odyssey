@@ -1,5 +1,6 @@
 package timelessodyssey.control.menu;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
@@ -8,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.awt.FontFormatException;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +162,23 @@ class EntryControllerTest {
         entryController.step(gameMock, action, 0);
 
         verify(gameMock).setState(any(MainMenuState.class));
+    }
+
+    @Test
+    void testGetResolutionIndexUsingReflection() throws Exception {
+        ResizableGUI.Resolution[] resolutions = ResizableGUI.Resolution.values();
+
+        Method getResolutionIndex = EntryController.class.getDeclaredMethod("getResolutionIndex", ResizableGUI.Resolution.class);
+        getResolutionIndex.setAccessible(true);
+
+        for (int i = 0; i < resolutions.length; i++) {
+            int index = (int) getResolutionIndex.invoke(entryController, resolutions[i]);
+            assertEquals(i, index, "Expected index for resolution " + resolutions[i] + " to be " + i);
+        }
+
+        ResizableGUI.Resolution invalidResolution = mock(ResizableGUI.Resolution.class);
+        int index = (int) getResolutionIndex.invoke(entryController, invalidResolution);
+        assertEquals(-1, index, "Expected index for invalid resolution to be -1");
     }
 
 }

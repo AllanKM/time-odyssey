@@ -39,6 +39,7 @@ class SceneBuilderTest {
         assertNotNull(createdScene.getGoals(), "Goals should not be null");
         assertNotNull(createdScene.getTransitionPositionBegin(), "Transition start position should not be null");
         assertNotNull(createdScene.getTransitionPositionEnd(), "Transition end position should not be null");
+        assertNotNull(createdScene.getSnow(), "Snow should not be null");
     }
 
     @Test
@@ -83,8 +84,8 @@ class SceneBuilderTest {
         scene.setSnow(Collections.emptyList());
         scene.setDeathParticles(Collections.emptyList());
 
-        assertTrue(scene.getSnow().isEmpty());
-        assertTrue(scene.getDeathParticles().isEmpty());
+        assertTrue(scene.getSnow().isEmpty(), "Snow list should be empty");
+        assertTrue(scene.getDeathParticles().isEmpty(), "Death particles list should be empty");
     }
 
     @Test
@@ -92,55 +93,46 @@ class SceneBuilderTest {
         scene.setTransitionPositionBegin(new Vector(0, 0));
         scene.setTransitionPositionEnd(new Vector(10, 10));
 
-        assertNotNull(scene.getTransitionPositionBegin());
-        assertNotNull(scene.getTransitionPositionEnd());
+        assertNotNull(scene.getTransitionPositionBegin(), "Transition position begin should not be null");
+        assertNotNull(scene.getTransitionPositionEnd(), "Transition position end should not be null");
     }
 
     @Test
     void testSceneBuilderHandlesPlayer() {
         Player newPlayer = new Player(10, 10, scene);
         scene.setPlayer(newPlayer);
-        assertEquals(newPlayer, scene.getPlayer());
-    }
-
-    @Test
-    void testCreateSceneEmptyTiles() {
-        Scene createdScene = sceneBuilder.createScene(player);
-        assertNotNull(createdScene.getTiles());
-
-        for (Tile[] row : createdScene.getTiles()) {
-            assertNotNull(row);
-            for (Tile tile : row) {
-                if (tile != null) {
-                    assertEquals(Tile.class, tile.getClass(), "Tile should be of correct type");
-                }
-            }
-        }
+        assertEquals(newPlayer, scene.getPlayer(), "Player should match");
     }
 
     @Test
     void testSceneBuilderHandlesSpikes() {
         Spike[][] spikes = new Spike[20][60];
         scene.setSpikes(spikes);
-        assertEquals(spikes, scene.getSpikes());
+        assertEquals(spikes, scene.getSpikes(), "Spikes should match");
     }
 
     @Test
     void testSceneBuilderHandlesStars() {
         Star[][] stars = new Star[20][60];
         scene.setStars(stars);
-        assertEquals(stars, scene.getStars());
+        assertEquals(stars, scene.getStars(), "Stars should match");
     }
 
     @Test
     void testSceneBuilderHandlesGoals() {
         Tile[][] goals = new Tile[20][60];
         scene.setGoals(goals);
-        assertEquals(goals, scene.getGoals());
+        assertEquals(goals, scene.getGoals(), "Goals should match");
     }
 
     @Test
-    void testCreateSceneWithCustomProperties() {
+    void testSceneBuilderHandlesSnow() {
+        scene.setSnow(Collections.emptyList());
+        assertNotNull(scene.getSnow(), "Snow list should not be null");
+    }
+
+    @Test
+    void testSceneBuilderHandlesCustomProperties() {
         Tile[][] tiles = new Tile[12][21];
         Spike[][] spikes = new Spike[12][21];
         Star[][] stars = new Star[12][21];
@@ -153,24 +145,37 @@ class SceneBuilderTest {
 
         Scene createdScene = sceneBuilder.createScene(player);
 
-        Tile[][] createdTiles = createdScene.getTiles();
-        assertNotNull(createdTiles);
-        assertEquals(tiles.length, createdTiles.length);
-        assertEquals(tiles[0].length, createdTiles[0].length);
+        assertEquals(tiles.length, createdScene.getTiles().length, "Tile rows should match");
+        assertEquals(tiles[0].length, createdScene.getTiles()[0].length, "Tile columns should match");
 
-        Spike[][] createdSpikes = createdScene.getSpikes();
-        assertNotNull(createdSpikes);
-        assertEquals(spikes.length, createdSpikes.length);
-        assertEquals(spikes[0].length, createdSpikes[0].length);
+        assertEquals(spikes.length, createdScene.getSpikes().length, "Spike rows should match");
+        assertEquals(spikes[0].length, createdScene.getSpikes()[0].length, "Spike columns should match");
 
-        Star[][] createdStars = createdScene.getStars();
-        assertNotNull(createdStars);
-        assertEquals(stars.length, createdStars.length);
-        assertEquals(stars[0].length, createdStars[0].length);
+        assertEquals(stars.length, createdScene.getStars().length, "Star rows should match");
+        assertEquals(stars[0].length, createdScene.getStars()[0].length, "Star columns should match");
 
-        Tile[][] createdGoals = createdScene.getGoals();
-        assertNotNull(createdGoals);
-        assertEquals(goals.length, createdGoals.length);
-        assertEquals(goals[0].length, createdGoals[0].length);
+        assertEquals(goals.length, createdScene.getGoals().length, "Goal rows should match");
+        assertEquals(goals[0].length, createdScene.getGoals()[0].length, "Goal columns should match");
+    }
+
+    @Test
+    void testCreateSceneEmptyTiles() {
+        Scene createdScene = sceneBuilder.createScene(player);
+        assertNotNull(createdScene.getTiles(), "Tiles should not be null");
+
+        for (Tile[] row : createdScene.getTiles()) {
+            assertNotNull(row, "Tile row should not be null");
+            for (Tile tile : row) {
+                if (tile != null) {
+                    assertEquals(Tile.class, tile.getClass(), "Tile should be of correct type");
+                }
+            }
+        }
+    }
+
+    @Test
+    void testSceneBuilderHandlesDefaultValues() {
+        assertNotNull(scene.getSnow(), "Snow should not be null by default");
+        assertNotNull(scene.getDeathParticles(), "Death particles should not be null by default");
     }
 }

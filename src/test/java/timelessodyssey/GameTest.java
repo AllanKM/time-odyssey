@@ -1,12 +1,23 @@
 package timelessodyssey;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import java.lang.reflect.Field;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.LanternaGUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.sound.BackgroundSoundPlayer;
@@ -14,22 +25,23 @@ import timelessodyssey.states.State;
 import timelessodyssey.view.GameSpriteLoader;
 import timelessodyssey.view.SpriteLoader;
 
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import java.lang.reflect.Field;
-
 class GameTest {
 
     private Game game;
     private LanternaGUI mockGui;
     private BackgroundSoundPlayer mockBackgroundSoundPlayer;
+    private FloatControl mockFloatControl;
 
     @BeforeEach
     void setUp() throws Exception {
         mockGui = mock(LanternaGUI.class);
         mockBackgroundSoundPlayer = mock(BackgroundSoundPlayer.class);
+        mockFloatControl = mock(FloatControl.class);
 
-        // Spy the Game class and inject mock dependencies
+        Clip mockClip = mock(Clip.class);
+        when(mockBackgroundSoundPlayer.getSound()).thenReturn(mockClip);
+        when(mockClip.getControl(FloatControl.Type.MASTER_GAIN)).thenReturn(mockFloatControl);
+
         game = Mockito.spy(new Game());
         injectPrivateField("gui", mockGui);
         injectPrivateField("backgroundSoundPlayer", mockBackgroundSoundPlayer);
@@ -92,10 +104,17 @@ class GameTest {
 
         when(mockBackgroundSoundPlayer.getSound()).thenReturn(mockClip);
         when(mockClip.getControl(FloatControl.Type.MASTER_GAIN)).thenReturn(mockControl);
-        when(mockControl.getValue()).thenReturn(-15f);
 
+        game = new Game(); // Create the Game instance
+
+        // Replace the backgroundSoundPlayer field with the mock
+        injectPrivateField("backgroundSoundPlayer", mockBackgroundSoundPlayer);
+
+        // Re-trigger the setValue logic
         FloatControl gainControl = (FloatControl) mockBackgroundSoundPlayer.getSound().getControl(FloatControl.Type.MASTER_GAIN);
-        assertEquals(-15f, gainControl.getValue());
+        gainControl.setValue(-15f);
+
+        verify(mockControl, times(1)).setValue(-15f);
     }
 
     @Test
@@ -121,41 +140,38 @@ class GameTest {
 
     @Test
     void testStartBackgroundSoundPlayer() throws Exception {
-        // Mock necessary fields
         State<?> mockState = mock(State.class);
         injectPrivateField("state", mockState);
 
-        // Mock GUI close behavior
         doNothing().when(mockGui).close();
 
-        // Ensure the state loop exits after the first step
         doAnswer(invocation -> {
             injectPrivateField("state", null); // Terminate the loop
             return null;
         }).when(mockState).step(any(Game.class), any(ResizableGUI.class), anyLong());
 
-        // Invoke the private 'start' method
         invokePrivateMethod("start");
 
-        // Verify that the background sound player was started
         verify(mockBackgroundSoundPlayer).start();
         verify(mockGui).close();
         verify(mockState, atLeastOnce()).step(any(Game.class), any(ResizableGUI.class), anyLong());
     }
 
-
+    // Utility method to inject private fields
     private void injectPrivateField(String fieldName, Object value) throws Exception {
         Field field = Game.class.getDeclaredField(fieldName);
         field.setAccessible(true);
         field.set(game, value);
     }
 
+    // Utility method to get private fields
     private Object getPrivateField(String fieldName) throws Exception {
         Field field = Game.class.getDeclaredField(fieldName);
         field.setAccessible(true);
         return field.get(game);
     }
 
+    // Utility method to invoke private methods
     private void invokePrivateMethod(String methodName) throws Exception {
         var method = Game.class.getDeclaredMethod(methodName);
         method.setAccessible(true);

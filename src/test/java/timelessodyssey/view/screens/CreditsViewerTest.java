@@ -1,14 +1,9 @@
 package timelessodyssey.view.screens;
 
-import static org.mockito.Mockito.anyDouble;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.ResizableGUI;
@@ -42,13 +37,16 @@ class CreditsViewerTest {
         when(mockCredits.getDeaths()).thenReturn(3);
         when(mockCredits.getMinutes()).thenReturn(12);
         when(mockCredits.getSeconds()).thenReturn(34);
+
         creditsViewer = new CreditsViewer(mockCredits, mockViewerProvider);
     }
 
     @Test
     void testDraw() throws IOException {
         when(mockGUI.getWidth()).thenReturn(200);
+
         creditsViewer.draw(mockGUI, 100L);
+
         verify(mockGUI).clear();
         verify(mockTextViewer).draw(eq("Message1"), anyDouble(), anyDouble(), eq(CreditsViewer.messageColor), eq(mockGUI));
         verify(mockTextViewer).draw(eq("Message2"), anyDouble(), anyDouble(), eq(CreditsViewer.messageColor), eq(mockGUI));
@@ -63,7 +61,7 @@ class CreditsViewerTest {
 
     @Test
     void testDrawWithNoMessages() throws IOException {
-        when(mockCredits.getMessages()).thenReturn(new String[]{});
+        when(mockCredits.getMessages()).thenReturn(new String[0]);
         when(mockGUI.getWidth()).thenReturn(200);
 
         creditsViewer.draw(mockGUI, 100L);
@@ -78,4 +76,39 @@ class CreditsViewerTest {
         verify(mockGUI).refresh();
     }
 
+    @Test
+    void testDrawWithNullCredits() throws IOException {
+        when(mockCredits.getMessages()).thenReturn(new String[0]); // Return an empty array instead of null
+        when(mockCredits.getNames()).thenReturn(new String[0]); // Return an empty array instead of null
+        when(mockGUI.getWidth()).thenReturn(200);
+
+        creditsViewer.draw(mockGUI, 100L);
+
+        verify(mockGUI).clear();
+        verify(mockTextViewer, never()).draw(anyString(), anyDouble(), anyDouble(), eq(CreditsViewer.messageColor), eq(mockGUI));
+        verify(mockTextViewer, never()).draw(anyString(), anyDouble(), anyDouble(), eq(CreditsViewer.nameColor), eq(mockGUI));
+        verify(mockTextViewer).draw(eq("Score:  42"), eq(10.0d), eq(60.0d), eq(CreditsViewer.scoreColor), eq(mockGUI));
+        verify(mockTextViewer).draw(eq("Deaths: 03"), eq(10.0d), eq(70.0d), eq(CreditsViewer.deathColor), eq(mockGUI));
+        verify(mockTextViewer).draw(eq("Time:   12:34"), eq(10.0d), eq(80.0d), eq(CreditsViewer.timeColor), eq(mockGUI));
+        verify(mockLogoViewer).draw(mockGUI, 44, 16);
+        verify(mockGUI).refresh();
+    }
+
+    @Test
+    void testDrawWithEmptyNames() throws IOException {
+        when(mockCredits.getNames()).thenReturn(new String[0]);
+        when(mockGUI.getWidth()).thenReturn(200);
+
+        creditsViewer.draw(mockGUI, 100L);
+
+        verify(mockGUI).clear();
+        verify(mockTextViewer).draw(eq("Message1"), anyDouble(), anyDouble(), eq(CreditsViewer.messageColor), eq(mockGUI));
+        verify(mockTextViewer).draw(eq("Message2"), anyDouble(), anyDouble(), eq(CreditsViewer.messageColor), eq(mockGUI));
+        verify(mockTextViewer, never()).draw(anyString(), anyDouble(), anyDouble(), eq(CreditsViewer.nameColor), eq(mockGUI));
+        verify(mockTextViewer).draw(eq("Score:  42"), eq(10.0d), eq(60.0d), eq(CreditsViewer.scoreColor), eq(mockGUI));
+        verify(mockTextViewer).draw(eq("Deaths: 03"), eq(10.0d), eq(70.0d), eq(CreditsViewer.deathColor), eq(mockGUI));
+        verify(mockTextViewer).draw(eq("Time:   12:34"), eq(10.0d), eq(80.0d), eq(CreditsViewer.timeColor), eq(mockGUI));
+        verify(mockLogoViewer).draw(mockGUI, 44, 16);
+        verify(mockGUI).refresh();
+    }
 }

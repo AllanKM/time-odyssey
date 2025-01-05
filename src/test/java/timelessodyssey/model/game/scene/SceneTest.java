@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import timelessodyssey.model.Vector;
-import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.player.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -145,5 +145,18 @@ class SceneTest {
         assertTrue(scene.collidesRight(new Vector(scene.getWidth() * Tile.SIZE + 1, 0), new Vector(1, 1)));
         assertTrue(scene.collidesUp(new Vector(0, -1), new Vector(1, 1)));
         assertTrue(scene.collidesDown(new Vector(0, scene.getHeight() * Tile.SIZE + 1), new Vector(1, 1)));
+    }
+
+    @Test
+    void testUpdateStars_MultipleStarsCaught() {
+        Star[][] stars = new Star[10][10];
+        stars[0][0] = new Star(0 * Tile.SIZE, 0 * Tile.SIZE);
+        stars[0][1] = new Star(1 * Tile.SIZE, 0 * Tile.SIZE);
+        scene.setStars(stars);
+        when(player.getPosition()).thenReturn(new Vector(0 * Tile.SIZE, 0 * Tile.SIZE));
+        boolean caughtStar = scene.updateStars();
+        assertTrue(caughtStar);
+        assertNull(stars[0][0]);
+        assertNotNull(stars[0][1]); // Player should not catch this one
     }
 }

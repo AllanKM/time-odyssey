@@ -107,10 +107,8 @@ class GameTest {
 
         game = new Game(); // Create the Game instance
 
-        // Replace the backgroundSoundPlayer field with the mock
         injectPrivateField("backgroundSoundPlayer", mockBackgroundSoundPlayer);
 
-        // Re-trigger the setValue logic
         FloatControl gainControl = (FloatControl) mockBackgroundSoundPlayer.getSound().getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(-15f);
 
@@ -157,21 +155,18 @@ class GameTest {
         verify(mockState, atLeastOnce()).step(any(Game.class), any(ResizableGUI.class), anyLong());
     }
 
-    // Utility method to inject private fields
     private void injectPrivateField(String fieldName, Object value) throws Exception {
         Field field = Game.class.getDeclaredField(fieldName);
         field.setAccessible(true);
         field.set(game, value);
     }
 
-    // Utility method to get private fields
     private Object getPrivateField(String fieldName) throws Exception {
         Field field = Game.class.getDeclaredField(fieldName);
         field.setAccessible(true);
         return field.get(game);
     }
 
-    // Utility method to invoke private methods
     private void invokePrivateMethod(String methodName) throws Exception {
         var method = Game.class.getDeclaredMethod(methodName);
         method.setAccessible(true);

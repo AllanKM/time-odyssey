@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SoundLoaderTest {
 
     @Test
-    void testLoadSoundSuccess() throws Exception {
+    public void testLoadSoundSuccess() throws Exception {
         AudioInputStream mockAudioInputStream = mock(AudioInputStream.class);
         Clip mockClip = mock(Clip.class);
         SoundLoader soundLoader = new SoundLoader();
@@ -23,7 +23,7 @@ class SoundLoaderTest {
     }
 
     @Test
-    void testLoadSoundFailure() throws LineUnavailableException, IOException {
+    public void testLoadSoundFailure() throws LineUnavailableException, IOException {
         AudioInputStream mockAudioInputStream = mock(AudioInputStream.class);
         Clip mockClip = mock(Clip.class);
         SoundLoader soundLoader = new SoundLoader();

@@ -21,7 +21,7 @@ class TileViewerTest {
     private Sprite mockSprite;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockTile = mock(Tile.class);
@@ -32,7 +32,7 @@ class TileViewerTest {
     }
 
     @Test
-    void testDrawFuturisticGrayTile() {
+    public void testDrawFuturisticGrayTile() {
         when(mockTile.getCharacter()).thenReturn('G');
         when(mockTile.getPosition()).thenReturn(new Vector(10, 20));
         tileViewer.draw(mockTile, mockGUI, 100L);
@@ -40,7 +40,7 @@ class TileViewerTest {
     }
 
     @Test
-    void testDrawCaveTopTile() {
+    public void testDrawCaveTopTile() {
         when(mockTile.getCharacter()).thenReturn('t');
         when(mockTile.getPosition()).thenReturn(new Vector(15, 25));
         tileViewer.draw(mockTile, mockGUI, 101L);

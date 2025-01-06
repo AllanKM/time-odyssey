@@ -35,7 +35,7 @@ class LanternaScreenCreatorTest {
     private Rectangle defaultBounds;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         terminalSize = new TerminalSize(80, 24);
         defaultBounds = new Rectangle(800, 600);
@@ -43,14 +43,14 @@ class LanternaScreenCreatorTest {
     }
 
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         assertNotNull(screenCreator);
         verify(terminalFactory).setInitialTerminalSize(terminalSize);
         verify(terminalFactory).setForceAWTOverSwing(true);
     }
 
     @Test
-    void testCreateScreen() throws IOException, URISyntaxException, FontFormatException {
+    public void testCreateScreen() throws IOException, URISyntaxException, FontFormatException {
         when(terminalFactory.createScreen()).thenReturn(screen);
         when(screen.getTerminal()).thenReturn(terminal);
         when(terminal.getComponent(0)).thenReturn(mock(Component.class));
@@ -66,13 +66,13 @@ class LanternaScreenCreatorTest {
 
 
     @Test
-    void testLoadFont() throws URISyntaxException, IOException, FontFormatException {
+    public void testLoadFont() throws URISyntaxException, IOException, FontFormatException {
         AWTTerminalFontConfiguration fontConfig = screenCreator.loadFont(12);
         assertNotNull(fontConfig);
     }
 
     @Test
-    void testGetBestFontSize() {
+    public void testGetBestFontSize() {
         Rectangle bounds = new Rectangle(800, 600);
         int fontSize = screenCreator.getBestFontSize(bounds);
         assertTrue(fontSize > 0);
@@ -80,12 +80,12 @@ class LanternaScreenCreatorTest {
     }
 
     @Test
-    void testGetWidth() {
+    public void testGetWidth() {
         assertEquals(terminalSize.getColumns(), screenCreator.getWidth());
     }
 
     @Test
-    void testGetHeight() {
+    public void testGetHeight() {
         assertEquals(terminalSize.getRows(), screenCreator.getHeight());
     }
 }

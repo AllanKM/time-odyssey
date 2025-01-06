@@ -10,23 +10,23 @@ class SpikeTest {
     private Spike spike;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         spike = new Spike(5, 10, '*');
     }
 
     @Test
-    void testGetCharacter() {
+    public void testGetCharacter() {
         assertEquals('*', spike.getCharacter());
     }
 
     @Test
-    void testPositionInitialization() {
+    public void testPositionInitialization() {
         assertEquals(5, spike.getPosition().x(), 0.001);
         assertEquals(10, spike.getPosition().y(), 0.001);
     }
 
     @Test
-    void testSpikeHeightConstant() {
+    public void testSpikeHeightConstant() {
         assertEquals(4, Spike.SPIKE_HEIGHT);
 
     }

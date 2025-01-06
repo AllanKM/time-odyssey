@@ -21,7 +21,7 @@ class JumpingStateTest {
     private JumpingState jumpingState;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
         when(player.getVelocity()).thenReturn(new Vector(0, 5));
@@ -34,7 +34,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testJump() {
+    public void testJump() {
         Vector result = jumpingState.jump();
 
         assertEquals(0, result.x(), 0.001);
@@ -42,7 +42,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testDashFacingRight() {
+    public void testDashFacingRight() {
         when(player.isFacingRight()).thenReturn(true);
         when(player.getDashBoost()).thenReturn(3.0);
 
@@ -53,7 +53,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testDashFacingLeft() {
+    public void testDashFacingLeft() {
         when(player.isFacingRight()).thenReturn(false);
         when(player.getDashBoost()).thenReturn(3.0);
 
@@ -64,7 +64,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testUpdateVelocity() {
+    public void testUpdateVelocity() {
         Vector initialVelocity = new Vector(5, 2);
         Vector result = jumpingState.updateVelocity(initialVelocity);
 
@@ -73,7 +73,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testGetNextState_Dying() {
+    public void testGetNextState_Dying() {
         when(scene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = jumpingState.getNextState();
@@ -82,7 +82,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testGetNextState_OverMaxXVelocity() {
+    public void testGetNextState_OverMaxXVelocity() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(true);
 
@@ -92,7 +92,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testGetNextState_Falling() {
+    public void testGetNextState_Falling() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
         when(player.getVelocity()).thenReturn(new Vector(0, 1));
@@ -103,7 +103,7 @@ class JumpingStateTest {
     }
 
     @Test
-    void testGetNextState_StillJumping() {
+    public void testGetNextState_StillJumping() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
         when(player.getVelocity()).thenReturn(new Vector(0, -1));

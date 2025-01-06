@@ -21,7 +21,7 @@ class SnowTest {
     private Snow snow;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         snow = new Snow(10, 20, 2, 1.5, 0.5);
         when(scene.getWidth()).thenReturn(100);
@@ -29,7 +29,7 @@ class SnowTest {
     }
 
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         assertEquals(10, snow.getPosition().x());
         assertEquals(20, snow.getPosition().y());
         assertEquals(2, snow.getSize());
@@ -39,7 +39,7 @@ class SnowTest {
     }
 
     @Test
-    void testMove() {
+    public void testMove() {
         Vector newPosition = snow.move(scene);
 
         double expectedX = (10 + 1.5) % (100 * Tile.SIZE);
@@ -50,7 +50,7 @@ class SnowTest {
     }
 
     @Test
-    void testMoveWraparound() {
+    public void testMoveWraparound() {
         Snow wrapSnow = new Snow(99 * Tile.SIZE, 49 * Tile.SIZE, 2, 1.5, 0.5);
         Vector newPosition = wrapSnow.move(scene);
 

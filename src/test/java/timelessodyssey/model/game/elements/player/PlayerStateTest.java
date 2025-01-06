@@ -21,7 +21,7 @@ class PlayerStateTest {
     private TestPlayerState testPlayerState;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
         when(player.getVelocity()).thenReturn(new Vector(0, 0));
@@ -33,7 +33,7 @@ class PlayerStateTest {
     }
 
     @Test
-    void testMovePlayerLeft() {
+    public void testMovePlayerLeft() {
         when(player.getVelocity()).thenReturn(new Vector(1, 0));
         Vector result = testPlayerState.movePlayerLeft();
 
@@ -42,7 +42,7 @@ class PlayerStateTest {
     }
 
     @Test
-    void testMovePlayerRight() {
+    public void testMovePlayerRight() {
         when(player.getVelocity()).thenReturn(new Vector(1, 0));
         Vector result = testPlayerState.movePlayerRight();
 
@@ -51,7 +51,7 @@ class PlayerStateTest {
     }
 
     @Test
-    void testApplyCollisions() {
+    public void testApplyCollisions() {
         Vector velocity = new Vector(5, 5);
         when(scene.collidesDown(any(), any())).thenReturn(false);
         when(scene.collidesUp(any(), any())).thenReturn(false);

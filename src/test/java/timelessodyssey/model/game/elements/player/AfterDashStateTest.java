@@ -21,7 +21,7 @@ class AfterDashStateTest {
     private AfterDashState afterDashState;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
         when(player.getVelocity()).thenReturn(new Vector(0, 0));
@@ -33,7 +33,7 @@ class AfterDashStateTest {
     }
 
     @Test
-    void testJump() {
+    public void testJump() {
         Vector initialVelocity = new Vector(5, 0);
         when(player.getVelocity()).thenReturn(initialVelocity);
 
@@ -44,7 +44,7 @@ class AfterDashStateTest {
     }
 
     @Test
-    void testDash() {
+    public void testDash() {
         Vector initialVelocity = new Vector(5, 0);
         Vector initialPosition = new Vector(10, 10);
         when(player.getVelocity()).thenReturn(initialVelocity);
@@ -57,7 +57,7 @@ class AfterDashStateTest {
     }
 
     @Test
-    void testUpdateVelocity() {
+    public void testUpdateVelocity() {
         Vector initialVelocity = new Vector(5, 0);
 
         Vector result = afterDashState.updateVelocity(initialVelocity);
@@ -67,14 +67,14 @@ class AfterDashStateTest {
     }
 
     @Test
-    void testGetNextState_Dying() {
+    public void testGetNextState_Dying() {
         when(scene.isPlayerDying()).thenReturn(true);
         PlayerState nextState = afterDashState.getNextState();
         assertTrue(nextState instanceof DeadState);
     }
 
     @Test
-    void testGetNextState_OnGround() {
+    public void testGetNextState_OnGround() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOnGround()).thenReturn(true);
 
@@ -84,7 +84,7 @@ class AfterDashStateTest {
     }
 
     @Test
-    void testGetNextState_InAir() {
+    public void testGetNextState_InAir() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOnGround()).thenReturn(false);
 

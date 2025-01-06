@@ -26,14 +26,14 @@ class SceneBuilderTest {
     private Player player;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
+    public void setUp() throws IOException, URISyntaxException {
         sceneBuilder = new SceneBuilder(1);
         scene = new Scene(60, 20, 1);
         player = new Player(0, 0, scene);
     }
 
     @Test
-    void testCreateScene() {
+    public void testCreateScene() {
         Scene createdScene = sceneBuilder.createScene(player);
 
         assertNotNull(createdScene, "Scene should not be null");
@@ -53,13 +53,13 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testInvalidSceneCode() {
+    public void testInvalidSceneCode() {
         Exception exception = assertThrows(IOException.class, () -> new SceneBuilder(999));
         assertTrue(exception.getMessage().contains("Level file not found!"));
     }
 
     @Test
-    void testSetSceneProperties() {
+    public void testSetSceneProperties() {
         Tile[][] tiles = new Tile[20][60];
         Spike[][] spikes = new Spike[20][60];
         Star[][] stars = new Star[20][60];
@@ -83,7 +83,7 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testEmptyLists() {
+    public void testEmptyLists() {
         scene.setSnow(Collections.emptyList());
         scene.setDeathParticles(Collections.emptyList());
 
@@ -92,7 +92,7 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testTransitionPositionsNotNull() {
+    public void testTransitionPositionsNotNull() {
         scene.setTransitionPositionBegin(new Vector(0, 0));
         scene.setTransitionPositionEnd(new Vector(10, 10));
 
@@ -101,35 +101,35 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testSceneBuilderHandlesPlayer() {
+    public void testSceneBuilderHandlesPlayer() {
         Player newPlayer = new Player(10, 10, scene);
         scene.setPlayer(newPlayer);
         assertEquals(newPlayer, scene.getPlayer(), "Player should match");
     }
 
     @Test
-    void testSceneBuilderHandlesSpikes() {
+    public void testSceneBuilderHandlesSpikes() {
         Spike[][] spikes = new Spike[20][60];
         scene.setSpikes(spikes);
         assertEquals(spikes, scene.getSpikes(), "Spikes should match");
     }
 
     @Test
-    void testSceneBuilderHandlesStars() {
+    public void testSceneBuilderHandlesStars() {
         Star[][] stars = new Star[20][60];
         scene.setStars(stars);
         assertEquals(stars, scene.getStars(), "Stars should match");
     }
 
     @Test
-    void testSceneBuilderHandlesGoals() {
+    public void testSceneBuilderHandlesGoals() {
         Tile[][] goals = new Tile[20][60];
         scene.setGoals(goals);
         assertEquals(goals, scene.getGoals(), "Goals should match");
     }
 
     @Test
-    void testSceneBuilderHandlesSnow() {
+    public void testSceneBuilderHandlesSnow() {
         Particle mockParticle = mock(Snow.class);
         scene.setSnow(new ArrayList<>(List.of(mockParticle)));
         assertFalse(scene.getSnow().isEmpty(), "Snow list should not be empty");
@@ -137,7 +137,7 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testSceneBuilderHandlesCustomProperties() {
+    public void testSceneBuilderHandlesCustomProperties() {
         Tile[][] tiles = new Tile[12][21];
         Spike[][] spikes = new Spike[12][21];
         Star[][] stars = new Star[12][21];
@@ -164,7 +164,7 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testCreateSceneEmptyTiles() {
+    public void testCreateSceneEmptyTiles() {
         Scene createdScene = sceneBuilder.createScene(player);
         assertNotNull(createdScene.getTiles(), "Tiles should not be null");
 
@@ -179,7 +179,7 @@ class SceneBuilderTest {
     }
 
     @Test
-    void testSceneBuilderHandlesDefaultValues() {
+    public void testSceneBuilderHandlesDefaultValues() {
         assertNotNull(scene.getSnow(), "Snow should not be null by default");
         assertNotNull(scene.getDeathParticles(), "Death particles should not be null by default");
     }

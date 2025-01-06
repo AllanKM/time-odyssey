@@ -31,7 +31,7 @@ class ScreenCreatorTest {
     }
 
     @Test
-    void testCreateScreen() throws IOException, URISyntaxException, FontFormatException {
+    public void testCreateScreen() throws IOException, URISyntaxException, FontFormatException {
         when(screenCreator.createScreen(any(ResizableGUI.Resolution.class), anyString(), any(KeyListener.class)))
                 .thenReturn(screen);
 
@@ -43,7 +43,7 @@ class ScreenCreatorTest {
     }
 
     @Test
-    void testCreateScreenThrowsExceptions() {
+    public void testCreateScreenThrowsExceptions() {
         assertThrows(IOException.class, () -> {
             doThrow(new IOException()).when(screenCreator).createScreen(any(), anyString(), any());
             screenCreator.createScreen(ResizableGUI.Resolution.FHD, "Test Title", keyListener);
@@ -61,13 +61,13 @@ class ScreenCreatorTest {
     }
 
     @Test
-    void testGetWidth() {
+    public void testGetWidth() {
         when(screenCreator.getWidth()).thenReturn(1920);
         assertEquals(1920, screenCreator.getWidth());
     }
 
     @Test
-    void testGetHeight() {
+    public void testGetHeight() {
         when(screenCreator.getHeight()).thenReturn(1080);
         assertEquals(1080, screenCreator.getHeight());
     }

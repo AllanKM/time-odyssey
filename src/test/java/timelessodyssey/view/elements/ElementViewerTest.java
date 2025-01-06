@@ -21,14 +21,14 @@ class ElementViewerTest {
     private ElementViewer<Object> elementViewer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         mockModel = new Object();
         mockGUI = mock(GUI.class);
         elementViewer = new TestElementViewer();
     }
 
     @Test
-    void testDraw() {
+    public void testDraw() {
         elementViewer.draw(mockModel, mockGUI, 100L);
         verify(mockGUI).drawPixel(0, 0, TextColor.ANSI.WHITE);
     }

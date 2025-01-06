@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainMenuTest {
 
     @Test
-    void testCreateEntries() {
+    public void testCreateEntries() {
         MainMenu mainMenu = new MainMenu();
         List<Entry> entries = mainMenu.createEntries();
         assertNotNull(entries, "Entries list initialized should not be null");

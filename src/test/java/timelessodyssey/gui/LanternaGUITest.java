@@ -30,7 +30,7 @@ class LanternaGUITest {
     private LanternaGUI lanternaGUI;
 
     @BeforeEach
-    void setUp() throws Exception {
+    public void setUp() throws Exception {
         terminalFactoryMock = mock(DefaultTerminalFactory.class);
         screenMock = mock(Screen.class);
         textGraphicsMock = mock(TextGraphics.class);
@@ -44,7 +44,7 @@ class LanternaGUITest {
     }
 
     @Test
-    void testSetResolution() throws Exception {
+    public void testSetResolution() throws Exception {
         Resolution resolution = ResizableGUI.Resolution.FHD;
         lanternaGUI.setResolution(resolution);
         verify(screenMock, atLeastOnce()).setCursorPosition(null);
@@ -53,7 +53,7 @@ class LanternaGUITest {
 
 
     @Test
-    void testDrawPixel() {
+    public void testDrawPixel() {
         TextColor color = TextColor.Factory.fromString("#FFFFFF");
         lanternaGUI.drawPixel(10, 15, color);
         verify(textGraphicsMock).setBackgroundColor(color);

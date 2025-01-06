@@ -13,12 +13,12 @@ class SpriteLoaderTest {
     private SpriteLoader spriteLoader;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         spriteLoader = Mockito.mock(SpriteLoader.class);
     }
 
     @Test
-    void testGetSpriteThrowsIOExceptionForInvalidPath() throws IOException {
+    public void testGetSpriteThrowsIOExceptionForInvalidPath() throws IOException {
         String invalidSpriteFilePath = "invalid/path/to/sprite.png";
         when(spriteLoader.get(invalidSpriteFilePath)).thenThrow(new IOException("File not found"));
         IOException exception = assertThrows(IOException.class, () -> {
@@ -28,7 +28,7 @@ class SpriteLoaderTest {
     }
 
     @Test
-    void testGetSpriteThrowsIOExceptionForNullPath() throws IOException {
+    public void testGetSpriteThrowsIOExceptionForNullPath() throws IOException {
         String nullSpriteFilePath = null;
         when(spriteLoader.get(nullSpriteFilePath)).thenThrow(new IOException("Invalid file path"));
         IOException exception = assertThrows(IOException.class, () -> {

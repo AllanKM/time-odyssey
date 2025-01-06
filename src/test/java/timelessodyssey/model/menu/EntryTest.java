@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EntryTest {
 
     @Test
-    void testEntryInitialization() {
+    public void testEntryInitialization() {
         int x = 10;
         int y = 20;
         Entry.Type type = Entry.Type.START_GAME;
@@ -20,7 +20,7 @@ class EntryTest {
     }
 
     @Test
-    void testGetPosition() {
+    public void testGetPosition() {
         int x = 5;
         int y = 15;
         Entry entry = new Entry(x, y, Entry.Type.SETTINGS);
@@ -32,7 +32,7 @@ class EntryTest {
 
 
     @Test
-    void testGetType() {
+    public void testGetType() {
         Entry.Type type = Entry.Type.EXIT;
         Entry entry = new Entry(0, 0, type);
         Entry.Type resultType = entry.getType();

@@ -33,7 +33,7 @@ class GameTest {
     private FloatControl mockFloatControl;
 
     @BeforeEach
-    void setUp() throws Exception {
+    public void setUp() throws Exception {
         mockGui = mock(LanternaGUI.class);
         mockBackgroundSoundPlayer = mock(BackgroundSoundPlayer.class);
         mockFloatControl = mock(FloatControl.class);
@@ -49,34 +49,34 @@ class GameTest {
     }
 
     @Test
-    void testGameInitialization() throws Exception {
+    public void testGameInitialization() throws Exception {
         assertNotNull(getPrivateField("spriteLoader"));
         assertEquals(11, game.getNumberOfLevels());
         assertNotNull(getPrivateField("gui"));
     }
 
     @Test
-    void testSetState() throws Exception {
+    public void testSetState() throws Exception {
         State<?> mockState = mock(State.class);
         game.setState(mockState);
         assertEquals(mockState, getPrivateField("state"));
     }
 
     @Test
-    void testSetResolution() throws Exception {
+    public void testSetResolution() throws Exception {
         ResizableGUI.Resolution mockResolution = mock(ResizableGUI.Resolution.class);
         game.setResolution(mockResolution);
         verify(mockGui).setResolution(mockResolution);
     }
 
     @Test
-    void testSetKeySpam() throws Exception {
+    public void testSetKeySpam() throws Exception {
         game.setKeySpam(true);
         verify(mockGui).setKeySpam(true);
     }
 
     @Test
-    void testGetResolution() throws Exception {
+    public void testGetResolution() throws Exception {
         ResizableGUI.Resolution mockResolution = mock(ResizableGUI.Resolution.class);
         when(mockGui.getResolution()).thenReturn(mockResolution);
         assertEquals(mockResolution, game.getResolution());
@@ -84,21 +84,21 @@ class GameTest {
     }
 
     @Test
-    void testGetSpriteLoader() {
+    public void testGetSpriteLoader() {
         SpriteLoader spriteLoader = game.getSpriteLoader();
         assertNotNull(spriteLoader);
         assertEquals(GameSpriteLoader.class, spriteLoader.getClass());
     }
 
     @Test
-    void testFrameTimeCalculation() {
+    public void testFrameTimeCalculation() {
         int FPS = 30;
         long expectedFrameTime = 1000 / FPS;
         assertEquals(33, expectedFrameTime);
     }
 
     @Test
-    void testGainControlValue() throws Exception {
+    public void testGainControlValue() throws Exception {
         Clip mockClip = mock(Clip.class);
         FloatControl mockControl = mock(FloatControl.class);
 
@@ -116,7 +116,7 @@ class GameTest {
     }
 
     @Test
-    void testStartMethod() throws Exception {
+    public void testStartMethod() throws Exception {
         State<?> mockState = mock(State.class);
 
         injectPrivateField("state", mockState);

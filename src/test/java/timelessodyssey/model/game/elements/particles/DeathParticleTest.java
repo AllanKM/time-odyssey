@@ -17,13 +17,13 @@ class DeathParticleTest {
     private Scene scene;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         deathParticle = new DeathParticle(10, 20, 5, Math.PI / 4);
     }
 
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         assertEquals(10, deathParticle.getPosition().x());
         assertEquals(20, deathParticle.getPosition().y());
         assertEquals(1, deathParticle.getSize());
@@ -36,7 +36,7 @@ class DeathParticleTest {
     }
 
     @Test
-    void testMove() {
+    public void testMove() {
         Vector newPosition = deathParticle.move(scene);
 
         double expectedX = 10 + 5 * Math.cos(Math.PI / 4);

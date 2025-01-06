@@ -26,7 +26,7 @@ class DeadStateTest {
     private DeadState deadState;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
         when(player.getPosition()).thenReturn(new Vector(10, 20));
@@ -34,12 +34,12 @@ class DeadStateTest {
     }
 
     @Test
-    void testGetDuration() {
+    public void testGetDuration() {
         assertEquals(5, deadState.getDuration());
     }
 
     @Test
-    void testCreateDeathParticles() throws Exception {
+    public void testCreateDeathParticles() throws Exception {
         Method createDeathParticlesMethod = DeadState.class.getDeclaredMethod("createDeathParticles");
         createDeathParticlesMethod.setAccessible(true);
 
@@ -54,7 +54,7 @@ class DeadStateTest {
     }
 
     @Test
-    void testUpdateVelocity() {
+    public void testUpdateVelocity() {
         Vector initialVelocity = new Vector(5, 0);
 
         Vector result = deadState.updateVelocity(initialVelocity);
@@ -65,14 +65,14 @@ class DeadStateTest {
     }
 
     @Test
-    void testGetNextState_DurationNotExpired() {
+    public void testGetNextState_DurationNotExpired() {
         PlayerState nextState = deadState.getNextState();
 
         assertSame(deadState, nextState);
     }
 
     @Test
-    void testGetNextState_DurationExpired() {
+    public void testGetNextState_DurationExpired() {
         deadState = new DeadState(player, 0);
         PlayerState nextState = deadState.getNextState();
         assertNull(nextState);

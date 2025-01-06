@@ -21,7 +21,7 @@ class FallingStateTest {
     private FallingState fallingState;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
         when(player.getVelocity()).thenReturn(new Vector(5, 0));
@@ -33,7 +33,7 @@ class FallingStateTest {
     }
 
     @Test
-    void testJump() {
+    public void testJump() {
         Vector result = fallingState.jump();
 
         assertEquals(4.5, result.x(), 0.001);

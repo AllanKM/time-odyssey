@@ -31,7 +31,7 @@ class SceneControllerTest {
     private SceneBuilder sceneBuilderMock;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         sceneMock = mock(Scene.class);
         playerControllerMock = mock(PlayerController.class);
         particleControllerMock = mock(ParticleController.class);
@@ -51,7 +51,7 @@ class SceneControllerTest {
     }
 
     @Test
-    void testStepQuitAction() throws IOException, URISyntaxException {
+    public void testStepQuitAction() throws IOException, URISyntaxException {
         GUI.Action action = GUI.Action.QUIT;
         long frameCount = 0;
         when(sceneMock.isAtTransitionPosition()).thenReturn(false);
@@ -61,7 +61,7 @@ class SceneControllerTest {
     }
 
     @Test
-    void testStepTransitionToCredits() throws IOException, URISyntaxException {
+    public void testStepTransitionToCredits() throws IOException, URISyntaxException {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
 
@@ -78,7 +78,7 @@ class SceneControllerTest {
     }
 
     @Test
-    void testStepTransitionToNextScene() throws IOException, URISyntaxException {
+    public void testStepTransitionToNextScene() throws IOException, URISyntaxException {
         // Arrange
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
@@ -95,7 +95,7 @@ class SceneControllerTest {
     }
 
     @Test
-    void testStepUpdateStarsAndParticles() throws IOException, URISyntaxException {
+    public void testStepUpdateStarsAndParticles() throws IOException, URISyntaxException {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
         when(sceneMock.isAtTransitionPosition()).thenReturn(false);

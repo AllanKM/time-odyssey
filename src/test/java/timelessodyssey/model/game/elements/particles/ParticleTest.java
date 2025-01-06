@@ -22,7 +22,7 @@ class ParticleTest {
     }
 
     @Test
-    void testConstructorAndGetters() {
+    public void testConstructorAndGetters() {
         Vector velocity = new Vector(2, 3);
         TestParticle particle = new TestParticle(10, 20, 5, TextColor.ANSI.BLUE, velocity);
 
@@ -34,7 +34,7 @@ class ParticleTest {
     }
 
     @Test
-    void testMove() {
+    public void testMove() {
         Vector velocity = new Vector(2, 3);
         TestParticle particle = new TestParticle(10, 20, 5, TextColor.ANSI.BLUE, velocity);
         Scene mockScene = mock(Scene.class);

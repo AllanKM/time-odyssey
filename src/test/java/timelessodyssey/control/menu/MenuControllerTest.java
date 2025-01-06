@@ -36,7 +36,7 @@ class MenuControllerTest {
     private Game game;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         menu = mock(Menu.class);
         entryController = mock(EntryController.class);
         menuController = spy(new TestMenuController(menu, entryController));
@@ -44,21 +44,21 @@ class MenuControllerTest {
     }
 
     @Test
-    void testStepUpAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testStepUpAction() throws IOException, URISyntaxException, FontFormatException {
         menuController.step(game, GUI.Action.UP, 0);
         verify(menu, times(1)).moveUp();
         verify(entryController, never()).step(any(), any(), anyLong());
     }
 
     @Test
-    void testStepDownAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testStepDownAction() throws IOException, URISyntaxException, FontFormatException {
         menuController.step(game, GUI.Action.DOWN, 0);
         verify(menu, times(1)).moveDown();
         verify(entryController, never()).step(any(), any(), anyLong());
     }
 
     @Test
-    void testStepQuitAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testStepQuitAction() throws IOException, URISyntaxException, FontFormatException {
         menuController.step(game, GUI.Action.QUIT, 0);
         verify(menu, never()).moveUp();
         verify(menu, never()).moveDown();
@@ -67,7 +67,7 @@ class MenuControllerTest {
     }
 
     @Test
-    void testStepOtherActions() throws IOException, URISyntaxException, FontFormatException {
+    public void testStepOtherActions() throws IOException, URISyntaxException, FontFormatException {
         menuController.step(game, GUI.Action.LEFT, 0);
         verify(menu, never()).moveUp();
         verify(menu, never()).moveDown();

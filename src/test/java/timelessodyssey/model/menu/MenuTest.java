@@ -24,12 +24,12 @@ class MenuTest {
     private Menu menu;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         menu = new TestMenu();
     }
 
     @Test
-    void testGetEntries() {
+    public void testGetEntries() {
         List<Entry> entries = menu.getEntries();
         assertNotNull(entries, "The Entries list should not be null");
         assertEquals(3, entries.size(), "The Entries list should contain exactly 3 entries");
@@ -39,7 +39,7 @@ class MenuTest {
     }
 
     @Test
-    void testGetNumberEntries() {
+    public void testGetNumberEntries() {
         // Act
         int numberEntries = menu.getNumberEntries();
 
@@ -48,7 +48,7 @@ class MenuTest {
     }
 
     @Test
-    void testMoveDown() {
+    public void testMoveDown() {
         // Act & Assert
         assertEquals(Entry.Type.START_GAME, menu.getCurrentEntry().getType(), "Initial entry should be START_GAME");
 
@@ -63,7 +63,7 @@ class MenuTest {
     }
 
     @Test
-    void testMoveUp() {
+    public void testMoveUp() {
         // Act & Assert
         assertEquals(Entry.Type.START_GAME, menu.getCurrentEntry().getType(), "Initial entry should be START_GAME");
 
@@ -78,7 +78,7 @@ class MenuTest {
     }
 
     @Test
-    void testGetCurrentEntry() {
+    public void testGetCurrentEntry() {
         // Act & Assert
         assertEquals(Entry.Type.START_GAME, menu.getCurrentEntry().getType(), "Initial current entry should be START_GAME");
 

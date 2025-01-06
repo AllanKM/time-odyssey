@@ -21,7 +21,7 @@ class SpikeViewerTest {
     private Sprite mockSprite;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockSpike = mock(Spike.class);
@@ -35,7 +35,7 @@ class SpikeViewerTest {
     }
 
     @Test
-    void testDrawSpikeFuturistic() {
+    public void testDrawSpikeFuturistic() {
         when(mockSpike.getCharacter()).thenReturn('^');
         when(mockSpike.getPosition()).thenReturn(new Vector(10, 20));
         spikeViewer.draw(mockSpike, mockGUI, 100L);
@@ -43,7 +43,7 @@ class SpikeViewerTest {
     }
 
     @Test
-    void testDrawSpikeCaveStyle1() {
+    public void testDrawSpikeCaveStyle1() {
         when(mockSpike.getCharacter()).thenReturn('+');
         when(mockSpike.getPosition()).thenReturn(new Vector(15, 25));
         spikeViewer.draw(mockSpike, mockGUI, 101L);
@@ -51,7 +51,7 @@ class SpikeViewerTest {
     }
 
     @Test
-    void testDrawSpikeCaveStyle2() {
+    public void testDrawSpikeCaveStyle2() {
         when(mockSpike.getCharacter()).thenReturn('-');
         when(mockSpike.getPosition()).thenReturn(new Vector(20, 30));
         spikeViewer.draw(mockSpike, mockGUI, 102L);

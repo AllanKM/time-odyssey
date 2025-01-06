@@ -26,7 +26,7 @@ class PlayerViewerTest {
     private Scene mockScene;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockPlayer = mock(Player.class);
@@ -46,7 +46,7 @@ class PlayerViewerTest {
     }
 
     @Test
-    void testDraw_FallingState() throws IOException {
+    public void testDraw_FallingState() throws IOException {
         // Mock the sprite that will be used
         Sprite mockSprite = mock(Sprite.class);
         when(mockSpriteLoader.get("sprites/player/player-left-7.png")).thenReturn(mockSprite);
@@ -65,7 +65,7 @@ class PlayerViewerTest {
 
 
     @Test
-    void testDraw_DashingState() throws IOException {
+    public void testDraw_DashingState() throws IOException {
         Sprite mockSprite = mock(Sprite.class);
         when(mockSpriteLoader.get("sprites/player/player-right-4.png")).thenReturn(mockSprite);
 
@@ -83,7 +83,7 @@ class PlayerViewerTest {
 
 
     @Test
-    void testDraw_DeadState() throws IOException {
+    public void testDraw_DeadState() throws IOException {
         when(mockPlayer.getScene()).thenReturn(mockScene);
         when(mockScene.getDeathParticles()).thenReturn(Collections.emptyList());
         when(mockPlayer.getPosition()).thenReturn(new Vector(0, 0));
@@ -98,7 +98,7 @@ class PlayerViewerTest {
 
 
     @Test
-    void testGetSprite() throws IOException {
+    public void testGetSprite() throws IOException {
         when(mockPlayer.getState()).thenReturn(new RunningState(mockPlayer));
         when(mockPlayer.isFacingRight()).thenReturn(true);
 

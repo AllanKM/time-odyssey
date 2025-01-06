@@ -18,7 +18,7 @@ class LogoViewerTest {
     private LogoViewer logoViewer;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockSprite = mock(Sprite.class);
@@ -27,7 +27,7 @@ class LogoViewerTest {
     }
 
     @Test
-    void testDraw() {
+    public void testDraw() {
         int x = 10;
         int y = 20;
         logoViewer.draw(mockGUI, x, y);

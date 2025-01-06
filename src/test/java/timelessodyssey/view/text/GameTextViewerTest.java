@@ -18,13 +18,13 @@ class GameTextViewerTest {
     private GameTextViewer gameTextViewer;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
+    public void setUp() throws IOException, URISyntaxException {
         mockGUI = mock(GUI.class);
         gameTextViewer = new GameTextViewer();
     }
 
     @Test
-    void testDrawKnownChar() {
+    public void testDrawKnownChar() {
         char character = 'A';
         double x = 10;
         double y = 20;
@@ -37,7 +37,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testDrawUnknownChar() {
+    public void testDrawUnknownChar() {
         char unknownCharacter = '\uFFFF';
         double x = 10.0;
         double y = 20.0;
@@ -57,7 +57,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testDrawString() {
+    public void testDrawString() {
         String text = "HELLO";
         double x = 10;
         double y = 20;
@@ -73,7 +73,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testDrawEmptyString() {
+    public void testDrawEmptyString() {
         String text = "";
         double x = 10;
         double y = 20;
@@ -86,7 +86,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testDrawInvalidChar() {
+    public void testDrawInvalidChar() {
         char character = '\u0000'; // Non-mapped character
         double x = 10.0;
         double y = 20.0;
@@ -105,7 +105,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testSpacingIncrements() {
+    public void testSpacingIncrements() {
         String text = "AB";
         double x = 10.0;
         double y = 20.0;
@@ -119,7 +119,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testNegativeCoordinates() {
+    public void testNegativeCoordinates() {
         char character = 'C';
         double x = -5.0;
         double y = -10.0;
@@ -129,7 +129,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testNullGUI() {
+    public void testNullGUI() {
         char character = 'Z';
         double x = 0.0;
         double y = 0.0;
@@ -139,32 +139,32 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testGetCharHeight() {
+    public void testGetCharHeight() {
         int charHeight = GameTextViewer.getCharHeight();
         assertEquals(5, charHeight, "Character height should be 5.");
     }
 
     @Test
-    void testGetCharWidth() {
+    public void testGetCharWidth() {
         int charWidth = GameTextViewer.getCharWidth();
         assertEquals(3, charWidth, "Character width should be 3.");
     }
 
     @Test
-    void testGetSpacing() {
+    public void testGetSpacing() {
         int spacing = GameTextViewer.getSpacing();
         assertEquals(1, spacing, "Spacing should be 1.");
     }
 
     @Test
-    void testParseCharMap() throws IOException, URISyntaxException {
+    public void testParseCharMap() throws IOException, URISyntaxException {
         BufferedImage fontImage = gameTextViewer.getClass().getClassLoader().getResourceAsStream("gamefont/font.png") != null
                 ? mock(BufferedImage.class) : null;
         assertNotNull(fontImage, "Font image should be loaded.");
     }
 
     @Test
-    void testDrawKnownCharIntegration() throws IOException, URISyntaxException {
+    public void testDrawKnownCharIntegration() throws IOException, URISyntaxException {
         char character = 'A';
         double x = 0;
         double y = 0;
@@ -174,7 +174,7 @@ class GameTextViewerTest {
     }
 
     @Test
-    void testDrawUnknownCharIntegration() {
+    public void testDrawUnknownCharIntegration() {
         char character = '?';
         double x = 0;
         double y = 0;

@@ -15,7 +15,7 @@ class MainMenuControllerTest {
     private Game gameMock;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         mainMenuMock = mock(MainMenu.class);
         entryControllerMock = mock(EntryController.class);
         gameMock = mock(Game.class);
@@ -24,7 +24,7 @@ class MainMenuControllerTest {
     }
 
     @Test
-    void testOnQuit() {
+    public void testOnQuit() {
         mainMenuController.onQuit(gameMock);
         verify(gameMock).setState(null);
     }

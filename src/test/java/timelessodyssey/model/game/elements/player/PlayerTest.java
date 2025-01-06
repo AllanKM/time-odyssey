@@ -26,13 +26,13 @@ class PlayerTest {
 
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         player = new Player(0, 0, scene);
     }
 
     @Test
-    void testInitialValues() {
+    public void testInitialValues() {
         assertEquals(0, player.getPosition().x());
         assertEquals(0, player.getPosition().y());
         assertEquals(0, player.getStarCounter());
@@ -45,7 +45,7 @@ class PlayerTest {
     }
 
     @Test
-    void testSetFacingRight() {
+    public void testSetFacingRight() {
         player.setFacingRight(false);
         assertFalse(player.isFacingRight());
 
@@ -54,7 +54,7 @@ class PlayerTest {
     }
 
     @Test
-    void testUpdatePosition() {
+    public void testUpdatePosition() {
         player.setVelocity(new Vector(2.0, 3.0));
         Vector newPosition = player.updatePosition();
 
@@ -63,35 +63,35 @@ class PlayerTest {
     }
 
     @Test
-    void testMoveLeft() {
+    public void testMoveLeft() {
         Vector result = player.moveLeft();
         assertNotNull(result);
         assertEquals(0.0, result.x(), 0.001);
     }
 
     @Test
-    void testMoveRight() {
+    public void testMoveRight() {
         Vector result = player.moveRight();
         assertNotNull(result);
         assertEquals(0.0, result.x(), 0.001);
     }
 
     @Test
-    void testJump() {
+    public void testJump() {
         Vector result = player.jump();
         assertNotNull(result);
         assertEquals(-3.6, result.y(), 0.001);
     }
 
     @Test
-    void testDash() {
+    public void testDash() {
         Vector result = player.dash();
         assertNotNull(result);
         assertEquals(5.0, Math.abs(result.x()), 0.001);
     }
 
     @Test
-    void testIsOnGround() {
+    public void testIsOnGround() {
         when(scene.collidesDown(any(), any())).thenReturn(true);
         assertTrue(player.isOnGround());
         when(scene.collidesDown(any(), any())).thenReturn(false);
@@ -99,7 +99,7 @@ class PlayerTest {
     }
 
     @Test
-    void testIncreaseStars() {
+    public void testIncreaseStars() {
         player.increaseStars();
         assertEquals(1, player.getStarCounter());
         player.increaseStars();
@@ -107,7 +107,7 @@ class PlayerTest {
     }
 
     @Test
-    void testIncreaseDeaths() {
+    public void testIncreaseDeaths() {
         player.increaseDeaths();
         assertEquals(1, player.getNumberOfDeaths());
         player.increaseDeaths();
@@ -115,7 +115,7 @@ class PlayerTest {
     }
 
     @Test
-    void testResetValues() {
+    public void testResetValues() {
         player.setFacingRight(false);
         player.resetValues();
 
@@ -124,7 +124,7 @@ class PlayerTest {
     }
 
     @Test
-    void testIsOverMaxXVelocity() {
+    public void testIsOverMaxXVelocity() {
         player.setVelocity(new Vector(3.0, 0));
         assertTrue(player.isOverMaxXVelocity());
 
@@ -133,28 +133,28 @@ class PlayerTest {
     }
 
     @Test
-    void testUpdateVelocity() {
+    public void testUpdateVelocity() {
         player.setVelocity(new Vector(1.0, 1.0));
         Vector updatedVelocity = player.updateVelocity();
         assertNotNull(updatedVelocity);
     }
 
     @Test
-    void testSetAndGetBirthTime() {
+    public void testSetAndGetBirthTime() {
         long newBirthTime = System.currentTimeMillis();
         player.setBirthTime(newBirthTime);
         assertEquals(newBirthTime, player.getBirthTime());
     }
 
     @Test
-    void testSetAndGetScene() {
+    public void testSetAndGetScene() {
         Scene newScene = mock(Scene.class);
         player.setScene(newScene);
         assertEquals(newScene, player.getScene());
     }
 
     @Test
-    void testGetNextState() {
+    public void testGetNextState() {
         player.setVelocity(new Vector(RunningState.MIN_VELOCITY, 0));
         player.setState(new IdleState(player));
         PlayerState nextState = player.getNextState();
@@ -168,7 +168,7 @@ class PlayerTest {
     }
 
     @Test
-    void testApplyCollisions() throws Exception {
+    public void testApplyCollisions() throws Exception {
         PlayerState playerState = new IdleState(player);
 
         when(scene.collidesDown(any(), any())).thenReturn(false);
@@ -190,7 +190,7 @@ class PlayerTest {
 
 
     @Test
-    void testLimitVelocity() throws Exception {
+    public void testLimitVelocity() throws Exception {
         PlayerState playerState = new IdleState(player); // Use appropriate PlayerState subclass
         Method limitVelocity = PlayerState.class.getDeclaredMethod("limitVelocity", Vector.class);
         limitVelocity.setAccessible(true);
@@ -202,7 +202,7 @@ class PlayerTest {
 
 
     @Test
-    void testGetNextGroundState() throws Exception {
+    public void testGetNextGroundState() throws Exception {
         PlayerState playerState = new IdleState(player);
 
         Method getNextGroundState = PlayerState.class.getDeclaredMethod("getNextGroundState");
@@ -223,7 +223,7 @@ class PlayerTest {
 
 
     @Test
-    void testGetNextOnAirState() throws Exception {
+    public void testGetNextOnAirState() throws Exception {
         PlayerState playerState = new IdleState(player);
         Method getNextOnAirState = PlayerState.class.getDeclaredMethod("getNextOnAirState");
         getNextOnAirState.setAccessible(true);

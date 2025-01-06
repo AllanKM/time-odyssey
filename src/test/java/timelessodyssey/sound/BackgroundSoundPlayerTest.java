@@ -14,13 +14,13 @@ class BackgroundSoundPlayerTest {
     private BackgroundSoundPlayer soundPlayer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         mockClip = mock(Clip.class);
         soundPlayer = new BackgroundSoundPlayer(mockClip);
     }
 
     @Test
-    void testStart() {
+    public void testStart() {
         soundPlayer.start();
 
         verify(mockClip).setMicrosecondPosition(0);
@@ -29,20 +29,20 @@ class BackgroundSoundPlayerTest {
     }
 
     @Test
-    void testStop() {
+    public void testStop() {
         soundPlayer.stop();
         verify(mockClip).stop();
     }
 
     @Test
-    void testSetSound() {
+    public void testSetSound() {
         Clip newMockClip = mock(Clip.class);
         soundPlayer.setSound(newMockClip);
         assertEquals(newMockClip, soundPlayer.getSound(), "The set sound should match the retrieved sound");
     }
 
     @Test
-    void testGetSound() {
+    public void testGetSound() {
         Clip retrievedClip = soundPlayer.getSound();
         assertEquals(mockClip, retrievedClip, "The retrieved sound should match the initial sound");
     }

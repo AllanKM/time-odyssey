@@ -26,7 +26,7 @@ class GameStateTest {
     private GameState gameState;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
+    public void setUp() throws IOException, URISyntaxException {
         mockScene = mock(Scene.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockViewerProvider = mock(ViewerProvider.class);
@@ -34,7 +34,7 @@ class GameStateTest {
     }
 
     @Test
-    void testCreateController() {
+    public void testCreateController() {
         Controller<Scene> controller = gameState.createController();
         assertNotNull(controller, "Controller should not be null");
         assertTrue(controller instanceof SceneController, "Controller should be an instance of SceneController");
@@ -43,14 +43,14 @@ class GameStateTest {
     }
 
     @Test
-    void testCreateScreenViewer() {
+    public void testCreateScreenViewer() {
         ScreenViewer<Scene> screenViewer = gameState.createScreenViewer(mockViewerProvider);
         assertNotNull(screenViewer, "ScreenViewer should not be null");
         assertTrue(screenViewer instanceof GameViewer, "ScreenViewer should be an instance of GameViewer");
     }
 
     @Test
-    void testAllowArrowSpam() {
+    public void testAllowArrowSpam() {
         boolean result = gameState.allowArrowSpam();
         assertTrue(result, "allowArrowSpam should return true");
     }

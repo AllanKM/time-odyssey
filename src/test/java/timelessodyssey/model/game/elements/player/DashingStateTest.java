@@ -21,7 +21,7 @@ class DashingStateTest {
     private DashingState dashingState;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
         when(player.getVelocity()).thenReturn(new Vector(5, 0));
@@ -33,7 +33,7 @@ class DashingStateTest {
     }
 
     @Test
-    void testJump() {
+    public void testJump() {
         Vector result = dashingState.jump();
 
         assertEquals(4.5, result.x(), 0.001);
@@ -41,7 +41,7 @@ class DashingStateTest {
     }
 
     @Test
-    void testDash() {
+    public void testDash() {
         Vector result = dashingState.dash();
 
         assertEquals(4.5, result.x(), 0.001);
@@ -49,7 +49,7 @@ class DashingStateTest {
     }
 
     @Test
-    void testUpdateVelocity() {
+    public void testUpdateVelocity() {
         Vector initialVelocity = new Vector(5, 0);
 
         Vector result = dashingState.updateVelocity(initialVelocity);
@@ -59,7 +59,7 @@ class DashingStateTest {
     }
 
     @Test
-    void testGetNextState_Dying() {
+    public void testGetNextState_Dying() {
         when(scene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = dashingState.getNextState();
@@ -68,7 +68,7 @@ class DashingStateTest {
     }
 
     @Test
-    void testGetNextState_BelowMinVelocity() {
+    public void testGetNextState_BelowMinVelocity() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.getVelocity()).thenReturn(new Vector(1.5, 0));
 
@@ -78,7 +78,7 @@ class DashingStateTest {
     }
 
     @Test
-    void testGetNextState_AboveMinVelocity() {
+    public void testGetNextState_AboveMinVelocity() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.getVelocity()).thenReturn(new Vector(3, 0));
 

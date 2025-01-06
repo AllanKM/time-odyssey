@@ -17,7 +17,7 @@ class CreditsTest {
     private Credits credits;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getStarCounter()).thenReturn(100);
         when(player.getNumberOfDeaths()).thenReturn(5);
@@ -26,7 +26,7 @@ class CreditsTest {
     }
 
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         assertEquals(100, credits.getScore());
         assertEquals(5, credits.getDeaths());
         assertEquals(5, credits.getSeconds());
@@ -40,20 +40,20 @@ class CreditsTest {
     }
 
     @Test
-    void testSetAndGetScore() {
+    public void testSetAndGetScore() {
         credits.setScore(200);
         assertEquals(200, credits.getScore());
     }
 
     @Test
-    void testSetAndGetMessages() {
+    public void testSetAndGetMessages() {
         String[] newMessages = {"New Message 1", "New Message 2"};
         credits.setMessages(newMessages);
         assertArrayEquals(newMessages, credits.getMessages());
     }
 
     @Test
-    void testSetAndGetNames() {
+    public void testSetAndGetNames() {
         String[] newNames = {"Name 1", "Name 2", "Name 3"};
         credits.setNames(newNames);
         assertArrayEquals(newNames, credits.getNames());

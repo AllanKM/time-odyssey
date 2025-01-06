@@ -26,7 +26,7 @@ class SceneTest {
     private Scene scene;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         scene = new Scene(10, 10, 1);
         scene.setPlayer(player);
@@ -36,7 +36,7 @@ class SceneTest {
     }
 
     @Test
-    void testSceneInitialization() {
+    public void testSceneInitialization() {
         assertEquals(10, scene.getWidth());
         assertEquals(10, scene.getHeight());
         assertEquals(1, scene.getSceneCode());
@@ -45,14 +45,14 @@ class SceneTest {
     }
 
     @Test
-    void testIsPlayerDying_NoCollision() {
+    public void testIsPlayerDying_NoCollision() {
         Spike[][] spikes = new Spike[10][10];
         scene.setSpikes(spikes);
         assertFalse(scene.isPlayerDying());
     }
 
     @Test
-    void testIsPlayerDying_WithCollision() {
+    public void testIsPlayerDying_WithCollision() {
         Spike[][] spikes = new Spike[10][10];
         spikes[1][1] = new Spike(1 * Tile.SIZE, 1 * Tile.SIZE, 'S');
         scene.setSpikes(spikes);
@@ -61,7 +61,7 @@ class SceneTest {
     }
 
     @Test
-    void testUpdateStars_CatchStar() {
+    public void testUpdateStars_CatchStar() {
         Star[][] stars = new Star[10][10];
         stars[0][0] = new Star(0 * Tile.SIZE, 0 * Tile.SIZE);
         scene.setStars(stars);
@@ -72,14 +72,14 @@ class SceneTest {
     }
 
     @Test
-    void testUpdateStars_NoStarCaught() {
+    public void testUpdateStars_NoStarCaught() {
         Star[][] stars = new Star[10][10];
         scene.setStars(stars);
         assertFalse(scene.updateStars());
     }
 
     @Test
-    void testTransitionPositions() {
+    public void testTransitionPositions() {
         scene.setTransitionPositionBegin(new Vector(1, 1));
         scene.setTransitionPositionEnd(new Vector(5, 5));
         assertEquals(new Vector(1, 1), scene.getTransitionPositionBegin());
@@ -87,7 +87,7 @@ class SceneTest {
     }
 
     @Test
-    void testIsAtTransitionPosition() {
+    public void testIsAtTransitionPosition() {
         scene.setTransitionPositionBegin(new Vector(1, 1));
         scene.setTransitionPositionEnd(new Vector(5, 5));
         when(player.getPosition()).thenReturn(new Vector(3, 3));
@@ -97,14 +97,14 @@ class SceneTest {
     }
 
     @Test
-    void testCheckCollision_OutsideScene() {
+    public void testCheckCollision_OutsideScene() {
         Tile[][] tiles = new Tile[10][10];
         scene.setTiles(tiles);
         assertTrue(scene.collidesLeft(new Vector(-1, 0), new Vector(2, 2)));
     }
 
     @Test
-    void testCheckCollision_InsideScene() {
+    public void testCheckCollision_InsideScene() {
         Tile[][] tiles = new Tile[10][10];
         tiles[1][1] = new Tile(1 * Tile.SIZE, 1 * Tile.SIZE, 'T');
         scene.setTiles(tiles);
@@ -112,21 +112,21 @@ class SceneTest {
     }
 
     @Test
-    void testCollidesUp_NoCollision() {
+    public void testCollidesUp_NoCollision() {
         Tile[][] tiles = new Tile[10][10];
         scene.setTiles(tiles);
         assertFalse(scene.collidesUp(new Vector(5, 5), new Vector(2, 2)));
     }
 
     @Test
-    void testCollidesDown_NoCollision() {
+    public void testCollidesDown_NoCollision() {
         Tile[][] tiles = new Tile[10][10];
         scene.setTiles(tiles);
         assertFalse(scene.collidesDown(new Vector(5, 5), new Vector(2, 2)));
     }
 
     @Test
-    void testCollidesDown_WithCollision() {
+    public void testCollidesDown_WithCollision() {
         Tile[][] tiles = new Tile[10][10];
         tiles[7][5] = new Tile(5 * Tile.SIZE, 7 * Tile.SIZE, 'T');
         scene.setTiles(tiles);
@@ -134,13 +134,13 @@ class SceneTest {
     }
 
     @Test
-    void testGetDeathParticles() {
+    public void testGetDeathParticles() {
         scene.setDeathParticles(Collections.emptyList());
         assertTrue(scene.getDeathParticles().isEmpty());
     }
 
     @Test
-    void testCheckOutsideScene() {
+    public void testCheckOutsideScene() {
         assertTrue(scene.collidesLeft(new Vector(-1, 0), new Vector(1, 1)));
         assertTrue(scene.collidesRight(new Vector(scene.getWidth() * Tile.SIZE + 1, 0), new Vector(1, 1)));
         assertTrue(scene.collidesUp(new Vector(0, -1), new Vector(1, 1)));
@@ -148,7 +148,7 @@ class SceneTest {
     }
 
     @Test
-    void testUpdateStars_MultipleStarsCaught() {
+    public void testUpdateStars_MultipleStarsCaught() {
         Star[][] stars = new Star[10][10];
         stars[0][0] = new Star(0 * Tile.SIZE, 0 * Tile.SIZE);
         stars[0][1] = new Star(1 * Tile.SIZE, 0 * Tile.SIZE);

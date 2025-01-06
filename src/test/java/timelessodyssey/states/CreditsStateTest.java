@@ -24,7 +24,7 @@ class CreditsStateTest {
     private CreditsState creditsState;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
+    public void setUp() throws IOException, URISyntaxException {
         mockCredits = mock(Credits.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockViewerProvider = mock(ViewerProvider.class);
@@ -32,21 +32,21 @@ class CreditsStateTest {
     }
 
     @Test
-    void testCreateScreenViewer() {
+    public void testCreateScreenViewer() {
         ScreenViewer<Credits> screenViewer = creditsState.createScreenViewer(mockViewerProvider);
         assertNotNull(screenViewer, "ScreenViewer should not be null");
         assertTrue(screenViewer instanceof CreditsViewer, "ScreenViewer should be an instance of CreditsViewer");
     }
 
     @Test
-    void testCreateController() {
+    public void testCreateController() {
         Controller<Credits> controller = creditsState.createController();
         assertNotNull(controller, "Controller should not be null");
         assertTrue(controller instanceof CreditsController, "Controller should be an instance of CreditsController");
     }
 
     @Test
-    void testAllowArrowSpam() {
+    public void testAllowArrowSpam() {
         boolean result = creditsState.allowArrowSpam();
         assertFalse(result, "allowArrowSpam should return false");
     }

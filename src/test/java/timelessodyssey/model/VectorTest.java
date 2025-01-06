@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class VectorTest {
 
     @Test
-    void testVectorInitialization() {
+    public void testVectorInitialization() {
         double x = 10.5;
         double y = 20.5;
         Vector vector = new Vector(x, y);
@@ -17,7 +17,7 @@ class VectorTest {
     }
 
     @Test
-    void testVectorEquality() {
+    public void testVectorEquality() {
         Vector vector1 = new Vector(10.5, 20.5);
         Vector vector2 = new Vector(10.5, 20.5);
         Vector vector3 = new Vector(5.0, 15.0);
@@ -26,7 +26,7 @@ class VectorTest {
     }
 
     @Test
-    void testVectorHashCode() {
+    public void testVectorHashCode() {
         Vector vector1 = new Vector(10.5, 20.5);
         Vector vector2 = new Vector(10.5, 20.5);
         Vector vector3 = new Vector(5.0, 15.0);
@@ -36,7 +36,7 @@ class VectorTest {
     }
 
     @Test
-    void testVectorToString() {
+    public void testVectorToString() {
         Vector vector = new Vector(10.5, 20.5);
         String vectorString = vector.toString();
         assertEquals("Vector[x=10.5, y=20.5]", vectorString, "The String representation should match the expected format");

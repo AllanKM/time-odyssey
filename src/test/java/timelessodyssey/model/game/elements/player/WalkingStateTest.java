@@ -21,7 +21,7 @@ class WalkingStateTest {
     private WalkingState walkingState;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(player.getScene()).thenReturn(scene);
         when(player.getVelocity()).thenReturn(new Vector(1.0, 0));
@@ -33,14 +33,14 @@ class WalkingStateTest {
     }
 
     @Test
-    void testJump() {
+    public void testJump() {
         Vector result = walkingState.jump();
         assertEquals(0.9, result.x(), 0.001);
         assertEquals(-3.6, result.y(), 0.001);
     }
 
     @Test
-    void testDashFacingRight() {
+    public void testDashFacingRight() {
         when(player.isFacingRight()).thenReturn(true);
         when(player.getDashBoost()).thenReturn(5.0);
 
@@ -51,7 +51,7 @@ class WalkingStateTest {
     }
 
     @Test
-    void testDashFacingLeft() {
+    public void testDashFacingLeft() {
         when(player.isFacingRight()).thenReturn(false);
         when(player.getDashBoost()).thenReturn(5.0);
 
@@ -62,7 +62,7 @@ class WalkingStateTest {
     }
 
     @Test
-    void testUpdateVelocity() {
+    public void testUpdateVelocity() {
         Vector initialVelocity = new Vector(1.5, 2);
         Vector result = walkingState.updateVelocity(initialVelocity);
 
@@ -71,14 +71,14 @@ class WalkingStateTest {
     }
 
     @Test
-    void testGetNextState_Dying() {
+    public void testGetNextState_Dying() {
         when(scene.isPlayerDying()).thenReturn(true);
         PlayerState nextState = walkingState.getNextState();
         assertTrue(nextState instanceof DeadState);
     }
 
     @Test
-    void testGetNextState_OverMaxXVelocity() {
+    public void testGetNextState_OverMaxXVelocity() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(true);
         PlayerState nextState = walkingState.getNextState();
@@ -86,7 +86,7 @@ class WalkingStateTest {
     }
 
     @Test
-    void testGetNextState_Falling() {
+    public void testGetNextState_Falling() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
         when(player.isOnGround()).thenReturn(false);
@@ -98,7 +98,7 @@ class WalkingStateTest {
     }
 
     @Test
-    void testGetNextState_Running() {
+    public void testGetNextState_Running() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
         when(player.isOnGround()).thenReturn(true);
@@ -110,7 +110,7 @@ class WalkingStateTest {
     }
 
     @Test
-    void testGetNextState_Idle() {
+    public void testGetNextState_Idle() {
         when(scene.isPlayerDying()).thenReturn(false);
         when(player.isOverMaxXVelocity()).thenReturn(false);
         when(player.isOnGround()).thenReturn(true);

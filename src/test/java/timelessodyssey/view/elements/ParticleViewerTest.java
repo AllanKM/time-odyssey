@@ -16,14 +16,14 @@ class ParticleViewerTest {
     private ParticleViewer particleViewer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         mockGUI = mock(GUI.class);
         mockParticle = mock(Particle.class);
         particleViewer = new ParticleViewer();
     }
 
     @Test
-    void testDraw() {
+    public void testDraw() {
         when(mockParticle.getPosition()).thenReturn(new Vector(10, 20));
         when(mockParticle.getSize()).thenReturn(5);
         when(mockParticle.getColor()).thenReturn(TextColor.ANSI.RED);

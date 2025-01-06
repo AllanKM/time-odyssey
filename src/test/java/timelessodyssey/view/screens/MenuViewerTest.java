@@ -43,7 +43,7 @@ class MenuViewerTest {
     private MenuViewer<Menu> menuViewer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(viewerProvider.getEntryViewer()).thenReturn(entryViewer);
         when(viewerProvider.getLogoViewer()).thenReturn(logoViewer);
@@ -52,7 +52,7 @@ class MenuViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException {
+    public void testDraw() throws IOException {
         when(gui.getWidth()).thenReturn(200);
         when(gui.getHeight()).thenReturn(100);
 
@@ -77,7 +77,7 @@ class MenuViewerTest {
     }
 
     @Test
-    void testDrawWithNoEntries() throws IOException {
+    public void testDrawWithNoEntries() throws IOException {
         when(gui.getWidth()).thenReturn(200);
         when(gui.getHeight()).thenReturn(100);
 
@@ -99,7 +99,7 @@ class MenuViewerTest {
     }
 
     @Test
-    void testDrawWhenCurrentEntryIsNull() throws IOException {
+    public void testDrawWhenCurrentEntryIsNull() throws IOException {
         when(gui.getWidth()).thenReturn(200);
         when(gui.getHeight()).thenReturn(100);
 

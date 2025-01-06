@@ -47,7 +47,7 @@ class StateTest {
     private TestState testState;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
+    public void setUp() throws IOException, URISyntaxException {
         mockModel = new Object();
         mockSpriteLoader = mock(SpriteLoader.class);
         mockGame = mock(Game.class);
@@ -56,12 +56,12 @@ class StateTest {
     }
 
     @Test
-    void testGetModel() {
+    public void testGetModel() {
         assertEquals(mockModel, testState.getModel(), "The model should match the initialized value");
     }
 
     @Test
-    void testStep() throws IOException, URISyntaxException, FontFormatException {
+    public void testStep() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action mockAction = mock(GUI.Action.class);
         when(mockGUI.getNextAction()).thenReturn(mockAction);
         testState.step(mockGame, mockGUI, 100L);

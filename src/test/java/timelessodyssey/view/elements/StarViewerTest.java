@@ -21,7 +21,7 @@ class StarViewerTest {
     private StarViewer starViewer;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         mockGUI = mock(GUI.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockStar = mock(Star.class);
@@ -31,7 +31,7 @@ class StarViewerTest {
     }
 
     @Test
-    void testDraw() {
+    public void testDraw() {
         when(mockStar.getPosition()).thenReturn(new Vector(10, 20));
         starViewer.draw(mockStar, mockGUI, 100L);
         verify(mockSprite).draw(mockGUI, 10, 20);

@@ -19,13 +19,13 @@ class ViewerProviderTest {
     private ViewerProvider viewerProvider;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
+    public void setUp() throws IOException, URISyntaxException {
         MockitoAnnotations.openMocks(this);
         viewerProvider = new ViewerProvider(spriteLoader);
     }
 
     @Test
-    void testViewerInitialization() {
+    public void testViewerInitialization() {
         assertNotNull(viewerProvider.getParticleViewer());
         assertNotNull(viewerProvider.getPlayerViewer());
         assertNotNull(viewerProvider.getSpikeViewer());
@@ -37,13 +37,13 @@ class ViewerProviderTest {
     }
 
     @Test
-    void testGetPlayerViewerReturnsCorrectInstance() {
+    public void testGetPlayerViewerReturnsCorrectInstance() {
         PlayerViewer playerViewer = viewerProvider.getPlayerViewer();
         assertEquals(playerViewer, viewerProvider.getPlayerViewer());
     }
 
     @Test
-    void testGetLogoViewerReturnsCorrectInstance() {
+    public void testGetLogoViewerReturnsCorrectInstance() {
         LogoViewer logoViewer = viewerProvider.getLogoViewer();
         assertEquals(logoViewer, viewerProvider.getLogoViewer());
     }

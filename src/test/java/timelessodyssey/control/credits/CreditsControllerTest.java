@@ -26,14 +26,14 @@ class CreditsControllerTest {
     private Game game;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         credits = mock(Credits.class);
         creditsController = new CreditsController(credits);
         game = mock(Game.class);
     }
 
     @Test
-    void testStepQuitAction() throws IOException, URISyntaxException {
+    public void testStepQuitAction() throws IOException, URISyntaxException {
         GUI.Action action = GUI.Action.QUIT;
         long frameCount = 0;
         SpriteLoader spriteLoader = mock(SpriteLoader.class);
@@ -51,7 +51,7 @@ class CreditsControllerTest {
     }
 
     @Test
-    void testStepNonQuitAction() throws IOException, URISyntaxException {
+    public void testStepNonQuitAction() throws IOException, URISyntaxException {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
         creditsController.step(game, action, frameCount);

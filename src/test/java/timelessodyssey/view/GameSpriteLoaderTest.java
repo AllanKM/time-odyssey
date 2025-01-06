@@ -13,12 +13,12 @@ class GameSpriteLoaderTest {
     private GameSpriteLoader gameSpriteLoader;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         gameSpriteLoader = new GameSpriteLoader();
     }
 
     @Test
-    void testGetLoadsSpriteIfNotPresent() throws IOException {
+    public void testGetLoadsSpriteIfNotPresent() throws IOException {
         String spriteFilepath = "path/to/sprite.png";
         Sprite mockSprite = mock(Sprite.class);
         gameSpriteLoader.spriteMap.put(spriteFilepath, mockSprite);
@@ -28,7 +28,7 @@ class GameSpriteLoaderTest {
     }
 
     @Test
-    void testGetReturnsExistingSprite() throws IOException {
+    public void testGetReturnsExistingSprite() throws IOException {
         String spriteFilepath = "path/to/sprite.png";
         Sprite firstSprite = mock(Sprite.class);
         gameSpriteLoader.spriteMap.put(spriteFilepath, firstSprite);

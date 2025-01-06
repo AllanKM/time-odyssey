@@ -22,55 +22,55 @@ class GUITest {
     }
 
     @Test
-    void testGetWidth() {
+    public void testGetWidth() {
         when(gui.getWidth()).thenReturn(100);
         assertEquals(100, gui.getWidth());
     }
 
     @Test
-    void testGetHeight() {
+    public void testGetHeight() {
         when(gui.getHeight()).thenReturn(80);
         assertEquals(80, gui.getHeight());
     }
 
     @Test
-    void testDrawPixel() {
+    public void testDrawPixel() {
         gui.drawPixel(10.0, 20.0, TextColor.ANSI.RED);
         verify(gui).drawPixel(10.0, 20.0, TextColor.ANSI.RED);
     }
 
     @Test
-    void testDrawRectangle() {
+    public void testDrawRectangle() {
         gui.drawRectangle(5.0, 5.0, 10, 10, TextColor.ANSI.BLUE);
         verify(gui).drawRectangle(5.0, 5.0, 10, 10, TextColor.ANSI.BLUE);
     }
 
     @Test
-    void testClear() {
+    public void testClear() {
         gui.clear();
         verify(gui).clear();
     }
 
     @Test
-    void testGetNextAction() {
+    public void testGetNextAction() {
         when(gui.getNextAction()).thenReturn(GUI.Action.UP);
         assertEquals(GUI.Action.UP, gui.getNextAction());
     }
 
     @Test
-    void testRefresh() throws IOException {
+    public void testRefresh() throws IOException {
         gui.refresh();
         verify(gui).refresh();
     }
 
     @Test
-    void testClose() throws IOException {
+    public void testClose() throws IOException {
         gui.close();
         verify(gui).close();
     }
 
     @Test
-    void testActionEnum() {
+    public void testActionEnum() {
         assertEquals(9, GUI.Action.values().length);
         assertArrayEquals(
                 new GUI.Action[]{

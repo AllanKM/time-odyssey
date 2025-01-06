@@ -22,7 +22,7 @@ class CreditsViewerTest {
     private CreditsViewer creditsViewer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         mockGUI = mock(ResizableGUI.class);
         mockCredits = mock(Credits.class);
         mockViewerProvider = mock(ViewerProvider.class);
@@ -42,7 +42,7 @@ class CreditsViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException {
+    public void testDraw() throws IOException {
         when(mockGUI.getWidth()).thenReturn(200);
 
         creditsViewer.draw(mockGUI, 100L);
@@ -60,7 +60,7 @@ class CreditsViewerTest {
     }
 
     @Test
-    void testDrawWithNoMessages() throws IOException {
+    public void testDrawWithNoMessages() throws IOException {
         when(mockCredits.getMessages()).thenReturn(new String[0]);
         when(mockGUI.getWidth()).thenReturn(200);
 
@@ -77,7 +77,7 @@ class CreditsViewerTest {
     }
 
     @Test
-    void testDrawWithNullCredits() throws IOException {
+    public void testDrawWithNullCredits() throws IOException {
         when(mockCredits.getMessages()).thenReturn(new String[0]); // Return an empty array instead of null
         when(mockCredits.getNames()).thenReturn(new String[0]); // Return an empty array instead of null
         when(mockGUI.getWidth()).thenReturn(200);
@@ -95,7 +95,7 @@ class CreditsViewerTest {
     }
 
     @Test
-    void testDrawWithEmptyNames() throws IOException {
+    public void testDrawWithEmptyNames() throws IOException {
         when(mockCredits.getNames()).thenReturn(new String[0]);
         when(mockGUI.getWidth()).thenReturn(200);
 

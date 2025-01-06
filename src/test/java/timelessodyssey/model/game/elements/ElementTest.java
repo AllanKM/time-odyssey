@@ -11,19 +11,19 @@ class ElementTest {
     private Element element;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         element = new Element(10, 20);
     }
 
     @Test
-    void testGetPosition() {
+    public void testGetPosition() {
         Vector position = element.getPosition();
         assertEquals(10, position.x(), 0.001);
         assertEquals(20, position.y(), 0.001);
     }
 
     @Test
-    void testSetPosition() {
+    public void testSetPosition() {
         Vector newPosition = new Vector(30, 40);
         element.setPosition(newPosition);
         Vector position = element.getPosition();

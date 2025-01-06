@@ -25,18 +25,18 @@ class ControllerTest {
     private TestController<String> testController;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         testController = new TestController<>("Test Model");
     }
 
     @Test
-    void constructor_shouldInitializeModel() {
+    public void constructor_shouldInitializeModel() {
         assertEquals("Test Model", testController.getModel());
     }
 
     @Test
-    void step_shouldBeCalledWithCorrectParameters() throws IOException, URISyntaxException, FontFormatException {
+    public void step_shouldBeCalledWithCorrectParameters() throws IOException, URISyntaxException, FontFormatException {
         testController.step(game, action, 100L);
         assertTrue(testController.stepCalled);
         assertEquals(game, testController.lastGame);

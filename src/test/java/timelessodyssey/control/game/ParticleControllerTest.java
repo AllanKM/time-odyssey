@@ -22,7 +22,7 @@ class ParticleControllerTest {
     private List<Particle> deathParticles;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         sceneMock = mock(Scene.class);
         gameMock = mock(Game.class);
         snowParticles = new ArrayList<>();
@@ -40,7 +40,7 @@ class ParticleControllerTest {
     }
 
     @Test
-    void testStep() {
+    public void testStep() {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
         particleController.step(gameMock, action, frameCount);

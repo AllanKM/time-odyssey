@@ -10,23 +10,23 @@ class TileTest {
     private Tile tile;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         tile = new Tile(5, 10, '#');
     }
 
     @Test
-    void testGetCharacter() {
+    public void testGetCharacter() {
         assertEquals('#', tile.getCharacter());
     }
 
     @Test
-    void testPositionInitialization() {
+    public void testPositionInitialization() {
         assertEquals(5, tile.getPosition().x(), 0.001);
         assertEquals(10, tile.getPosition().y(), 0.001);
     }
 
     @Test
-    void testTileSizeConstant() {
+    public void testTileSizeConstant() {
         assertEquals(8, Tile.SIZE);
     }
 }

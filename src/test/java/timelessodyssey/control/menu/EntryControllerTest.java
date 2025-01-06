@@ -32,7 +32,7 @@ class EntryControllerTest {
     private Game gameMock;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         menuMock = mock(Menu.class);
         gameMock = mock(Game.class);
         entryController = new EntryController(menuMock);
@@ -47,7 +47,7 @@ class EntryControllerTest {
     }
 
     @Test
-    void testExitAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testExitAction() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.SELECT;
         List<Entry> entries = menuMock.getEntries();
         when(menuMock.getCurrentEntry()).thenReturn(entries.get(2));
@@ -57,7 +57,7 @@ class EntryControllerTest {
 
 
     @Test
-    void testStartGameAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testStartGameAction() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.SELECT;
         List<Entry> entries = new ArrayList<>();
         entries.add(new Entry(0, 0, Entry.Type.START_GAME)); // START_GAME Entry
@@ -75,7 +75,7 @@ class EntryControllerTest {
 
 
     @Test
-    void testSettingsAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testSettingsAction() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.SELECT;
 
         List<Entry> entries = new ArrayList<>();
@@ -97,7 +97,7 @@ class EntryControllerTest {
 
 
     @Test
-    void testResolutionRightAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testResolutionRightAction() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.RIGHT;
 
         List<Entry> entries = new ArrayList<>();
@@ -121,7 +121,7 @@ class EntryControllerTest {
 
 
     @Test
-    void testResolutionLeftAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testResolutionLeftAction() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.LEFT;
 
         List<Entry> entries = new ArrayList<>();
@@ -146,7 +146,7 @@ class EntryControllerTest {
 
 
     @Test
-    void testToMainMenuAction() throws IOException, URISyntaxException, FontFormatException {
+    public void testToMainMenuAction() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.SELECT;
         List<Entry> entries = new ArrayList<>();
         entries.add(new Entry(0, 0, Entry.Type.START_GAME));
@@ -165,7 +165,7 @@ class EntryControllerTest {
     }
 
     @Test
-    void testGetResolutionIndexUsingReflection() throws Exception {
+    public void testGetResolutionIndexUsingReflection() throws Exception {
         ResizableGUI.Resolution[] resolutions = ResizableGUI.Resolution.values();
 
         Method getResolutionIndex = EntryController.class.getDeclaredMethod("getResolutionIndex", ResizableGUI.Resolution.class);

@@ -52,7 +52,7 @@ class GameViewerTest {
     private GameViewer gameViewer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
 
         when(viewerProvider.getPlayerViewer()).thenReturn(playerViewer);
@@ -73,7 +73,7 @@ class GameViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException {
+    public void testDraw() throws IOException {
         when(gui.getWidth()).thenReturn(200);
         when(gui.getHeight()).thenReturn(100);
 
@@ -86,7 +86,7 @@ class GameViewerTest {
     }
 
     @Test
-    void testDrawWithTilesAndSpikes() throws IOException {
+    public void testDrawWithTilesAndSpikes() throws IOException {
         Tile tile = mock(Tile.class);
         Spike spike = mock(Spike.class);
 
@@ -105,7 +105,7 @@ class GameViewerTest {
     }
 
     @Test
-    void testDrawWithStarsAndParticles() throws IOException {
+    public void testDrawWithStarsAndParticles() throws IOException {
         Star star = mock(Star.class);
         Particle particle = mock(Particle.class);
 
@@ -124,7 +124,7 @@ class GameViewerTest {
     }
 
     @Test
-    void testDrawWithNullElements() throws IOException {
+    public void testDrawWithNullElements() throws IOException {
         Tile[][] tiles = new Tile[10][10];
         Spike[][] spikes = new Spike[10][10];
         tiles[0][0] = null;

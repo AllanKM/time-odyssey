@@ -25,7 +25,7 @@ class MainMenuStateTest {
     private MainMenuState mainMenuState;
 
     @BeforeEach
-    void setUp() throws IOException, URISyntaxException {
+    public void setUp() throws IOException, URISyntaxException {
         mockMainMenu = mock(MainMenu.class);
         mockSpriteLoader = mock(SpriteLoader.class);
         mockViewerProvider = mock(ViewerProvider.class);
@@ -33,14 +33,14 @@ class MainMenuStateTest {
     }
 
     @Test
-    void testCreateScreenViewer() {
+    public void testCreateScreenViewer() {
         ScreenViewer<MainMenu> screenViewer = mainMenuState.createScreenViewer(mockViewerProvider);
         assertNotNull(screenViewer, "ScreenViewer should not be null");
         assertTrue(screenViewer instanceof MenuViewer, "ScreenViewer should be an instance of MenuViewer");
     }
 
     @Test
-    void testCreateController() {
+    public void testCreateController() {
         Controller<MainMenu> controller = mainMenuState.createController();
         assertNotNull(controller, "Controller should not be null");
         assertTrue(controller instanceof MainMenuController, "Controller should be an instance of MainMenuController");
@@ -50,7 +50,7 @@ class MainMenuStateTest {
     }
 
     @Test
-    void testAllowArrowSpam() {
+    public void testAllowArrowSpam() {
         boolean result = mainMenuState.allowArrowSpam();
         assertFalse(result, "allowArrowSpam should return false");
     }

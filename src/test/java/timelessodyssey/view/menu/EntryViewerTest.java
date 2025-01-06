@@ -18,14 +18,14 @@ class EntryViewerTest {
     private EntryViewer entryViewer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         mockTextViewer = mock(TextViewer.class);
         mockResizableGUI = mock(ResizableGUI.class);
         entryViewer = new EntryViewer(mockTextViewer);
     }
 
     @Test
-    void testDrawStartGameEntry() {
+    public void testDrawStartGameEntry() {
         Entry startGameEntry = new Entry(10, 20, Type.START_GAME);
         TextColor mockColor = TextColor.ANSI.WHITE;
         entryViewer.draw(startGameEntry, mockResizableGUI, mockColor);
@@ -33,7 +33,7 @@ class EntryViewerTest {
     }
 
     @Test
-    void testDrawResolutionEntryWithAutomatic() {
+    public void testDrawResolutionEntryWithAutomatic() {
         Entry resolutionEntry = new Entry(15, 25, Type.RESOLUTION);
         TextColor mockColor = TextColor.ANSI.GREEN;
         when(mockResizableGUI.getResolution()).thenReturn(null);
@@ -42,7 +42,7 @@ class EntryViewerTest {
     }
 
     @Test
-    void testDrawExitEntryWithAutomatic() {
+    public void testDrawExitEntryWithAutomatic() {
         Entry resolutionEntry = new Entry(15, 25, Type.EXIT);
         TextColor mockColor = TextColor.ANSI.GREEN;
         when(mockResizableGUI.getResolution()).thenReturn(null);
@@ -57,7 +57,7 @@ class EntryViewerTest {
     }
 
     @Test
-    void testDrawSettingsEntryWithAutomatic() {
+    public void testDrawSettingsEntryWithAutomatic() {
         Entry resolutionEntry = new Entry(15, 25, Type.SETTINGS);
         TextColor mockColor = TextColor.ANSI.GREEN;
         when(mockResizableGUI.getResolution()).thenReturn(null);
@@ -73,7 +73,7 @@ class EntryViewerTest {
 
 
     @Test
-    void testDrawResolutionEntryWithSpecificResolution() {
+    public void testDrawResolutionEntryWithSpecificResolution() {
         Entry resolutionEntry = new Entry(15, 25, Entry.Type.RESOLUTION);
         TextColor mockColor = TextColor.ANSI.GREEN;
         ResizableGUI.Resolution mockResolution = mock(ResizableGUI.Resolution.class);
@@ -86,7 +86,7 @@ class EntryViewerTest {
 
 
     @Test
-    void testDrawToMainMenuEntry() {
+    public void testDrawToMainMenuEntry() {
         Entry toMainMenuEntry = new Entry(5, 10, Entry.Type.TO_MAIN_MENU);
         TextColor mockColor = TextColor.ANSI.YELLOW;
         entryViewer.draw(toMainMenuEntry, mockResizableGUI, mockColor);

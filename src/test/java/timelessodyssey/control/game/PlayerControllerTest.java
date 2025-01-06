@@ -23,7 +23,7 @@ class PlayerControllerTest {
     private Game gameMock;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         sceneMock = mock(Scene.class);
         playerMock = mock(Player.class);
         gameMock = mock(Game.class);
@@ -34,7 +34,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    void testStepLeftAction() {
+    public void testStepLeftAction() {
         GUI.Action action = GUI.Action.LEFT;
         long frameCount = 0;
 
@@ -48,7 +48,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    void testStepRightAction() {
+    public void testStepRightAction() {
         GUI.Action action = GUI.Action.RIGHT;
         long frameCount = 0;
         when(playerMock.moveRight()).thenReturn(mock(Vector.class));
@@ -60,7 +60,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    void testStepJumpAction() {
+    public void testStepJumpAction() {
         GUI.Action action = GUI.Action.JUMP;
         long frameCount = 0;
         when(playerMock.jump()).thenReturn(mock(Vector.class));
@@ -71,7 +71,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    void testStepDashAction() {
+    public void testStepDashAction() {
         GUI.Action action = GUI.Action.DASH;
         long frameCount = 0;
         when(playerMock.dash()).thenReturn(mock(Vector.class));
@@ -82,7 +82,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    void testStepDefaultAction() {
+    public void testStepDefaultAction() {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
         when(playerMock.updateVelocity()).thenReturn(mock(Vector.class));
@@ -93,7 +93,7 @@ class PlayerControllerTest {
     }
 
     @Test
-    void testStepNullState() {
+    public void testStepNullState() {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
 

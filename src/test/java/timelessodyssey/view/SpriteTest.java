@@ -21,7 +21,7 @@ class SpriteTest {
     private BufferedImage testImage;
 
     @BeforeEach
-    void setUp() throws IOException {
+    public void setUp() throws IOException {
         mockGUI = mock(GUI.class);
 
         String testImagePath = "test_image.png";
@@ -36,7 +36,7 @@ class SpriteTest {
     }
 
     @Test
-    void testGetImage() {
+    public void testGetImage() {
         BufferedImage image = sprite.getImage();
         assertNotNull(image, "Image should not be null");
         assertEquals(testImage.getWidth(), image.getWidth(), "Image width should match the expected value");
@@ -44,7 +44,7 @@ class SpriteTest {
     }
 
     @Test
-    void testDraw() {
+    public void testDraw() {
         sprite.draw(mockGUI, 5, 5);
 
         for (int dx = 0; dx < testImage.getWidth(); dx++) {

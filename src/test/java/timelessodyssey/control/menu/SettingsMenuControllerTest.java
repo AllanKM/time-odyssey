@@ -32,20 +32,20 @@ class SettingsMenuControllerTest {
     private SettingsMenuController settingsMenuController;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         settingsMenuController = new SettingsMenuController(settingsMenu, entryController);
         when(game.getSpriteLoader()).thenReturn(spriteLoader);
     }
 
     @Test
-    void onQuit_shouldSetMainMenuState() throws IOException, URISyntaxException {
+    public void onQuit_shouldSetMainMenuState() throws IOException, URISyntaxException {
         settingsMenuController.onQuit(game);
         verify(game).setState(any(MainMenuState.class));
     }
 
     @Test
-    void onQuit_shouldCreateMainMenuStateWithCorrectParameters() throws IOException, URISyntaxException {
+    public void onQuit_shouldCreateMainMenuStateWithCorrectParameters() throws IOException, URISyntaxException {
         settingsMenuController.onQuit(game);
         verify(game).setState(any(MainMenuState.class));
     }

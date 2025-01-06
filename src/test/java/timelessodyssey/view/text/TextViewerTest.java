@@ -13,7 +13,7 @@ class TextViewerTest {
     private TextViewer textViewer;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         mockGUI = mock(GUI.class);
         textViewer = new TextViewer() {
             @Override
@@ -31,7 +31,7 @@ class TextViewerTest {
     }
 
     @Test
-    void testDrawCharacter() {
+    public void testDrawCharacter() {
         char character = 'A';
         double x = 10;
         double y = 20;
@@ -41,7 +41,7 @@ class TextViewerTest {
     }
 
     @Test
-    void testDrawString() {
+    public void testDrawString() {
         String string = "HELLO";
         double x = 10;
         double y = 20;
